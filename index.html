@@ -237,70 +237,73 @@
 <!-- ============ MODULES ============ -->
 <section class="modules section-pad" id="modules">
   <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> System overview</span>
-      <h2>Six modules, one accountable system</h2>
-      <p>Every module is scoped to a specific role &mdash; so access always matches professional need, never convenience.</p>
-      <div class="section-rule"></div>
+
+    <div class="modules-header reveal">
+      <div class="modules-header-left">
+        <span class="eyebrow dark"><i class="ti ti-point-filled"></i> System overview</span>
+        <h2>Six modules,<br>one accountable system.</h2>
+      </div>
+      <div class="modules-header-right">
+        <p>Every module is scoped to a specific role &mdash; so access always matches professional need, never convenience.</p>
+        <div class="modules-tabs">
+          <button class="mod-tab active" data-filter="all">All</button>
+          <button class="mod-tab" data-filter="open"><i class="ti ti-lock-open"></i> Open</button>
+          <button class="mod-tab" data-filter="restricted"><i class="ti ti-lock"></i> Restricted</button>
+        </div>
+      </div>
     </div>
 
-    <div class="modules-tabs reveal">
-      <button class="mod-tab active" data-filter="all">All modules</button>
-      <button class="mod-tab" data-filter="open"><i class="ti ti-lock-open"></i> Open access</button>
-      <button class="mod-tab" data-filter="restricted"><i class="ti ti-lock"></i> Staff only</button>
-    </div>
+    <div class="modules-bento" id="modules-grid">
 
-    <div class="modules-grid" id="modules-grid">
-
-      <div class="module-card restricted reveal" data-access="restricted" style="--i:0">
-        <div class="module-card-accent"></div>
-        <span class="module-tag"><i class="ti ti-lock"></i> Staff only</span>
-        <div class="module-icon"><i class="ti ti-clipboard-list"></i></div>
+      <div class="mod-card mod-card-dark reveal" data-access="restricted" style="--i:0">
+        <span class="mod-num">01</span>
+        <span class="mod-tag-pill restricted"><i class="ti ti-lock"></i> Staff only</span>
+        <div class="mod-icon"><i class="ti ti-clipboard-list"></i></div>
         <h3>Incident intake &amp; tracking</h3>
-        <p>Validated intake forms capture every GBV report from first contact through to case closure. Mandatory fields prevent incomplete records, and every submission is timestamped and attributed.</p>
-        <a href="#lifecycle" class="module-link">View case lifecycle <i class="ti ti-arrow-right"></i></a>
+        <p>Validated intake forms capture every GBV report from first contact through to case closure. Every submission is timestamped and attributed.</p>
+        <a href="#lifecycle" class="mod-link">View case lifecycle <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="module-card restricted reveal" data-access="restricted" style="--i:1">
-        <div class="module-card-accent"></div>
-        <span class="module-tag"><i class="ti ti-lock"></i> Staff only</span>
-        <div class="module-icon"><i class="ti ti-route"></i></div>
-        <h3>Referral management</h3>
-        <p>Coordinate medical, legal and psychosocial referrals to verified Ugandan partner agencies. Each referral carries a unique tracking ID so outcomes are confirmed and recorded against the original case.</p>
-        <a href="#support" class="module-link">View referral directory <i class="ti ti-arrow-right"></i></a>
-      </div>
-
-      <div class="module-card reveal" data-access="open" style="--i:2">
-        <div class="module-card-accent"></div>
-        <div class="module-icon"><i class="ti ti-book-2"></i></div>
+      <div class="mod-card mod-card-teal reveal" data-access="open" style="--i:1">
+        <span class="mod-num">02</span>
+        <div class="mod-icon"><i class="ti ti-book-2"></i></div>
         <h3>Research &amp; knowledge repository</h3>
-        <p>Search and download published studies, policy briefs and programme toolkits from Raising Voices Uganda and partner organisations, catalogued with Dublin Core metadata.</p>
-        <a href="#repository" class="module-link">Search the repository <i class="ti ti-arrow-right"></i></a>
+        <p>Search and download published studies, policy briefs and toolkits catalogued with Dublin Core metadata.</p>
+        <a href="#repository" class="mod-link">Search the repository <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="module-card reveal" data-access="open" style="--i:3">
-        <div class="module-card-accent"></div>
-        <div class="module-icon"><i class="ti ti-users"></i></div>
-        <h3>Role-based access control</h3>
-        <p>Field activists, case officers, researchers and system administrators each see only what their role requires. Permissions are assigned by the system administrator and reviewed quarterly.</p>
-        <a href="#support" class="module-link">View support contacts <i class="ti ti-arrow-right"></i></a>
+      <div class="mod-card mod-card-light reveal" data-access="restricted" style="--i:2">
+        <span class="mod-num">03</span>
+        <span class="mod-tag-pill restricted"><i class="ti ti-lock"></i> Staff only</span>
+        <div class="mod-icon"><i class="ti ti-route"></i></div>
+        <h3>Referral management</h3>
+        <p>Coordinate medical, legal and psychosocial referrals to verified Ugandan partner agencies with unique tracking IDs.</p>
+        <a href="#support" class="mod-link">View referral directory <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="module-card reveal" data-access="open" style="--i:4">
-        <div class="module-card-accent"></div>
-        <div class="module-icon"><i class="ti ti-chart-bar"></i></div>
+      <div class="mod-card mod-card-orange reveal" data-access="open" style="--i:3">
+        <span class="mod-num">04</span>
+        <div class="mod-icon"><i class="ti ti-chart-bar"></i></div>
         <h3>Analytics &amp; reporting</h3>
-        <p>Aggregated incident trends, referral outcomes and programme reach visualised by region and type &mdash; without ever exposing individual survivor identities. Feeds directly into Raising Voices&rsquo; M&amp;E reporting cycles.</p>
-        <a href="#repository" class="module-link">Browse the data <i class="ti ti-arrow-right"></i></a>
+        <p>Aggregated incident trends and referral outcomes visualised by region &mdash; without exposing individual survivor identities.</p>
+        <a href="#repository" class="mod-link">Browse the data <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="module-card restricted reveal" data-access="restricted" style="--i:5">
-        <div class="module-card-accent"></div>
-        <span class="module-tag"><i class="ti ti-lock"></i> Staff only</span>
-        <div class="module-icon"><i class="ti ti-list-check"></i></div>
+      <div class="mod-card mod-card-light reveal" data-access="open" style="--i:4">
+        <span class="mod-num">05</span>
+        <div class="mod-icon"><i class="ti ti-users"></i></div>
+        <h3>Role-based access control</h3>
+        <p>Field activists, case officers, researchers and administrators each see only what their role requires. Permissions reviewed quarterly.</p>
+        <a href="#support" class="mod-link">View support contacts <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+      <div class="mod-card mod-card-dark reveal" data-access="restricted" style="--i:5">
+        <span class="mod-num">06</span>
+        <span class="mod-tag-pill restricted"><i class="ti ti-lock"></i> Staff only</span>
+        <div class="mod-icon"><i class="ti ti-list-check"></i></div>
         <h3>Audit &amp; compliance trail</h3>
-        <p>Every view, edit and data export is logged immutably against the acting user and timestamp. The trail is read-only and satisfies the accountability requirements of the Uganda Data Protection &amp; Privacy Act, 2019.</p>
-        <a href="#about" class="module-link">Our data commitments <i class="ti ti-arrow-right"></i></a>
+        <p>Every view, edit and export is logged immutably. Read-only trail satisfies Uganda Data Protection &amp; Privacy Act, 2019.</p>
+        <a href="#about" class="mod-link">Our data commitments <i class="ti ti-arrow-right"></i></a>
       </div>
 
     </div>

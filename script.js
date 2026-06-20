@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Modules filter tabs ---------- */
   var modTabs = document.querySelectorAll('.mod-tab');
-  var modCards = document.querySelectorAll('#modules-grid .module-card');
+  var modCards = document.querySelectorAll('#modules-grid .mod-card');
 
   modTabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
