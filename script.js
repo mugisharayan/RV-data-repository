@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---------- Staff sign-in modal ---------- */
+  /* ---------- Staff portal modal (sign-in + sign-up) ---------- */
   var loginModal    = document.getElementById('login-modal');
   var openers       = ['open-login','open-login-hero','open-login-cta','open-login-qa']
     .map(function(id){ return document.getElementById(id); }).filter(Boolean);
@@ -228,6 +228,43 @@ document.addEventListener('DOMContentLoaded', function () {
   var modalSuccess  = document.getElementById('modal-success');
   var successClose  = document.getElementById('modal-success-close');
   var loginSubmit   = document.getElementById('login-submit');
+
+  /* ── Tab switching ── */
+  var tabBtns       = document.querySelectorAll('.modal-tab');
+  var tabIndicator  = document.getElementById('modal-tab-indicator');
+  var panelSignin   = document.getElementById('panel-signin');
+  var panelSignup   = document.getElementById('panel-signup');
+
+  function switchTab(target) {
+    tabBtns.forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    var activeBtn = document.getElementById('tab-' + target);
+    if(activeBtn){ activeBtn.classList.add('active'); activeBtn.setAttribute('aria-selected','true'); }
+
+    if(target === 'signup'){
+      tabIndicator.classList.add('to-signup');
+      panelSignin.classList.add('modal-panel-hidden');   panelSignin.classList.remove('modal-panel');
+      panelSignup.classList.remove('modal-panel-hidden'); panelSignup.classList.add('modal-panel');
+    } else {
+      tabIndicator.classList.remove('to-signup');
+      panelSignup.classList.add('modal-panel-hidden');   panelSignup.classList.remove('modal-panel');
+      panelSignin.classList.remove('modal-panel-hidden'); panelSignin.classList.add('modal-panel');
+    }
+    /* scroll modal box to top */
+    loginModal.querySelector('.modal-box').scrollTop = 0;
+  }
+
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      switchTab(btn.getAttribute('data-tab'));
+    });
+  });
+
+  /* "Register" / "Sign in" cross-links */
+  document.querySelectorAll('.modal-switch-link').forEach(function(link){
+    link.addEventListener('click', function(){
+      switchTab(link.getAttribute('data-switch'));
+    });
+  });
 
   /* Focusable elements inside modal for focus trap */
   function getFocusable(){
@@ -239,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function openModal(){
     loginModal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    /* reset form state */
+    /* reset sign-in form */
     loginForm.style.display = '';
     loginForm.reset();
     modalSuccess.classList.remove('show');
@@ -252,6 +289,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if(mrbDesc){ mrbDesc.textContent = 'Choose your staff role to continue'; }
     /* reset strength */
     if(pwStrength){ pwStrength.classList.remove('show'); }
+    /* reset tabs to sign-in */
+    switchTab('signin');
+    /* reset sign-up wizard */
+    goToRegStep(0);
     setTimeout(function(){
       var f = getFocusable();
       if(f.length) f[0].focus();
@@ -398,7 +439,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Form submit ---------- */
+  /* ---------- Form submit (sign-in) ---------- */
   loginForm.addEventListener('submit', function(e){
     e.preventDefault();
     clearErrors();
@@ -426,9 +467,180 @@ document.addEventListener('DOMContentLoaded', function () {
       loginSubmit.classList.remove('loading');
       loginSubmit.disabled = false;
       loginForm.style.display = 'none';
+      document.getElementById('success-heading').textContent = 'Signed in successfully';
+      document.getElementById('success-body').textContent = 'Your credentials have been verified. You will be redirected to your role-based dashboard. Multi-factor authentication is enforced in the live system.';
       modalSuccess.classList.add('show');
     }, 1600);
   });
+
+  /* ---------- Registration wizard ---------- */
+  var currentRegStep = 0;
+  var regPanels = document.querySelectorAll('.reg-panel');
+  var regStepDots = document.querySelectorAll('.reg-step');
+  var regStepLines = document.querySelectorAll('.reg-step-line');
+
+  function goToRegStep(idx) {
+    regPanels.forEach(function(p){ p.classList.remove('active'); });
+    var target = document.getElementById('reg-step-' + idx);
+    if(target) target.classList.add('active');
+    currentRegStep = idx;
+
+    /* Update dot states */
+    regStepDots.forEach(function(dot, i){
+      dot.classList.remove('active','done');
+      if(i < idx) dot.classList.add('done');
+      else if(i === idx) dot.classList.add('active');
+    });
+    /* Update connector lines */
+    regStepLines.forEach(function(line, i){
+      line.classList.toggle('filled', i < idx);
+    });
+  }
+
+  /* Next buttons */
+  document.querySelectorAll('.reg-next-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var next = parseInt(btn.getAttribute('data-next'), 10);
+      if(!validateRegStep(currentRegStep)) return;
+      goToRegStep(next);
+      loginModal.querySelector('.modal-box').scrollTop = 0;
+    });
+  });
+
+  /* Back buttons */
+  document.querySelectorAll('.reg-back-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var back = parseInt(btn.getAttribute('data-back'), 10);
+      goToRegStep(back);
+      loginModal.querySelector('.modal-box').scrollTop = 0;
+    });
+  });
+
+  /* Validate each step before proceeding */
+  function validateRegStep(step) {
+    var ok = true;
+    if(step === 0){
+      var fn = document.getElementById('reg-firstname').value.trim();
+      var ln = document.getElementById('reg-lastname').value.trim();
+      var em = document.getElementById('reg-email').value.trim();
+      var inv = document.getElementById('reg-invite').value.trim();
+      if(!fn){ showRegError('err-reg-firstname','reg-firstname','Required.'); ok=false; }
+      else clearRegError('err-reg-firstname','reg-firstname');
+      if(!ln){ showRegError('err-reg-lastname','reg-lastname','Required.'); ok=false; }
+      else clearRegError('err-reg-lastname','reg-lastname');
+      if(!em || !/^[^@]+@[^@]+\.[^@]+$/.test(em)){ showRegError('err-reg-email','reg-email','Enter a valid email.'); ok=false; }
+      else clearRegError('err-reg-email','reg-email');
+      if(!inv || inv.length < 6){ showRegError('err-reg-invite','reg-invite','Enter a valid invite code.'); ok=false; }
+      else clearRegError('err-reg-invite','reg-invite');
+    }
+    if(step === 1){
+      var roleVal = document.querySelector('input[name="reg-role"]:checked');
+      var dept = document.getElementById('reg-department').value;
+      if(!roleVal){ showRegError('err-reg-role','role-cards','Please select your role.'); ok=false; }
+      else clearRegError('err-reg-role','role-cards');
+      if(!dept){ showRegError('err-reg-department','reg-department','Please select your department.'); ok=false; }
+      else clearRegError('err-reg-department','reg-department');
+    }
+    return ok;
+  }
+
+  function showRegError(errId, inputId, msg){
+    var errEl = document.getElementById(errId);
+    if(errEl) errEl.textContent = msg;
+    var inputEl = document.getElementById(inputId);
+    if(inputEl){
+      var wrap = inputEl.closest('.form-input-wrap, .form-select-wrap');
+      if(wrap) wrap.classList.add('error');
+    }
+  }
+  function clearRegError(errId, inputId){
+    var errEl = document.getElementById(errId);
+    if(errEl) errEl.textContent = '';
+    var inputEl = document.getElementById(inputId);
+    if(inputEl){
+      var wrap = inputEl.closest('.form-input-wrap, .form-select-wrap');
+      if(wrap) wrap.classList.remove('error');
+    }
+  }
+
+  /* Registration submit */
+  var regSubmitBtn = document.getElementById('reg-submit');
+  if(regSubmitBtn){
+    regSubmitBtn.addEventListener('click', function(){
+      var pw1 = document.getElementById('reg-password').value;
+      var pw2 = document.getElementById('reg-confirm').value;
+      var terms = document.getElementById('reg-terms');
+      var ok = true;
+
+      if(pw1.length < 8){ showRegError('err-reg-password','reg-password','Password must be at least 8 characters.'); ok=false; }
+      else clearRegError('err-reg-password','reg-password');
+      if(pw1 !== pw2){ showRegError('err-reg-confirm','reg-confirm','Passwords do not match.'); ok=false; }
+      else clearRegError('err-reg-confirm','reg-confirm');
+      if(!terms || !terms.checked){ showRegError('err-reg-terms','reg-terms','You must accept the terms.'); ok=false; }
+      else clearRegError('err-reg-terms','reg-terms');
+      if(!ok) return;
+
+      /* Loading */
+      regSubmitBtn.classList.add('loading');
+      regSubmitBtn.disabled = true;
+      setTimeout(function(){
+        regSubmitBtn.classList.remove('loading');
+        regSubmitBtn.disabled = false;
+        /* Hide sign-up panel, show success */
+        panelSignup.classList.add('modal-panel-hidden');
+        panelSignup.classList.remove('modal-panel');
+        document.getElementById('success-heading').textContent = 'Registration submitted';
+        document.getElementById('success-body').textContent = 'Your registration request has been received. A system administrator will verify your invitation code and activate your account within one business day.';
+        modalSuccess.classList.add('show');
+      }, 1800);
+    });
+  }
+
+  /* Registration password strength + requirements */
+  var regPwInput       = document.getElementById('reg-password');
+  var regPwStrength    = document.getElementById('reg-pw-strength');
+  var regPwFill        = document.getElementById('reg-pw-strength-fill');
+  var regPwLabel       = document.getElementById('reg-pw-strength-label');
+
+  function checkPwRequirements(pw){
+    var reqs = {
+      'req-length':  pw.length >= 8,
+      'req-upper':   /[A-Z]/.test(pw),
+      'req-number':  /[0-9]/.test(pw),
+      'req-special': /[^A-Za-z0-9]/.test(pw)
+    };
+    Object.keys(reqs).forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.classList.toggle('met', reqs[id]);
+    });
+  }
+
+  if(regPwInput && regPwStrength){
+    regPwInput.addEventListener('input', function(){
+      var val = regPwInput.value;
+      if(!val){ regPwStrength.classList.remove('show'); return; }
+      regPwStrength.classList.add('show');
+      var lvl = strengthLevels[scorePassword(val)];
+      regPwFill.style.width = lvl.pct + '%';
+      regPwFill.style.background = lvl.color;
+      regPwLabel.textContent = lvl.label;
+      regPwLabel.style.color = lvl.color;
+      checkPwRequirements(val);
+    });
+  }
+
+  /* Registration password show/hide */
+  var toggleRegPw   = document.getElementById('toggle-reg-pw');
+  var toggleRegIcon = document.getElementById('toggle-reg-pw-icon');
+  var regPwField    = document.getElementById('reg-password');
+  if(toggleRegPw){
+    toggleRegPw.addEventListener('click', function(){
+      var isHidden = regPwField.type === 'password';
+      regPwField.type = isHidden ? 'text' : 'password';
+      toggleRegIcon.className = isHidden ? 'ti ti-eye-off' : 'ti ti-eye';
+      toggleRegPw.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+  }
 
   /* ---------- Toast helper ---------- */
   var toastEl = document.getElementById('toast');

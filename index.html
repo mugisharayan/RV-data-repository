@@ -1292,10 +1292,15 @@
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="ti ti-arrow-up"></i></button>
 
-<!-- ============ STAFF SIGN-IN MODAL ============ -->
+<!-- ============ STAFF PORTAL MODAL ============ -->
 <div class="modal-overlay" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
 
+    <!-- Decorative background orbs -->
+    <div class="modal-orb modal-orb-1" aria-hidden="true"></div>
+    <div class="modal-orb modal-orb-2" aria-hidden="true"></div>
+
+    <!-- Header -->
     <div class="modal-head">
       <div class="modal-head-left">
         <div class="modal-brand-mark">
@@ -1312,85 +1317,333 @@
           </svg>
         </div>
         <div>
-          <h3 id="modal-title">Staff sign-in</h3>
-          <p class="modal-note">Raising Voices Uganda portal</p>
+          <h3 id="modal-title">Staff portal</h3>
+          <p class="modal-note">Raising Voices Uganda</p>
         </div>
       </div>
       <button class="modal-close" id="close-login" aria-label="Close modal"><i class="ti ti-x"></i></button>
     </div>
 
-    <div class="modal-notice">
-      <i class="ti ti-info-circle"></i>
-      <span>Access is restricted to authorised Raising Voices Uganda staff. Credentials are verified against the staff directory.</span>
+    <!-- Tab switcher -->
+    <div class="modal-tabs" role="tablist" aria-label="Sign in or register">
+      <button class="modal-tab active" id="tab-signin" role="tab" aria-selected="true" aria-controls="panel-signin" data-tab="signin">
+        <i class="ti ti-lock"></i> Sign in
+      </button>
+      <button class="modal-tab" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup" data-tab="signup">
+        <i class="ti ti-user-plus"></i> Register
+      </button>
+      <div class="modal-tab-indicator" id="modal-tab-indicator"></div>
     </div>
 
-    <!-- Role illustration banner -->
-    <div class="modal-role-banner" id="modal-role-banner">
-      <div class="mrb-icon" id="mrb-icon"><i class="ti ti-users"></i></div>
-      <div class="mrb-text">
-        <span class="mrb-title" id="mrb-title">Select your role</span>
-        <span class="mrb-desc" id="mrb-desc">Choose your staff role to continue</span>
+    <!-- ── SIGN-IN PANEL ── -->
+    <div class="modal-panel" id="panel-signin" role="tabpanel" aria-labelledby="tab-signin">
+
+      <div class="modal-notice">
+        <i class="ti ti-info-circle"></i>
+        <span>Access restricted to authorised Raising Voices Uganda staff.</span>
       </div>
+
+      <!-- Role illustration banner -->
+      <div class="modal-role-banner" id="modal-role-banner">
+        <div class="mrb-icon" id="mrb-icon"><i class="ti ti-users"></i></div>
+        <div class="mrb-text">
+          <span class="mrb-title" id="mrb-title">Select your role</span>
+          <span class="mrb-desc" id="mrb-desc">Choose your staff role to continue</span>
+        </div>
+      </div>
+
+      <form id="staff-login-form" novalidate>
+        <div class="form-group" id="fg-role">
+          <label for="staff-role">Your role</label>
+          <div class="form-select-wrap">
+            <i class="ti ti-users"></i>
+            <select id="staff-role" required>
+              <option value="">Select your role…</option>
+              <option value="activist">Field activist</option>
+              <option value="officer">Case officer</option>
+              <option value="researcher">Researcher</option>
+              <option value="admin">System administrator</option>
+            </select>
+            <i class="ti ti-chevron-down form-select-caret"></i>
+          </div>
+          <span class="form-error" id="err-role"></span>
+        </div>
+
+        <div class="form-group" id="fg-email">
+          <label for="staff-email">Work email</label>
+          <div class="form-input-wrap">
+            <i class="ti ti-mail"></i>
+            <input type="email" id="staff-email" placeholder="name@raisingvoices.org" autocomplete="email" required>
+          </div>
+          <span class="form-error" id="err-email"></span>
+        </div>
+
+        <div class="form-group" id="fg-password">
+          <div class="form-label-row">
+            <label for="staff-password">Password</label>
+            <button type="button" class="forgot-link" id="forgot-link">Forgot password?</button>
+          </div>
+          <div class="form-input-wrap">
+            <i class="ti ti-lock"></i>
+            <input type="password" id="staff-password" placeholder="••••••••" autocomplete="current-password" required>
+            <button type="button" class="toggle-pw" id="toggle-pw" aria-label="Show password">
+              <i class="ti ti-eye" id="toggle-pw-icon"></i>
+            </button>
+          </div>
+          <div class="pw-strength" id="pw-strength" aria-hidden="true">
+            <div class="pw-strength-bar">
+              <div class="pw-strength-fill" id="pw-strength-fill"></div>
+            </div>
+            <span class="pw-strength-label" id="pw-strength-label"></span>
+          </div>
+          <span class="form-error" id="err-password"></span>
+        </div>
+
+        <button type="submit" class="btn btn-navy btn-block" id="login-submit">
+          <span class="login-btn-text"><i class="ti ti-arrow-right"></i> Sign in</span>
+          <span class="login-spinner" aria-hidden="true"><i class="ti ti-loader-2"></i></span>
+        </button>
+      </form>
+
+      <p class="modal-switch-hint">New staff member? <button class="modal-switch-link" data-switch="signup">Request access <i class="ti ti-arrow-right"></i></button></p>
     </div>
 
-    <!-- Sign-in form -->
-    <form id="staff-login-form" novalidate>
-      <div class="form-group" id="fg-role">
-        <label for="staff-role">Your role</label>
-        <div class="form-select-wrap">
-          <i class="ti ti-users"></i>
-          <select id="staff-role" required>
-            <option value="">Select your role…</option>
-            <option value="activist">Field activist</option>
-            <option value="officer">Case officer</option>
-            <option value="researcher">Researcher</option>
-            <option value="admin">System administrator</option>
-          </select>
-          <i class="ti ti-chevron-down form-select-caret"></i>
-        </div>
-        <span class="form-error" id="err-role"></span>
+    <!-- ── SIGN-UP PANEL ── -->
+    <div class="modal-panel modal-panel-hidden" id="panel-signup" role="tabpanel" aria-labelledby="tab-signup">
+
+      <!-- Registration notice -->
+      <div class="modal-notice modal-notice-gold">
+        <i class="ti ti-shield-check"></i>
+        <span>Registration requires a valid staff invitation code issued by your system administrator.</span>
       </div>
 
-      <div class="form-group" id="fg-email">
-        <label for="staff-email">Work email</label>
-        <div class="form-input-wrap">
-          <i class="ti ti-mail"></i>
-          <input type="email" id="staff-email" placeholder="name@raisingvoices.org" autocomplete="email" required>
+      <!-- Step progress dots -->
+      <div class="reg-steps" aria-label="Registration progress">
+        <div class="reg-step active" data-step-dot="0">
+          <div class="reg-step-dot"></div>
+          <span>Identity</span>
         </div>
-        <span class="form-error" id="err-email"></span>
+        <div class="reg-step-line"></div>
+        <div class="reg-step" data-step-dot="1">
+          <div class="reg-step-dot"></div>
+          <span>Role</span>
+        </div>
+        <div class="reg-step-line"></div>
+        <div class="reg-step" data-step-dot="2">
+          <div class="reg-step-dot"></div>
+          <span>Security</span>
+        </div>
       </div>
 
-      <div class="form-group" id="fg-password">
-        <div class="form-label-row">
-          <label for="staff-password">Password</label>
-          <button type="button" class="forgot-link" id="forgot-link">Forgot password?</button>
+      <!-- Step 1 — Identity -->
+      <div class="reg-panel active" id="reg-step-0">
+        <div class="reg-step-heading">
+          <div class="reg-step-num">01</div>
+          <div>
+            <h4>Your identity</h4>
+            <p>We need your full name and official work email.</p>
+          </div>
         </div>
-        <div class="form-input-wrap">
-          <i class="ti ti-lock"></i>
-          <input type="password" id="staff-password" placeholder="••••••••" autocomplete="current-password" required>
-          <button type="button" class="toggle-pw" id="toggle-pw" aria-label="Show password">
-            <i class="ti ti-eye" id="toggle-pw-icon"></i>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="reg-firstname">First name</label>
+            <div class="form-input-wrap">
+              <i class="ti ti-user"></i>
+              <input type="text" id="reg-firstname" placeholder="First name" autocomplete="given-name">
+            </div>
+            <span class="form-error" id="err-reg-firstname"></span>
+          </div>
+          <div class="form-group">
+            <label for="reg-lastname">Last name</label>
+            <div class="form-input-wrap">
+              <i class="ti ti-user"></i>
+              <input type="text" id="reg-lastname" placeholder="Last name" autocomplete="family-name">
+            </div>
+            <span class="form-error" id="err-reg-lastname"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email">Work email</label>
+          <div class="form-input-wrap">
+            <i class="ti ti-mail"></i>
+            <input type="email" id="reg-email" placeholder="name@raisingvoices.org" autocomplete="email">
+          </div>
+          <span class="form-error" id="err-reg-email"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-invite">Invitation code</label>
+          <div class="form-input-wrap">
+            <i class="ti ti-key"></i>
+            <input type="text" id="reg-invite" placeholder="RV-XXXX-XXXX" autocomplete="off" maxlength="12">
+          </div>
+          <span class="form-hint"><i class="ti ti-info-circle"></i> Issued by your system administrator</span>
+          <span class="form-error" id="err-reg-invite"></span>
+        </div>
+
+        <button type="button" class="btn btn-navy btn-block reg-next-btn" data-next="1">
+          Continue <i class="ti ti-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Step 2 — Role -->
+      <div class="reg-panel" id="reg-step-1">
+        <div class="reg-step-heading">
+          <div class="reg-step-num">02</div>
+          <div>
+            <h4>Your role &amp; department</h4>
+            <p>This determines your access level within the system.</p>
+          </div>
+        </div>
+
+        <!-- Role selector cards -->
+        <div class="role-cards" id="role-cards">
+          <label class="role-card" for="rc-activist">
+            <input type="radio" name="reg-role" id="rc-activist" value="activist">
+            <div class="role-card-inner">
+              <div class="role-card-icon"><i class="ti ti-heart-handshake"></i></div>
+              <div>
+                <h4>Field activist</h4>
+                <p>Community mobilisation &amp; first response</p>
+              </div>
+              <div class="role-card-check"><i class="ti ti-check"></i></div>
+            </div>
+          </label>
+          <label class="role-card" for="rc-officer">
+            <input type="radio" name="reg-role" id="rc-officer" value="officer">
+            <div class="role-card-inner">
+              <div class="role-card-icon"><i class="ti ti-clipboard-heart"></i></div>
+              <div>
+                <h4>Case officer</h4>
+                <p>Incident intake, tracking &amp; referrals</p>
+              </div>
+              <div class="role-card-check"><i class="ti ti-check"></i></div>
+            </div>
+          </label>
+          <label class="role-card" for="rc-researcher">
+            <input type="radio" name="reg-role" id="rc-researcher" value="researcher">
+            <div class="role-card-inner">
+              <div class="role-card-icon"><i class="ti ti-microscope"></i></div>
+              <div>
+                <h4>Researcher</h4>
+                <p>Repository &amp; analytics access</p>
+              </div>
+              <div class="role-card-check"><i class="ti ti-check"></i></div>
+            </div>
+          </label>
+        </div>
+        <span class="form-error" id="err-reg-role"></span>
+
+        <div class="form-group" style="margin-top:16px">
+          <label for="reg-department">Department / office</label>
+          <div class="form-select-wrap">
+            <i class="ti ti-building"></i>
+            <select id="reg-department">
+              <option value="">Select department…</option>
+              <option value="programmes">Programmes</option>
+              <option value="research">Research &amp; evaluation</option>
+              <option value="advocacy">Advocacy &amp; policy</option>
+              <option value="admin">Administration</option>
+              <option value="finance">Finance</option>
+            </select>
+            <i class="ti ti-chevron-down form-select-caret"></i>
+          </div>
+          <span class="form-error" id="err-reg-department"></span>
+        </div>
+
+        <div class="reg-btn-row">
+          <button type="button" class="btn btn-outline-navy reg-back-btn" data-back="0"><i class="ti ti-arrow-left"></i> Back</button>
+          <button type="button" class="btn btn-navy reg-next-btn" data-next="2">Continue <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 3 — Security -->
+      <div class="reg-panel" id="reg-step-2">
+        <div class="reg-step-heading">
+          <div class="reg-step-num">03</div>
+          <div>
+            <h4>Set your password</h4>
+            <p>Choose a strong password. You can also enable two-factor authentication now.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">New password</label>
+          <div class="form-input-wrap">
+            <i class="ti ti-lock"></i>
+            <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password">
+            <button type="button" class="toggle-pw" id="toggle-reg-pw" aria-label="Show password">
+              <i class="ti ti-eye" id="toggle-reg-pw-icon"></i>
+            </button>
+          </div>
+          <div class="pw-strength" id="reg-pw-strength" aria-hidden="true">
+            <div class="pw-strength-bar">
+              <div class="pw-strength-fill" id="reg-pw-strength-fill"></div>
+            </div>
+            <span class="pw-strength-label" id="reg-pw-strength-label"></span>
+          </div>
+          <span class="form-error" id="err-reg-password"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-confirm">Confirm password</label>
+          <div class="form-input-wrap">
+            <i class="ti ti-lock-check"></i>
+            <input type="password" id="reg-confirm" placeholder="••••••••" autocomplete="new-password">
+          </div>
+          <span class="form-error" id="err-reg-confirm"></span>
+        </div>
+
+        <!-- Password requirements checklist -->
+        <ul class="pw-req-list" id="pw-req-list" aria-label="Password requirements">
+          <li class="pw-req" id="req-length"><i class="ti ti-circle"></i> At least 8 characters</li>
+          <li class="pw-req" id="req-upper"><i class="ti ti-circle"></i> One uppercase letter</li>
+          <li class="pw-req" id="req-number"><i class="ti ti-circle"></i> One number</li>
+          <li class="pw-req" id="req-special"><i class="ti ti-circle"></i> One special character</li>
+        </ul>
+
+        <!-- 2FA toggle -->
+        <div class="twofa-toggle">
+          <div class="twofa-toggle-left">
+            <div class="twofa-icon"><i class="ti ti-device-mobile"></i></div>
+            <div>
+              <h4>Enable two-factor authentication</h4>
+              <p>Recommended for all staff accounts</p>
+            </div>
+          </div>
+          <label class="toggle-switch" for="reg-2fa" aria-label="Enable two-factor authentication">
+            <input type="checkbox" id="reg-2fa" checked>
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <!-- Terms checkbox -->
+        <div class="form-check">
+          <label class="check-label" for="reg-terms">
+            <input type="checkbox" id="reg-terms">
+            <span class="check-box"></span>
+            <span>I agree to the <a href="#" class="form-link">data handling policy</a> and <a href="#" class="form-link">terms of use</a></span>
+          </label>
+          <span class="form-error" id="err-reg-terms"></span>
+        </div>
+
+        <div class="reg-btn-row">
+          <button type="button" class="btn btn-outline-navy reg-back-btn" data-back="1"><i class="ti ti-arrow-left"></i> Back</button>
+          <button type="button" class="btn btn-navy reg-submit-btn" id="reg-submit">
+            <span class="login-btn-text"><i class="ti ti-user-check"></i> Register account</span>
+            <span class="login-spinner" aria-hidden="true"><i class="ti ti-loader-2"></i></span>
           </button>
         </div>
-        <div class="pw-strength" id="pw-strength" aria-hidden="true">
-          <div class="pw-strength-bar">
-            <div class="pw-strength-fill" id="pw-strength-fill"></div>
-          </div>
-          <span class="pw-strength-label" id="pw-strength-label"></span>
-        </div>
-        <span class="form-error" id="err-password"></span>
       </div>
 
-      <button type="submit" class="btn btn-navy btn-block" id="login-submit">
-        <span class="login-btn-text">Sign in</span>
-        <span class="login-spinner" aria-hidden="true"><i class="ti ti-loader-2"></i></span>
-      </button>
-    </form>
+    </div>
+    <!-- end panel-signup -->
 
-    <!-- Success state -->
+    <!-- Shared success state -->
     <div class="modal-success" id="modal-success">
       <div class="modal-success-icon" id="modal-success-icon">
-        <!-- Animated unlock shield -->
         <svg class="shield-unlock-svg" id="shield-unlock-svg" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="shieldGradSuccess" x1="8" y1="4" x2="56" y2="63" gradientUnits="userSpaceOnUse">
@@ -1400,18 +1653,15 @@
           </defs>
           <path class="shield-body" d="M32 4L56 13V32C56 48 45 58.5 32 63C19 58.5 8 48 8 32V13L32 4Z"/>
           <path class="shield-inner" d="M32 10L50 18V32C50 45 41 53.5 32 57.5C23 53.5 14 45 14 32V18L32 10Z"/>
-          <!-- shackle open path -->
           <path class="lock-shackle" d="M24 30V25a8 8 0 0 1 13.5-5.8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <!-- lock body -->
           <rect class="lock-body" x="20" y="30" width="24" height="18" rx="4"/>
           <circle class="lock-dot" cx="32" cy="39" r="3"/>
           <line class="lock-line" x1="32" y1="42" x2="32" y2="45" stroke-width="2" stroke-linecap="round"/>
-          <!-- check mark (shown after unlock) -->
           <path class="shield-check" d="M22 37l7 7 13-13" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
       </div>
-      <h4>Signed in successfully</h4>
-      <p>Your credentials have been verified. You will be redirected to your role-based dashboard. Multi-factor authentication is enforced in the live system.</p>
+      <h4 id="success-heading">Signed in successfully</h4>
+      <p id="success-body">Your credentials have been verified. You will be redirected to your role-based dashboard. Multi-factor authentication is enforced in the live system.</p>
       <button class="btn btn-navy btn-block" id="modal-success-close">Close</button>
     </div>
 
