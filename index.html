@@ -480,56 +480,66 @@
 <!-- ============ REPOSITORY SEARCH ============ -->
 <section class="section-pad repo-section" id="repository">
   <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Public research archive</span>
-      <h2>Knowledge repository</h2>
-      <p>Published studies, policy briefs and programme toolkits from Raising Voices Uganda and partner organisations &mdash; catalogued with Dublin Core metadata and free of any identifying survivor information.</p>
-      <div class="section-rule"></div>
+
+    <div class="repo-head reveal">
+      <div class="repo-head-left">
+        <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Public research archive</span>
+        <h2>Knowledge repository</h2>
+        <p>Published studies, policy briefs and programme toolkits &mdash; catalogued with Dublin Core metadata, free of any identifying survivor information.</p>
+      </div>
+      <div class="repo-head-right">
+        <div class="repo-stat"><strong id="repo-count">6</strong><span>records</span></div>
+        <div class="repo-stat-divider"></div>
+        <div class="repo-stat"><strong>Open</strong><span>access</span></div>
+        <div class="repo-stat-divider"></div>
+        <div class="repo-stat"><strong>20+</strong><span>years of data</span></div>
+      </div>
     </div>
 
-    <div class="repo-search-box reveal">
-      <div class="field-control">
-        <i class="ti ti-search"></i>
-        <input type="text" id="repo-search-input" placeholder="Search by title, author or keyword" autocomplete="off">
-        <button class="repo-clear" id="repo-clear" aria-label="Clear search"><i class="ti ti-x"></i></button>
+    <div class="repo-search-float reveal">
+      <div class="repo-search-inner">
+        <div class="repo-search-field">
+          <i class="ti ti-search"></i>
+          <input type="text" id="repo-search-input" placeholder="Search by title, author or keyword…" autocomplete="off">
+          <button class="repo-clear" id="repo-clear" aria-label="Clear search"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="repo-search-filters">
+          <div class="repo-filter-wrap">
+            <i class="ti ti-filter"></i>
+            <select id="repo-subject-filter">
+              <option value="all">All subjects</option>
+              <option value="Community Mobilization">Community mobilization</option>
+              <option value="Child Protection">Child protection</option>
+              <option value="Intimate Partner Violence">Intimate partner violence</option>
+              <option value="Programme Evaluation">Programme evaluation</option>
+              <option value="Policy & Advocacy">Policy &amp; advocacy</option>
+            </select>
+          </div>
+          <div class="repo-filter-wrap">
+            <i class="ti ti-arrows-sort"></i>
+            <select id="repo-sort">
+              <option value="default">Default order</option>
+              <option value="year-desc">Newest first</option>
+              <option value="year-asc">Oldest first</option>
+              <option value="title-asc">Title A&ndash;Z</option>
+              <option value="title-desc">Title Z&ndash;A</option>
+            </select>
+          </div>
+          <button class="btn btn-navy" id="repo-search-btn"><i class="ti ti-search"></i> Search</button>
+        </div>
       </div>
-      <div class="field-control">
-        <i class="ti ti-filter"></i>
-        <select id="repo-subject-filter">
-          <option value="all">All subjects</option>
-          <option value="Community Mobilization">Community mobilization</option>
-          <option value="Child Protection">Child protection</option>
-          <option value="Intimate Partner Violence">Intimate partner violence</option>
-          <option value="Programme Evaluation">Programme evaluation</option>
-          <option value="Policy & Advocacy">Policy &amp; advocacy</option>
-        </select>
-      </div>
-      <div class="field-control">
-        <i class="ti ti-arrows-sort"></i>
-        <select id="repo-sort">
-          <option value="default">Default order</option>
-          <option value="year-desc">Newest first</option>
-          <option value="year-asc">Oldest first</option>
-          <option value="title-asc">Title A&ndash;Z</option>
-          <option value="title-desc">Title Z&ndash;A</option>
-        </select>
-      </div>
-      <button class="btn btn-navy" id="repo-search-btn"><i class="ti ti-search"></i> Search</button>
     </div>
-
-    <div class="repo-meta reveal" id="repo-meta">Showing <strong id="repo-count">6</strong> of <strong>6</strong> records</div>
 
     <div class="record-grid" id="record-grid">
 
-      <article class="record-card" data-title="SASA! Together: a community mobilisation approach to prevent violence against women" data-subject="Community Mobilization" data-year="2021">
-        <div class="record-top"><span class="record-id">RV-2021-001</span><span class="badge badge-published">Published</span></div>
+      <article class="record-card record-card-featured" data-title="SASA! Together: a community mobilisation approach to prevent violence against women" data-subject="Community Mobilization" data-year="2021">
+        <div class="record-card-top">
+          <span class="record-id">RV-2021-001</span>
+          <span class="badge badge-published">Published</span>
+        </div>
+        <span class="record-subject-tag">Community mobilization</span>
         <h4>SASA! Together: a community mobilisation approach to prevent violence against women</h4>
         <p class="record-meta">Raising Voices &mdash; L. Michau, J. Horn, A. Bank, M. Dutt, C. Zimmerman &middot; 2021</p>
-        <span class="record-subject">Community mobilization</span>
-        <div class="record-actions">
-          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
-          <a href="https://raisingvoices.org/resources/sasa-together/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
-        </div>
         <div class="record-detail">
           <p>The full SASA! Together implementation guide presenting the community mobilisation model used across Uganda, East Africa and beyond to prevent violence against women and HIV.</p>
           <ul>
@@ -539,19 +549,22 @@
             <li><strong>Rights:</strong> Open access</li>
           </ul>
         </div>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/sasa-together/" target="_blank" rel="noopener" class="btn btn-navy btn-sm"><i class="ti ti-download"></i> Download</a>
+        </div>
       </article>
 
       <article class="record-card" data-title="Good School Toolkit: preventing violence in Ugandan primary schools" data-subject="Child Protection" data-year="2014">
-        <div class="record-top"><span class="record-id">RV-2014-002</span><span class="badge badge-published">Published</span></div>
+        <div class="record-card-top">
+          <span class="record-id">RV-2014-002</span>
+          <span class="badge badge-published">Published</span>
+        </div>
+        <span class="record-subject-tag">Child protection</span>
         <h4>Good School Toolkit: preventing violence in Ugandan primary schools</h4>
         <p class="record-meta">Raising Voices &mdash; L. Devries, J. Kyegombe, M. Zuurmond et al. &middot; 2014</p>
-        <span class="record-subject">Child protection</span>
-        <div class="record-actions">
-          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
-          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
-        </div>
         <div class="record-detail">
-          <p>A cluster randomised trial and implementation guide evaluating the Good School Toolkit&rsquo;s effectiveness in reducing physical and emotional violence by school staff against pupils in Ugandan primary schools.</p>
+          <p>A cluster randomised trial and implementation guide evaluating the Good School Toolkit&rsquo;s effectiveness in reducing physical and emotional violence by school staff against pupils.</p>
           <ul>
             <li><strong>Publisher:</strong> Raising Voices / The Lancet Global Health</li>
             <li><strong>Type:</strong> Randomised trial &amp; toolkit</li>
@@ -559,19 +572,22 @@
             <li><strong>Rights:</strong> Open access</li>
           </ul>
         </div>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm"><i class="ti ti-download"></i> Download</a>
+        </div>
       </article>
 
       <article class="record-card" data-title="Stepping Stones and Creating Futures: intervention outcomes" data-subject="Intimate Partner Violence" data-year="2015">
-        <div class="record-top"><span class="record-id">RV-2015-003</span><span class="badge badge-published">Published</span></div>
+        <div class="record-card-top">
+          <span class="record-id">RV-2015-003</span>
+          <span class="badge badge-published">Published</span>
+        </div>
+        <span class="record-subject-tag">Intimate partner violence</span>
         <h4>Stepping Stones and Creating Futures: intervention outcomes</h4>
         <p class="record-meta">Raising Voices / MRC South Africa &mdash; C. Watts, K. Heise et al. &middot; 2015</p>
-        <span class="record-subject">Intimate partner violence</span>
-        <div class="record-actions">
-          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
-          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
-        </div>
         <div class="record-detail">
-          <p>Evaluation of a combined livelihoods and gender-transformative intervention in South Africa, measuring reductions in intimate partner violence and improvements in economic outcomes for young women.</p>
+          <p>Evaluation of a combined livelihoods and gender-transformative intervention in South Africa, measuring reductions in intimate partner violence and improvements in economic outcomes.</p>
           <ul>
             <li><strong>Publisher:</strong> Raising Voices / MRC South Africa</li>
             <li><strong>Type:</strong> Programme evaluation</li>
@@ -579,17 +595,20 @@
             <li><strong>Rights:</strong> Open access</li>
           </ul>
         </div>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm"><i class="ti ti-download"></i> Download</a>
+        </div>
       </article>
 
       <article class="record-card" data-title="SASA! study: a cluster randomised trial to assess the impact on violence against women" data-subject="Programme Evaluation" data-year="2014">
-        <div class="record-top"><span class="record-id">RV-2014-004</span><span class="badge badge-published">Published</span></div>
+        <div class="record-card-top">
+          <span class="record-id">RV-2014-004</span>
+          <span class="badge badge-published">Published</span>
+        </div>
+        <span class="record-subject-tag">Programme evaluation</span>
         <h4>SASA! study: a cluster randomised trial to assess the impact on violence against women</h4>
         <p class="record-meta">L. Abramsky, C. Watts, C. Garcia-Moreno et al. &middot; 2014</p>
-        <span class="record-subject">Programme evaluation</span>
-        <div class="record-actions">
-          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
-          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
-        </div>
         <div class="record-detail">
           <p>A rigorous cluster randomised trial conducted in Kampala measuring the impact of the SASA! programme on community attitudes, norms and reported rates of intimate partner violence.</p>
           <ul>
@@ -599,19 +618,22 @@
             <li><strong>Rights:</strong> Open access</li>
           </ul>
         </div>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm"><i class="ti ti-download"></i> Download</a>
+        </div>
       </article>
 
       <article class="record-card" data-title="Preventing violence against women: the role of community activists" data-subject="Community Mobilization" data-year="2018">
-        <div class="record-top"><span class="record-id">RV-2018-005</span><span class="badge badge-published">Published</span></div>
+        <div class="record-card-top">
+          <span class="record-id">RV-2018-005</span>
+          <span class="badge badge-published">Published</span>
+        </div>
+        <span class="record-subject-tag">Community mobilization</span>
         <h4>Preventing violence against women: the role of community activists</h4>
         <p class="record-meta">Raising Voices &mdash; L. Michau &middot; 2018</p>
-        <span class="record-subject">Community mobilization</span>
-        <div class="record-actions">
-          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
-          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
-        </div>
         <div class="record-detail">
-          <p>A practice paper examining how community-based activists drive norm change in violence prevention programmes, drawing on 20 years of Raising Voices field experience in Uganda and East Africa.</p>
+          <p>A practice paper examining how community-based activists drive norm change in violence prevention programmes, drawing on 20 years of Raising Voices field experience.</p>
           <ul>
             <li><strong>Publisher:</strong> Raising Voices, Kampala</li>
             <li><strong>Type:</strong> Practice paper</li>
@@ -619,25 +641,32 @@
             <li><strong>Rights:</strong> Open access</li>
           </ul>
         </div>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm"><i class="ti ti-download"></i> Download</a>
+        </div>
       </article>
 
       <article class="record-card" data-title="Strengthening the evidence base for violence prevention in low-income settings" data-subject="Policy & Advocacy" data-year="2020">
-        <div class="record-top"><span class="record-id">RV-2020-006</span><span class="badge badge-published">Published</span></div>
+        <div class="record-card-top">
+          <span class="record-id">RV-2020-006</span>
+          <span class="badge badge-published">Published</span>
+        </div>
+        <span class="record-subject-tag">Policy &amp; advocacy</span>
         <h4>Strengthening the evidence base for violence prevention in low-income settings</h4>
         <p class="record-meta">Raising Voices / WHO &mdash; C. Garcia-Moreno, L. Michau et al. &middot; 2020</p>
-        <span class="record-subject">Policy &amp; advocacy</span>
-        <div class="record-actions">
-          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
-          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
-        </div>
         <div class="record-detail">
-          <p>A policy and advocacy brief co-authored with WHO examining what works in violence prevention in low- and middle-income country contexts, drawing on evidence from Uganda, East Africa and global programmes.</p>
+          <p>A policy and advocacy brief co-authored with WHO examining what works in violence prevention in low- and middle-income country contexts.</p>
           <ul>
             <li><strong>Publisher:</strong> Raising Voices / World Health Organization</li>
             <li><strong>Type:</strong> Policy brief</li>
             <li><strong>Language:</strong> English</li>
             <li><strong>Rights:</strong> Open access</li>
           </ul>
+        </div>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm"><i class="ti ti-download"></i> Download</a>
         </div>
       </article>
 
@@ -648,6 +677,7 @@
       <p>No matching records found.</p>
       <span>Try a different keyword or reset the subject filter.</span>
     </div>
+
   </div>
 </section>
 
