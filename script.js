@@ -352,26 +352,16 @@ document.addEventListener('DOMContentLoaded', function () {
     toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200);
   }
 
-  /* ---------- Case lifecycle: line draw + step reveal ---------- */
-  var timelineWrap = document.querySelector('.timeline-wrap');
-  var tlSteps = document.querySelectorAll('.tl-step');
-  var tlTriggered = false;
+  /* ---------- Lifecycle stepper accordion ---------- */
+  var stepperItems = document.querySelectorAll('.stepper-item');
 
-  if (timelineWrap) {
-    var tlObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !tlTriggered) {
-          tlTriggered = true;
-          timelineWrap.classList.add('in');
-          tlSteps.forEach(function (step) {
-            step.classList.add('in');
-          });
-          tlObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.2 });
-    tlObserver.observe(timelineWrap);
-  }
+  stepperItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var isActive = item.classList.contains('active');
+      stepperItems.forEach(function(s) { s.classList.remove('active'); });
+      if (!isActive) item.classList.add('active');
+    });
+  });
 
   /* ---------- Support filter tabs ---------- */
   var supTabs = document.querySelectorAll('.sup-tab');

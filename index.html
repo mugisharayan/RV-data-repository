@@ -310,75 +310,169 @@
   </div>
 </section>
 
-<!-- ============ CASE LIFECYCLE (signature section) ============ -->
+<!-- ============ CASE LIFECYCLE ============ -->
 <section class="lifecycle section-pad" id="lifecycle">
-  <div class="container">
-    <div class="section-head center reveal">
+  <div class="container lifecycle-grid">
+
+    <div class="lifecycle-head reveal">
       <span class="eyebrow"><i class="ti ti-point-filled"></i> Case management workflow</span>
-      <h2>From first disclosure to a closed, accountable case</h2>
-      <p>Every GBV report follows the same structured, auditable path through the system &mdash; no report is lost, no step happens off the record, and every action is attributed to a named staff member.</p>
-      <div class="section-rule"></div>
+      <h2>From first disclosure to a closed, accountable case.</h2>
+      <p>Every GBV report follows the same structured, auditable path &mdash; no step happens off the record, every action attributed to a named staff member.</p>
+      <div class="lifecycle-meta">
+        <div class="lifecycle-meta-item">
+          <i class="ti ti-shield-check"></i>
+          <span>Fully audited</span>
+        </div>
+        <div class="lifecycle-meta-item">
+          <i class="ti ti-lock"></i>
+          <span>Staff only</span>
+        </div>
+        <div class="lifecycle-meta-item">
+          <i class="ti ti-refresh"></i>
+          <span>6-step process</span>
+        </div>
+      </div>
     </div>
 
-    <div class="timeline-wrap">
-      <div class="timeline-line"><div class="timeline-line-fill" id="tl-line-fill"></div></div>
-      <div class="timeline" id="timeline">
+    <div class="stepper reveal" id="stepper">
 
-        <div class="tl-step" style="--i:0">
-          <div class="tl-node"><div class="tl-id">S1</div></div>
-          <div class="tl-body">
+      <div class="stepper-item active" data-step="0">
+        <div class="stepper-left">
+          <div class="stepper-node">
+            <span class="stepper-id">S1</span>
+            <span class="stepper-line"></span>
+          </div>
+        </div>
+        <div class="stepper-body">
+          <div class="stepper-head">
             <h4>Disclosure received</h4>
-            <p class="tl-short">A field activist or case officer receives the report.</p>
-            <p class="tl-detail">The intake form captures incident type, location, approximate date, survivor consent preferences and immediate safety concerns. Every field is mandatory before submission, preventing incomplete records from entering the system.</p>
+            <p class="stepper-short">A field activist or case officer receives the report.</p>
+            <i class="ti ti-chevron-down stepper-chevron"></i>
+          </div>
+          <div class="stepper-detail">
+            <p>The intake form captures incident type, location, approximate date, survivor consent preferences and immediate safety concerns. Every field is mandatory before submission, preventing incomplete records from entering the system.</p>
+            <div class="stepper-tags">
+              <span><i class="ti ti-forms"></i> Intake form</span>
+              <span><i class="ti ti-clock"></i> Timestamped</span>
+            </div>
           </div>
         </div>
-
-        <div class="tl-step" style="--i:1">
-          <div class="tl-node"><div class="tl-id">S2</div></div>
-          <div class="tl-body">
-            <h4>Safety &amp; needs screening</h4>
-            <p class="tl-short">Immediate risk assessed before any referral is made.</p>
-            <p class="tl-detail">A structured risk-screening tool flags immediate safety concerns. Cases meeting any of the six escalation criteria are automatically elevated to a senior officer before proceeding to the next step.</p>
-          </div>
-        </div>
-
-        <div class="tl-step" style="--i:2">
-          <div class="tl-node"><div class="tl-id">S3</div></div>
-          <div class="tl-body">
-            <h4>Case officer assigned</h4>
-            <p class="tl-short">A named officer takes full ownership of the case.</p>
-            <p class="tl-detail">Assignment is logged with a timestamp and the officer&rsquo;s staff ID. The case appears on their active queue immediately, and they are responsible for all subsequent actions until formal closure or escalation.</p>
-          </div>
-        </div>
-
-        <div class="tl-step" style="--i:3">
-          <div class="tl-node"><div class="tl-id">S4</div></div>
-          <div class="tl-body">
-            <h4>Referral actioned</h4>
-            <p class="tl-short">Medical, legal or psychosocial referrals sent to partners.</p>
-            <p class="tl-detail">Referrals are dispatched directly to verified Ugandan partner agencies from within the system. Each carries a unique tracking ID linked back to the originating case, so completion can be confirmed and recorded.</p>
-          </div>
-        </div>
-
-        <div class="tl-step" style="--i:4">
-          <div class="tl-node"><div class="tl-id">S5</div></div>
-          <div class="tl-body">
-            <h4>Follow-up &amp; review</h4>
-            <p class="tl-short">Outcomes verified against the original needs assessment.</p>
-            <p class="tl-detail">Scheduled follow-up prompts ensure the assigned officer confirms that each referral was received, acted upon and that the survivor&rsquo;s immediate needs have been met. Any unresolved needs trigger a new referral cycle.</p>
-          </div>
-        </div>
-
-        <div class="tl-step" style="--i:5">
-          <div class="tl-node"><div class="tl-id">S6</div></div>
-          <div class="tl-body">
-            <h4>Case closed</h4>
-            <p class="tl-short">Archived with a complete, immutable audit trail.</p>
-            <p class="tl-detail">Closure requires a mandatory summary note from the assigned officer. The case is then anonymised and archived. The full audit trail is locked as read-only, satisfying Uganda Data Protection &amp; Privacy Act, 2019 obligations.</p>
-          </div>
-        </div>
-
       </div>
+
+      <div class="stepper-item" data-step="1">
+        <div class="stepper-left">
+          <div class="stepper-node">
+            <span class="stepper-id">S2</span>
+            <span class="stepper-line"></span>
+          </div>
+        </div>
+        <div class="stepper-body">
+          <div class="stepper-head">
+            <h4>Safety &amp; needs screening</h4>
+            <p class="stepper-short">Immediate risk assessed before any referral is made.</p>
+            <i class="ti ti-chevron-down stepper-chevron"></i>
+          </div>
+          <div class="stepper-detail">
+            <p>A structured risk-screening tool flags immediate safety concerns. Cases meeting any of the six escalation criteria are automatically elevated to a senior officer before proceeding.</p>
+            <div class="stepper-tags">
+              <span><i class="ti ti-alert-triangle"></i> Risk screening</span>
+              <span><i class="ti ti-arrow-up"></i> Auto-escalation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepper-item" data-step="2">
+        <div class="stepper-left">
+          <div class="stepper-node">
+            <span class="stepper-id">S3</span>
+            <span class="stepper-line"></span>
+          </div>
+        </div>
+        <div class="stepper-body">
+          <div class="stepper-head">
+            <h4>Case officer assigned</h4>
+            <p class="stepper-short">A named officer takes full ownership of the case.</p>
+            <i class="ti ti-chevron-down stepper-chevron"></i>
+          </div>
+          <div class="stepper-detail">
+            <p>Assignment is logged with a timestamp and the officer&rsquo;s staff ID. The case appears on their active queue immediately, and they are responsible for all subsequent actions until formal closure or escalation.</p>
+            <div class="stepper-tags">
+              <span><i class="ti ti-user-check"></i> Named officer</span>
+              <span><i class="ti ti-id"></i> Staff ID logged</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepper-item" data-step="3">
+        <div class="stepper-left">
+          <div class="stepper-node">
+            <span class="stepper-id">S4</span>
+            <span class="stepper-line"></span>
+          </div>
+        </div>
+        <div class="stepper-body">
+          <div class="stepper-head">
+            <h4>Referral actioned</h4>
+            <p class="stepper-short">Medical, legal or psychosocial referrals sent to partners.</p>
+            <i class="ti ti-chevron-down stepper-chevron"></i>
+          </div>
+          <div class="stepper-detail">
+            <p>Referrals are dispatched directly to verified Ugandan partner agencies from within the system. Each carries a unique tracking ID linked back to the originating case, so completion can be confirmed and recorded.</p>
+            <div class="stepper-tags">
+              <span><i class="ti ti-route"></i> Tracking ID</span>
+              <span><i class="ti ti-building-hospital"></i> Verified partners</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepper-item" data-step="4">
+        <div class="stepper-left">
+          <div class="stepper-node">
+            <span class="stepper-id">S5</span>
+            <span class="stepper-line"></span>
+          </div>
+        </div>
+        <div class="stepper-body">
+          <div class="stepper-head">
+            <h4>Follow-up &amp; review</h4>
+            <p class="stepper-short">Outcomes verified against the original needs assessment.</p>
+            <i class="ti ti-chevron-down stepper-chevron"></i>
+          </div>
+          <div class="stepper-detail">
+            <p>Scheduled follow-up prompts ensure the assigned officer confirms that each referral was received, acted upon and that the survivor&rsquo;s immediate needs have been met. Unresolved needs trigger a new referral cycle.</p>
+            <div class="stepper-tags">
+              <span><i class="ti ti-calendar-check"></i> Scheduled prompts</span>
+              <span><i class="ti ti-refresh"></i> Re-referral trigger</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepper-item stepper-item-last" data-step="5">
+        <div class="stepper-left">
+          <div class="stepper-node stepper-node-final">
+            <span class="stepper-id">S6</span>
+          </div>
+        </div>
+        <div class="stepper-body">
+          <div class="stepper-head">
+            <h4>Case closed</h4>
+            <p class="stepper-short">Archived with a complete, immutable audit trail.</p>
+            <i class="ti ti-chevron-down stepper-chevron"></i>
+          </div>
+          <div class="stepper-detail">
+            <p>Closure requires a mandatory summary note from the assigned officer. The case is then anonymised and archived. The full audit trail is locked as read-only, satisfying Uganda Data Protection &amp; Privacy Act, 2019 obligations.</p>
+            <div class="stepper-tags">
+              <span><i class="ti ti-lock"></i> Read-only trail</span>
+              <span><i class="ti ti-eye-off"></i> Anonymised</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
