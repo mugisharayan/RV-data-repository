@@ -245,6 +245,13 @@ document.addEventListener('DOMContentLoaded', function () {
     modalSuccess.classList.remove('show');
     loginSubmit.classList.remove('loading');
     clearErrors();
+    /* reset role banner */
+    if(roleBanner){ roleBanner.classList.remove('has-role'); }
+    if(mrbIcon){ mrbIcon.innerHTML = '<i class="ti ti-users"></i>'; }
+    if(mrbTitle){ mrbTitle.textContent = 'Select your role'; }
+    if(mrbDesc){ mrbDesc.textContent = 'Choose your staff role to continue'; }
+    /* reset strength */
+    if(pwStrength){ pwStrength.classList.remove('show'); }
     setTimeout(function(){
       var f = getFocusable();
       if(f.length) f[0].focus();
@@ -319,6 +326,70 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Password strength indicator ---------- */
+  var pwStrength      = document.getElementById('pw-strength');
+  var pwStrengthFill  = document.getElementById('pw-strength-fill');
+  var pwStrengthLabel = document.getElementById('pw-strength-label');
+  var strengthLevels  = [
+    { label:'Too short',  color:'#C0392B', pct:10 },
+    { label:'Weak',       color:'#E8640C', pct:30 },
+    { label:'Fair',       color:'#C9920A', pct:55 },
+    { label:'Good',       color:'#2E9478', pct:78 },
+    { label:'Strong',     color:'#1A7A46', pct:100 }
+  ];
+  function scorePassword(pw){
+    if(pw.length < 6) return 0;
+    var score = 1;
+    if(pw.length >= 10) score++;
+    if(/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+    if(/[0-9]/.test(pw)) score++;
+    if(/[^A-Za-z0-9]/.test(pw)) score++;
+    return Math.min(score, 4);
+  }
+  if(pwInput && pwStrength){
+    pwInput.addEventListener('input', function(){
+      var val = pwInput.value;
+      if(!val){ pwStrength.classList.remove('show'); return; }
+      pwStrength.classList.add('show');
+      var lvl = strengthLevels[scorePassword(val)];
+      pwStrengthFill.style.width = lvl.pct + '%';
+      pwStrengthFill.style.background = lvl.color;
+      pwStrengthLabel.textContent = lvl.label;
+      pwStrengthLabel.style.color = lvl.color;
+    });
+  }
+
+  /* ---------- Role-based icon/illustration ---------- */
+  var staffRole   = document.getElementById('staff-role');
+  var roleBanner  = document.getElementById('modal-role-banner');
+  var mrbIcon     = document.getElementById('mrb-icon');
+  var mrbTitle    = document.getElementById('mrb-title');
+  var mrbDesc     = document.getElementById('mrb-desc');
+  var roleData = {
+    activist:   { icon:'ti-heart-handshake', title:'Field activist',        desc:'Community mobilisation & first response' },
+    officer:    { icon:'ti-clipboard-heart', title:'Case officer',           desc:'Incident intake, tracking & referrals' },
+    researcher: { icon:'ti-microscope',      title:'Researcher',             desc:'Research repository & analytics access' },
+    admin:      { icon:'ti-shield-cog',      title:'System administrator',   desc:'Full system & user management access' }
+  };
+  if(staffRole && roleBanner){
+    staffRole.addEventListener('change', function(){
+      var val = staffRole.value;
+      if(!val){
+        roleBanner.classList.remove('has-role');
+        mrbIcon.innerHTML = '<i class="ti ti-users"></i>';
+        mrbTitle.textContent = 'Select your role';
+        mrbDesc.textContent  = 'Choose your staff role to continue';
+        return;
+      }
+      var d = roleData[val];
+      if(!d) return;
+      roleBanner.classList.add('has-role');
+      mrbIcon.innerHTML = '<i class="ti ' + d.icon + '"></i>';
+      mrbTitle.textContent = d.title;
+      mrbDesc.textContent  = d.desc;
+    });
+  }
+
   /* ---------- Forgot password toast ---------- */
   var forgotLink = document.getElementById('forgot-link');
   if(forgotLink){
@@ -363,10 +434,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var toastEl = document.getElementById('toast');
   var toastTimer;
   function showToast(msg){
-    toastEl.textContent = msg;
+    toastEl.innerHTML = msg;
     toastEl.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3800);
   }
 
   /* ---------- Lifecycle horizontal timeline ---------- */
@@ -519,7 +590,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Repository search, filter, sort, highlight, expand ---------- */
   var searchInput  = document.getElementById('repo-search-input');
-  var subjectFilter= document.getElementById('repo-subject-filter');
   var sortSelect   = document.getElementById('repo-sort');
   var searchBtn    = document.getElementById('repo-search-btn');
   var repoClear    = document.getElementById('repo-clear');
@@ -527,7 +597,49 @@ document.addEventListener('DOMContentLoaded', function () {
   var records      = Array.prototype.slice.call(document.querySelectorAll('.record-card'));
   var noResults    = document.getElementById('no-results');
   var repoCount    = document.getElementById('repo-count');
-  var totalRecords = records.length;
+  var activeSubject = 'all';
+
+  /* Subject pill filter */
+  document.querySelectorAll('#repo-subject-pills .repo-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('#repo-subject-pills .repo-pill').forEach(function(p){ p.classList.remove('active'); });
+      pill.classList.add('active');
+      activeSubject = pill.getAttribute('data-subject');
+      applyFilter();
+    });
+  });
+
+  /* Animated search placeholder */
+  var searchPlaceholders = [
+    'Search by title, author or keyword…',
+    'Try “SASA! Together”…',
+    'Try “community mobilisation”…',
+    'Try “intimate partner violence”…',
+    'Try “school toolkit”…',
+    'Try “policy brief”…'
+  ];
+  var phIdx = 0, phCharIdx = 0, phDeleting = false;
+  function phTick() {
+    if (document.activeElement === searchInput) { setTimeout(phTick, 400); return; }
+    var current = searchPlaceholders[phIdx];
+    if (!phDeleting) {
+      phCharIdx++;
+      searchInput.setAttribute('placeholder', current.slice(0, phCharIdx));
+      if (phCharIdx === current.length) { phDeleting = true; setTimeout(phTick, 1800); return; }
+      setTimeout(phTick, 42);
+    } else {
+      phCharIdx--;
+      searchInput.setAttribute('placeholder', current.slice(0, phCharIdx));
+      if (phCharIdx === 0) {
+        phDeleting = false;
+        phIdx = (phIdx + 1) % searchPlaceholders.length;
+        setTimeout(phTick, 300);
+        return;
+      }
+      setTimeout(phTick, 22);
+    }
+  }
+  if (!prefersReducedMotion) setTimeout(phTick, 1000);
 
   function highlight(text, query) {
     if (!query) return text;
@@ -537,31 +649,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function applyFilter() {
     var query   = searchInput.value.trim().toLowerCase();
-    var subject = subjectFilter.value;
     var sort    = sortSelect.value;
     var visible = [];
 
-    /* show/hide + highlight */
     records.forEach(function (card) {
       var rawTitle   = card.getAttribute('data-title') || '';
       var metaEl     = card.querySelector('.record-meta');
       var meta       = metaEl ? metaEl.textContent : '';
       var cardSubject= card.getAttribute('data-subject') || '';
       var matchQ     = query === '' || rawTitle.toLowerCase().indexOf(query) !== -1 || meta.toLowerCase().indexOf(query) !== -1;
-      var matchS     = subject === 'all' || cardSubject === subject;
+      var matchS     = activeSubject === 'all' || cardSubject === activeSubject;
 
       if (matchQ && matchS) {
         card.style.display = '';
+        card.classList.remove('flipped');
         visible.push(card);
-        var h4 = card.querySelector('h4');
-        h4.innerHTML = highlight(rawTitle, query);
+        var h4 = card.querySelector('.rc-front h4');
+        if (h4) h4.innerHTML = highlight(rawTitle, query);
       } else {
         card.style.display = 'none';
-        card.querySelector('h4').textContent = rawTitle;
+        card.classList.remove('flipped');
+        var h4b = card.querySelector('.rc-front h4');
+        if (h4b) h4b.textContent = rawTitle;
       }
     });
 
-    /* sort visible cards */
     if (sort !== 'default') {
       visible.sort(function (a, b) {
         if (sort === 'year-desc') return parseInt(b.dataset.year) - parseInt(a.dataset.year);
@@ -573,17 +685,13 @@ document.addEventListener('DOMContentLoaded', function () {
       visible.forEach(function (card) { recordGrid.appendChild(card); });
     }
 
-    /* update count */
     repoCount.textContent = visible.length;
     noResults.classList.toggle('show', visible.length === 0);
-
-    /* show/hide clear button */
     repoClear.classList.toggle('show', query.length > 0);
   }
 
-  searchBtn.addEventListener('click', applyFilter);
+  if (searchBtn) searchBtn.addEventListener('click', applyFilter);
   searchInput.addEventListener('input', applyFilter);
-  subjectFilter.addEventListener('change', applyFilter);
   sortSelect.addEventListener('change', applyFilter);
   searchInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { e.preventDefault(); applyFilter(); }
@@ -594,22 +702,39 @@ document.addEventListener('DOMContentLoaded', function () {
     searchInput.focus();
   });
 
-  /* View entry expand/collapse */
-  document.querySelectorAll('.view-entry-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+  /* ---------- Citation copy button ---------- */
+  document.querySelectorAll('.rc-cite-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
       var card = btn.closest('.record-card');
-      var isOpen = card.classList.contains('expanded');
-      /* close all others */
-      document.querySelectorAll('.record-card.expanded').forEach(function (c) {
-        c.classList.remove('expanded');
-        var b = c.querySelector('.view-entry-btn');
-        if (b) { b.textContent = 'View entry'; b.classList.remove('active'); }
+      var citation = card.getAttribute('data-citation') || '';
+      // decode HTML entities for plain text copy
+      var tmp = document.createElement('textarea');
+      tmp.innerHTML = citation;
+      var plain = tmp.value;
+      navigator.clipboard.writeText(plain).then(function() {
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="ti ti-quote"></i> Cite';
+        }, 2200);
       });
-      if (!isOpen) {
-        card.classList.add('expanded');
-        btn.textContent = 'Close entry';
-        btn.classList.add('active');
-      }
+    });
+  });
+
+  /* ---------- Repository download intercept ---------- */
+  document.querySelectorAll('.record-actions a.btn-navy').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      showToast('<i class="ti ti-lock" style="margin-right:6px"></i>Download available to authorised staff — please sign in.');
+    });
+  });
+  document.querySelectorAll('.rc-flip-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var card = btn.closest('.record-card');
+      card.classList.toggle('flipped');
     });
   });
 
@@ -734,5 +859,150 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     drawParticles();
   }
+
+  /* =====================================================
+     STEP 9 — Mobile Experience
+     ===================================================== */
+
+  /* Mobile bottom nav scroll-spy */
+  var mbnItems = document.querySelectorAll('.mbn-item');
+  var mbnSectionIds = ['top','repository','support','contact'];
+  var mbnSections = mbnSectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+
+  function updateMobileNav(){
+    var scrollPos = window.scrollY + window.innerHeight / 2;
+    var current = mbnSections[0];
+    mbnSections.forEach(function(sec){
+      if(sec.offsetTop <= scrollPos) current = sec;
+    });
+    mbnItems.forEach(function(item){
+      item.classList.toggle('active', item.getAttribute('data-section') === current.id);
+    });
+  }
+  updateMobileNav();
+  window.addEventListener('scroll', updateMobileNav, { passive:true });
+
+  /* Smooth scroll for bottom nav links */
+  mbnItems.forEach(function(item){
+    item.addEventListener('click', function(e){
+      var href = item.getAttribute('href');
+      if(!href || href === '#') return;
+      var target = document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      var headerH = document.getElementById('site-header').offsetHeight;
+      var top = target.getBoundingClientRect().top + window.scrollY - headerH - 12;
+      window.scrollTo({ top: top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* =====================================================
+     STEP 8 — Micro-interactions & Animation Polish
+     ===================================================== */
+
+  if (!prefersReducedMotion) {
+
+    /* --- 1. Cursor spotlight on dark sections --- */
+    var spotlight = document.createElement('div');
+    spotlight.className = 'cursor-spotlight hidden';
+    document.body.appendChild(spotlight);
+
+    var darkSections = ['.hero','#lifecycle','.cta-band','.site-footer'];
+    function isOverDark(x, y) {
+      return darkSections.some(function(sel) {
+        var el = document.querySelector(sel);
+        if (!el) return false;
+        var r = el.getBoundingClientRect();
+        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+      });
+    }
+    document.addEventListener('mousemove', function(e) {
+      spotlight.style.left = e.clientX + 'px';
+      spotlight.style.top  = e.clientY + 'px';
+      spotlight.classList.toggle('hidden', !isOverDark(e.clientX, e.clientY));
+    });
+    document.addEventListener('mouseleave', function() {
+      spotlight.classList.add('hidden');
+    });
+
+    /* --- 2. Magnetic hover on CTA buttons --- */
+    document.querySelectorAll('.btn-primary, .btn-navy, .btn-hero, .btn-outline-light').forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var r = btn.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width  / 2)) * 0.28;
+        var dy = (e.clientY - (r.top  + r.height / 2)) * 0.28;
+        btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1.04)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = '';
+      });
+    });
+
+    /* --- 3. Staggered list reveal --- */
+    var staggerTargets = document.querySelectorAll(
+      '.about-pillar, .support-escalate li, .footer-col li, .lc-tags span'
+    );
+    staggerTargets.forEach(function(el, i) {
+      el.classList.add('stagger-item');
+      /* group siblings — reset index per parent */
+      var siblings = Array.prototype.slice.call(el.parentElement.children);
+      var sibIdx = siblings.indexOf(el);
+      el.style.setProperty('--si', (sibIdx * 80) + 'ms');
+    });
+    var staggerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    staggerTargets.forEach(function(el) { staggerObserver.observe(el); });
+
+    /* --- 4. Odometer rolling-digit counter --- */
+    function buildOdometer(el) {
+      var target = parseInt(el.getAttribute('data-target'), 10);
+      var digits = String(target).split('');
+      el.innerHTML = '';
+      var wrap = document.createElement('span');
+      wrap.className = 'odometer-wrap';
+      digits.forEach(function(d) {
+        var col = document.createElement('span');
+        col.className = 'odometer-digit';
+        col.style.transform = 'translateY(100%)';
+        col.textContent = d;
+        wrap.appendChild(col);
+      });
+      el.appendChild(wrap);
+      el.setAttribute('data-odometer', 'true');
+    }
+
+    function rollOdometer(el) {
+      el.querySelectorAll('.odometer-digit').forEach(function(col, i) {
+        setTimeout(function() {
+          col.style.transform = 'translateY(0)';
+        }, i * 80);
+      });
+    }
+
+    /* Replace plain counter animation with odometer on about + cta counters */
+    document.querySelectorAll('.counter').forEach(function(el) {
+      buildOdometer(el);
+    });
+
+    /* Trigger roll when section comes into view */
+    var odoObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-odometer]').forEach(rollOdometer);
+          odoObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    [document.getElementById('about'), document.querySelector('.cta-band')].forEach(function(sec) {
+      if (sec) odoObserver.observe(sec);
+    });
+
+  } /* end !prefersReducedMotion */
 
 });
