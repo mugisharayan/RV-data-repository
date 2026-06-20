@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
   onScrollSpy();
   window.addEventListener('scroll', onScrollSpy, { passive: true });
 
-  /* ---------- About: counter + stat bar ---------- */
+  /* ---------- About: counter + stat bar + SVG rings ---------- */
   var counterEls = document.querySelectorAll('.counter');
   var aboutLeft  = document.querySelector('.about-left');
   var aboutTriggered = false;
@@ -109,11 +109,28 @@ document.addEventListener('DOMContentLoaded', function () {
     requestAnimationFrame(step);
   }
 
+  function animateRings() {
+    document.querySelectorAll('.about-ring-fill').forEach(function(circle) {
+      var pct = parseFloat(circle.getAttribute('data-pct')) || 0;
+      var circumference = 2 * Math.PI * 32; /* r=32 */
+      var offset = circumference * (1 - pct / 100);
+      circle.style.strokeDasharray  = circumference;
+      circle.style.strokeDashoffset = circumference;
+      /* Force reflow then animate */
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          circle.style.strokeDashoffset = offset;
+        });
+      });
+    });
+  }
+
   var aboutObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting && !aboutTriggered) {
         aboutTriggered = true;
         counterEls.forEach(animateCounter);
+        animateRings();
         if (aboutLeft) aboutLeft.classList.add('in');
         aboutObserver.disconnect();
       }
@@ -409,6 +426,62 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+
+  /* ---------- Module cards: 3D tilt + SVG connectors ---------- */
+  if (!prefersReducedMotion) {
+    modCards.forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var r = card.getBoundingClientRect();
+        var mx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+        var my = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+        var rx = -my * 8;
+        var ry =  mx * 8;
+        card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateZ(8px)';
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width  * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100) + '%');
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+    });
+
+    /* Draw SVG connector lines between card centres */
+    var connSvg = document.getElementById('mod-connectors');
+    var grid    = document.getElementById('modules-grid');
+    if (connSvg && grid) {
+      function drawConnectors() {
+        var visCards = Array.prototype.slice.call(grid.querySelectorAll('.mod-card:not(.hidden)'));
+        connSvg.innerHTML = '';
+        if (visCards.length < 2) return;
+        var gRect = grid.getBoundingClientRect();
+        var centres = visCards.map(function(c) {
+          var r = c.getBoundingClientRect();
+          return { x: r.left - gRect.left + r.width/2, y: r.top - gRect.top + r.height/2 };
+        });
+        for (var i = 0; i < centres.length - 1; i++) {
+          var a = centres[i], b = centres[i + 1];
+          var line = document.createElementNS('http://www.w3.org/2000/svg','line');
+          line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+          line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+          line.setAttribute('class','mod-connector-line');
+          connSvg.appendChild(line);
+          var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          dot.setAttribute('cx', a.x); dot.setAttribute('cy', a.y); dot.setAttribute('r','5');
+          dot.setAttribute('class','mod-connector-node');
+          connSvg.appendChild(dot);
+        }
+        var last = centres[centres.length - 1];
+        var lastDot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        lastDot.setAttribute('cx', last.x); lastDot.setAttribute('cy', last.y); lastDot.setAttribute('r','5');
+        lastDot.setAttribute('class','mod-connector-node');
+        connSvg.appendChild(lastDot);
+      }
+      drawConnectors();
+      window.addEventListener('resize', drawConnectors, { passive: true });
+      /* Redraw when filter changes */
+      modTabs.forEach(function(tab) { tab.addEventListener('click', function(){ setTimeout(drawConnectors, 50); }); });
+    }
+  }
 
   /* ---------- Repository search, filter, sort, highlight, expand ---------- */
   var searchInput  = document.getElementById('repo-search-input');

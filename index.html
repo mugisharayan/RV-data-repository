@@ -227,24 +227,46 @@
 <section class="about" id="about">
   <div class="container about-grid">
 
-    <!-- LEFT: stat column -->
+    <!-- LEFT: stat column with SVG rings -->
     <div class="about-left reveal">
+
+      <!-- Ring stat: Est. year -->
       <div class="about-stat-card about-stat-primary">
         <span class="about-stat-label">Est.</span>
         <strong class="about-stat-num">1999</strong>
         <p>Kampala, Uganda &mdash; pioneering violence prevention across East &amp; Central Africa.</p>
         <div class="about-stat-icon"><i class="ti ti-map-pin"></i></div>
       </div>
+
+      <!-- Two SVG ring stats -->
       <div class="about-stat-row">
-        <div class="about-stat-card about-stat-sm">
-          <strong class="about-stat-num counter" data-target="25">0</strong><span class="about-stat-unit">+</span>
+        <div class="about-ring-card">
+          <svg class="about-ring-svg" viewBox="0 0 80 80" aria-hidden="true">
+            <circle class="about-ring-bg" cx="40" cy="40" r="32"/>
+            <circle class="about-ring-fill" cx="40" cy="40" r="32"
+              data-pct="83"
+              style="--ring-color:var(--orange)"/>
+          </svg>
+          <div class="about-ring-inner">
+            <strong class="about-stat-num counter" data-target="25">0</strong><span class="about-stat-unit">+</span>
+          </div>
           <p>years of programme experience</p>
         </div>
-        <div class="about-stat-card about-stat-sm about-stat-orange">
-          <strong class="about-stat-num counter" data-target="40">0</strong><span class="about-stat-unit">+</span>
+        <div class="about-ring-card about-ring-card-accent">
+          <svg class="about-ring-svg" viewBox="0 0 80 80" aria-hidden="true">
+            <circle class="about-ring-bg" cx="40" cy="40" r="32"/>
+            <circle class="about-ring-fill" cx="40" cy="40" r="32"
+              data-pct="100"
+              style="--ring-color:var(--white)"/>
+          </svg>
+          <div class="about-ring-inner">
+            <strong class="about-stat-num counter" data-target="40">0</strong><span class="about-stat-unit">+</span>
+          </div>
           <p>countries using SASA! Together</p>
         </div>
       </div>
+
+      <!-- Progress bar card -->
       <div class="about-stat-card about-stat-wide">
         <div class="about-stat-wide-inner">
           <div>
@@ -258,6 +280,49 @@
         </div>
         <span class="about-stat-bar-label">68% of target reached</span>
       </div>
+
+      <!-- World map -->
+      <div class="about-map-card">
+        <div class="about-map-label"><i class="ti ti-world"></i> SASA! Together active countries</div>
+        <div class="about-map-wrap">
+          <!-- Simplified SVG world outline with highlighted hotspots -->
+          <svg class="about-map-svg" viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" aria-label="World map showing SASA! Together active countries">
+            <!-- Landmass silhouette (simplified rectangles for continents) -->
+            <!-- Africa -->
+            <ellipse cx="185" cy="110" rx="28" ry="38" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <!-- Europe -->
+            <ellipse cx="178" cy="68" rx="20" ry="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <!-- Asia -->
+            <ellipse cx="250" cy="75" rx="42" ry="28" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <!-- North America -->
+            <ellipse cx="80" cy="75" rx="35" ry="30" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <!-- South America -->
+            <ellipse cx="100" cy="130" rx="20" ry="28" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <!-- Oceania -->
+            <ellipse cx="295" cy="135" rx="18" ry="12" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+            <!-- Active country dots — Uganda, Kenya, Tanzania, Rwanda, DRC, S.Africa, India, UK, USA, Canada, Australia, Netherlands -->
+            <circle class="map-dot" cx="197" cy="105" r="5" style="--md:0ms"/>
+            <circle class="map-dot" cx="204" cy="100" r="4" style="--md:120ms"/>
+            <circle class="map-dot" cx="200" cy="112" r="3.5" style="--md:220ms"/>
+            <circle class="map-dot" cx="192" cy="103" r="3" style="--md:320ms"/>
+            <circle class="map-dot" cx="187" cy="108" r="4" style="--md:180ms"/>
+            <circle class="map-dot" cx="188" cy="125" r="3.5" style="--md:400ms"/>
+            <circle class="map-dot" cx="258" cy="88" r="3.5" style="--md:280ms"/>
+            <circle class="map-dot" cx="172" cy="63" r="3" style="--md:360ms"/>
+            <circle class="map-dot" cx="75" cy="72" r="3.5" style="--md:440ms"/>
+            <circle class="map-dot" cx="65" cy="66" r="3" style="--md:500ms"/>
+            <circle class="map-dot" cx="294" cy="136" r="3" style="--md:560ms"/>
+            <circle class="map-dot" cx="163" cy="67" r="3" style="--md:300ms"/>
+            <!-- Pulse rings on Uganda (primary) -->
+            <circle class="map-pulse" cx="197" cy="105" r="5"/>
+            <circle class="map-pulse map-pulse-2" cx="197" cy="105" r="5"/>
+          </svg>
+        </div>
+        <div class="about-map-legend">
+          <span class="map-legend-dot"></span><span>Active programme country</span>
+        </div>
+      </div>
+
     </div>
 
     <!-- RIGHT: body text -->
@@ -297,6 +362,59 @@
       </div>
     </div>
 
+    <!-- TIMELINE: milestones -->
+    <div class="about-timeline reveal" style="grid-column:1/-1">
+      <div class="about-timeline-label"><i class="ti ti-timeline"></i> Milestones since 1999</div>
+      <div class="about-timeline-track">
+        <div class="about-timeline-line"></div>
+        <div class="about-timeline-items">
+
+          <div class="tl-item">
+            <div class="tl-node"></div>
+            <div class="tl-year">1999</div>
+            <div class="tl-content"><strong>Founded</strong><p>Raising Voices established in Kampala, Uganda.</p></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-node"></div>
+            <div class="tl-year">2004</div>
+            <div class="tl-content"><strong>SASA! launched</strong><p>Community mobilisation model piloted in Kampala.</p></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-node"></div>
+            <div class="tl-year">2012</div>
+            <div class="tl-content"><strong>Good School Toolkit</strong><p>School violence prevention programme launched.</p></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-node"></div>
+            <div class="tl-year">2014</div>
+            <div class="tl-content"><strong>RCT published</strong><p>Landmark cluster RCT of SASA! in <em>The Lancet</em>.</p></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-node"></div>
+            <div class="tl-year">2019</div>
+            <div class="tl-content"><strong>SASA! Together</strong><p>Updated programme adapted for global scale-up.</p></div>
+          </div>
+
+          <div class="tl-item tl-item-active">
+            <div class="tl-node"></div>
+            <div class="tl-year">2024</div>
+            <div class="tl-content"><strong>40+ countries</strong><p>SASA! Together active across East, West &amp; Southern Africa, Asia and Europe.</p></div>
+          </div>
+
+          <div class="tl-item tl-item-future">
+            <div class="tl-node"></div>
+            <div class="tl-year">2027</div>
+            <div class="tl-content"><strong>5,000 schools</strong><p>Good School Toolkit target for partner schools.</p></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -321,7 +439,10 @@
 
     <div class="modules-bento" id="modules-grid">
 
-      <div class="mod-card mod-card-dark reveal" data-access="restricted" style="--i:0">
+      <!-- SVG step connectors -->
+      <svg class="mod-connectors" id="mod-connectors" aria-hidden="true"></svg>
+
+      <div class="mod-card mod-card-dark reveal" data-access="restricted" data-index="0" style="--i:0">
         <span class="mod-num">01</span>
         <span class="mod-tag-pill restricted"><i class="ti ti-lock"></i> Staff only</span>
         <div class="mod-icon"><i class="ti ti-clipboard-list"></i></div>
@@ -330,7 +451,7 @@
         <a href="#lifecycle" class="mod-link">View case lifecycle <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="mod-card mod-card-teal reveal" data-access="open" style="--i:1">
+      <div class="mod-card mod-card-teal reveal" data-access="open" data-index="1" style="--i:1">
         <span class="mod-num">02</span>
         <div class="mod-icon"><i class="ti ti-book-2"></i></div>
         <h3>Research &amp; knowledge repository</h3>
@@ -338,7 +459,7 @@
         <a href="#repository" class="mod-link">Search the repository <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="mod-card mod-card-light reveal" data-access="restricted" style="--i:2">
+      <div class="mod-card mod-card-light reveal" data-access="restricted" data-index="2" style="--i:2">
         <span class="mod-num">03</span>
         <span class="mod-tag-pill restricted"><i class="ti ti-lock"></i> Staff only</span>
         <div class="mod-icon"><i class="ti ti-route"></i></div>
@@ -347,7 +468,7 @@
         <a href="#support" class="mod-link">View referral directory <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="mod-card mod-card-orange reveal" data-access="open" style="--i:3">
+      <div class="mod-card mod-card-orange reveal" data-access="open" data-index="3" style="--i:3">
         <span class="mod-num">04</span>
         <div class="mod-icon"><i class="ti ti-chart-bar"></i></div>
         <h3>Analytics &amp; reporting</h3>
@@ -355,7 +476,7 @@
         <a href="#repository" class="mod-link">Browse the data <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="mod-card mod-card-light reveal" data-access="open" style="--i:4">
+      <div class="mod-card mod-card-light reveal" data-access="open" data-index="4" style="--i:4">
         <span class="mod-num">05</span>
         <div class="mod-icon"><i class="ti ti-users"></i></div>
         <h3>Role-based access control</h3>
@@ -363,7 +484,7 @@
         <a href="#support" class="mod-link">View support contacts <i class="ti ti-arrow-right"></i></a>
       </div>
 
-      <div class="mod-card mod-card-dark reveal" data-access="restricted" style="--i:5">
+      <div class="mod-card mod-card-dark reveal" data-access="restricted" data-index="5" style="--i:5">
         <span class="mod-num">06</span>
         <span class="mod-tag-pill restricted"><i class="ti ti-lock"></i> Staff only</span>
         <div class="mod-icon"><i class="ti ti-list-check"></i></div>
