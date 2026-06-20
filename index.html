@@ -499,168 +499,178 @@
 
 <!-- ============ CASE LIFECYCLE ============ -->
 <section class="lifecycle section-pad" id="lifecycle">
-  <div class="container lifecycle-grid">
+  <div class="container">
 
     <div class="lifecycle-head reveal">
       <span class="eyebrow light"><i class="ti ti-point-filled"></i> Case management workflow</span>
       <h2>From first disclosure to a closed, accountable case.</h2>
       <p>Every GBV report follows the same structured, auditable path &mdash; no step happens off the record, every action attributed to a named staff member.</p>
       <div class="lifecycle-meta">
-        <div class="lifecycle-meta-item">
-          <i class="ti ti-shield-check"></i>
-          <span>Fully audited</span>
-        </div>
-        <div class="lifecycle-meta-item">
-          <i class="ti ti-lock"></i>
-          <span>Staff only</span>
-        </div>
-        <div class="lifecycle-meta-item">
-          <i class="ti ti-refresh"></i>
-          <span>6-step process</span>
-        </div>
+        <div class="lifecycle-meta-item"><i class="ti ti-shield-check"></i><span>Fully audited</span></div>
+        <div class="lifecycle-meta-item"><i class="ti ti-lock"></i><span>Staff only</span></div>
+        <div class="lifecycle-meta-item"><i class="ti ti-refresh"></i><span>6-step process</span></div>
       </div>
     </div>
 
-    <div class="stepper reveal" id="stepper">
+    <!-- Progress indicator -->
+    <div class="lc-progress-bar reveal">
+      <div class="lc-progress-fill" id="lc-progress-fill" style="width:16.66%"></div>
+      <span class="lc-progress-label" id="lc-progress-label">Step 1 of 6</span>
+    </div>
 
-      <div class="stepper-item active" data-step="0">
-        <div class="stepper-left">
-          <div class="stepper-node">
-            <span class="stepper-id">S1</span>
-            <span class="stepper-line"></span>
+    <!-- Horizontal timeline -->
+    <div class="lc-timeline-wrap reveal">
+      <div class="lc-timeline" id="lc-timeline">
+
+        <div class="lc-step active" data-step="0">
+          <div class="lc-connector"><div class="lc-connector-line"></div></div>
+          <div class="lc-node">
+            <div class="lc-node-ring"></div>
+            <div class="lc-node-ring lc-node-ring-2"></div>
+            <span class="lc-step-id">S1</span>
           </div>
-        </div>
-        <div class="stepper-body">
-          <div class="stepper-head">
+          <div class="lc-card">
+            <div class="lc-illus">
+              <!-- Micro-illustration: form/clipboard -->
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="10" y="6" width="28" height="36" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <rect x="18" y="3" width="12" height="6" rx="2" fill="var(--orange)" opacity="0.9"/>
+                <line x1="15" y1="18" x2="33" y2="18" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="15" y1="24" x2="33" y2="24" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="15" y1="30" x2="26" y2="30" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="38" cy="38" r="7" fill="var(--orange)"/>
+                <line x1="38" y1="35" x2="38" y2="41" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="35" y1="38" x2="41" y2="38" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="lc-step-id-label">S1</div>
             <h4>Disclosure received</h4>
-            <p class="stepper-short">A field activist or case officer receives the report.</p>
-            <i class="ti ti-chevron-down stepper-chevron"></i>
-          </div>
-          <div class="stepper-detail">
-            <p>The intake form captures incident type, location, approximate date, survivor consent preferences and immediate safety concerns. Every field is mandatory before submission, preventing incomplete records from entering the system.</p>
-            <div class="stepper-tags">
+            <p>A field activist or case officer receives the report and completes the mandatory intake form.</p>
+            <div class="lc-tags">
               <span><i class="ti ti-forms"></i> Intake form</span>
               <span><i class="ti ti-clock"></i> Timestamped</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="stepper-item" data-step="1">
-        <div class="stepper-left">
-          <div class="stepper-node">
-            <span class="stepper-id">S2</span>
-            <span class="stepper-line"></span>
-          </div>
-        </div>
-        <div class="stepper-body">
-          <div class="stepper-head">
+        <div class="lc-step" data-step="1">
+          <div class="lc-connector"><div class="lc-connector-line"></div></div>
+          <div class="lc-node"><span class="lc-step-id">S2</span></div>
+          <div class="lc-card">
+            <div class="lc-illus">
+              <!-- Micro-illustration: shield/risk -->
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M24 4L40 10V22C40 32 33 39 24 43C15 39 8 32 8 22V10L24 4Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <line x1="24" y1="16" x2="24" y2="26" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="24" cy="31" r="2" fill="var(--orange)"/>
+              </svg>
+            </div>
+            <div class="lc-step-id-label">S2</div>
             <h4>Safety &amp; needs screening</h4>
-            <p class="stepper-short">Immediate risk assessed before any referral is made.</p>
-            <i class="ti ti-chevron-down stepper-chevron"></i>
-          </div>
-          <div class="stepper-detail">
-            <p>A structured risk-screening tool flags immediate safety concerns. Cases meeting any of the six escalation criteria are automatically elevated to a senior officer before proceeding.</p>
-            <div class="stepper-tags">
+            <p>Immediate risk assessed using a structured tool. High-risk cases auto-escalate to a senior officer.</p>
+            <div class="lc-tags">
               <span><i class="ti ti-alert-triangle"></i> Risk screening</span>
               <span><i class="ti ti-arrow-up"></i> Auto-escalation</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="stepper-item" data-step="2">
-        <div class="stepper-left">
-          <div class="stepper-node">
-            <span class="stepper-id">S3</span>
-            <span class="stepper-line"></span>
-          </div>
-        </div>
-        <div class="stepper-body">
-          <div class="stepper-head">
+        <div class="lc-step" data-step="2">
+          <div class="lc-connector"><div class="lc-connector-line"></div></div>
+          <div class="lc-node"><span class="lc-step-id">S3</span></div>
+          <div class="lc-card">
+            <div class="lc-illus">
+              <!-- Micro-illustration: person/user -->
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="16" r="8" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <path d="M8 42C8 34.268 15.163 28 24 28C32.837 28 40 34.268 40 42" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-linecap="round" fill="rgba(255,255,255,0.04)"/>
+                <circle cx="36" cy="36" r="7" fill="var(--orange)"/>
+                <path d="M33 36l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="lc-step-id-label">S3</div>
             <h4>Case officer assigned</h4>
-            <p class="stepper-short">A named officer takes full ownership of the case.</p>
-            <i class="ti ti-chevron-down stepper-chevron"></i>
-          </div>
-          <div class="stepper-detail">
-            <p>Assignment is logged with a timestamp and the officer&rsquo;s staff ID. The case appears on their active queue immediately, and they are responsible for all subsequent actions until formal closure or escalation.</p>
-            <div class="stepper-tags">
+            <p>A named officer takes ownership. Assignment is logged with their staff ID and a timestamp.</p>
+            <div class="lc-tags">
               <span><i class="ti ti-user-check"></i> Named officer</span>
               <span><i class="ti ti-id"></i> Staff ID logged</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="stepper-item" data-step="3">
-        <div class="stepper-left">
-          <div class="stepper-node">
-            <span class="stepper-id">S4</span>
-            <span class="stepper-line"></span>
-          </div>
-        </div>
-        <div class="stepper-body">
-          <div class="stepper-head">
+        <div class="lc-step" data-step="3">
+          <div class="lc-connector"><div class="lc-connector-line"></div></div>
+          <div class="lc-node"><span class="lc-step-id">S4</span></div>
+          <div class="lc-card">
+            <div class="lc-illus">
+              <!-- Micro-illustration: route/referral -->
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="10" cy="24" r="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <circle cx="38" cy="14" r="5" fill="var(--orange)" opacity="0.9"/>
+                <circle cx="38" cy="34" r="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <path d="M15 22 Q24 14 33 14" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="3 2" fill="none"/>
+                <path d="M15 26 Q24 34 33 34" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 2" fill="none"/>
+              </svg>
+            </div>
+            <div class="lc-step-id-label">S4</div>
             <h4>Referral actioned</h4>
-            <p class="stepper-short">Medical, legal or psychosocial referrals sent to partners.</p>
-            <i class="ti ti-chevron-down stepper-chevron"></i>
-          </div>
-          <div class="stepper-detail">
-            <p>Referrals are dispatched directly to verified Ugandan partner agencies from within the system. Each carries a unique tracking ID linked back to the originating case, so completion can be confirmed and recorded.</p>
-            <div class="stepper-tags">
+            <p>Medical, legal or psychosocial referrals dispatched to verified partner agencies with tracking IDs.</p>
+            <div class="lc-tags">
               <span><i class="ti ti-route"></i> Tracking ID</span>
               <span><i class="ti ti-building-hospital"></i> Verified partners</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="stepper-item" data-step="4">
-        <div class="stepper-left">
-          <div class="stepper-node">
-            <span class="stepper-id">S5</span>
-            <span class="stepper-line"></span>
-          </div>
-        </div>
-        <div class="stepper-body">
-          <div class="stepper-head">
+        <div class="lc-step" data-step="4">
+          <div class="lc-connector"><div class="lc-connector-line"></div></div>
+          <div class="lc-node"><span class="lc-step-id">S5</span></div>
+          <div class="lc-card">
+            <div class="lc-illus">
+              <!-- Micro-illustration: calendar/check -->
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="8" y="12" width="32" height="28" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <line x1="8" y1="20" x2="40" y2="20" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <line x1="16" y1="8" x2="16" y2="16" stroke="rgba(255,255,255,0.3)" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="32" y1="8" x2="32" y2="16" stroke="rgba(255,255,255,0.3)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M17 30l4 4 8-8" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="lc-step-id-label">S5</div>
             <h4>Follow-up &amp; review</h4>
-            <p class="stepper-short">Outcomes verified against the original needs assessment.</p>
-            <i class="ti ti-chevron-down stepper-chevron"></i>
-          </div>
-          <div class="stepper-detail">
-            <p>Scheduled follow-up prompts ensure the assigned officer confirms that each referral was received, acted upon and that the survivor&rsquo;s immediate needs have been met. Unresolved needs trigger a new referral cycle.</p>
-            <div class="stepper-tags">
+            <p>Scheduled prompts verify outcomes. Unresolved needs trigger a new referral cycle automatically.</p>
+            <div class="lc-tags">
               <span><i class="ti ti-calendar-check"></i> Scheduled prompts</span>
               <span><i class="ti ti-refresh"></i> Re-referral trigger</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="stepper-item stepper-item-last" data-step="5">
-        <div class="stepper-left">
-          <div class="stepper-node stepper-node-final">
-            <span class="stepper-id">S6</span>
-          </div>
-        </div>
-        <div class="stepper-body">
-          <div class="stepper-head">
+        <div class="lc-step lc-step-last" data-step="5">
+          <div class="lc-node lc-node-final"><span class="lc-step-id">S6</span></div>
+          <div class="lc-card">
+            <div class="lc-illus">
+              <!-- Micro-illustration: lock/archive -->
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="10" y="22" width="28" height="20" rx="4" fill="var(--orange)" opacity="0.9"/>
+                <path d="M16 22V16a8 8 0 0116 0v6" stroke="rgba(255,255,255,0.4)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <circle cx="24" cy="32" r="3" fill="white" opacity="0.9"/>
+                <line x1="24" y1="35" x2="24" y2="38" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.9"/>
+              </svg>
+            </div>
+            <div class="lc-step-id-label">S6</div>
             <h4>Case closed</h4>
-            <p class="stepper-short">Archived with a complete, immutable audit trail.</p>
-            <i class="ti ti-chevron-down stepper-chevron"></i>
-          </div>
-          <div class="stepper-detail">
-            <p>Closure requires a mandatory summary note from the assigned officer. The case is then anonymised and archived. The full audit trail is locked as read-only, satisfying Uganda Data Protection &amp; Privacy Act, 2019 obligations.</p>
-            <div class="stepper-tags">
+            <p>Case anonymised and archived with a complete, immutable audit trail locked as read-only.</p>
+            <div class="lc-tags">
               <span><i class="ti ti-lock"></i> Read-only trail</span>
               <span><i class="ti ti-eye-off"></i> Anonymised</span>
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
+
   </div>
 </section>
 

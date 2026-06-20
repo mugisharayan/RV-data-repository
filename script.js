@@ -369,16 +369,50 @@ document.addEventListener('DOMContentLoaded', function () {
     toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200);
   }
 
-  /* ---------- Lifecycle stepper accordion ---------- */
-  var stepperItems = document.querySelectorAll('.stepper-item');
+  /* ---------- Lifecycle horizontal timeline ---------- */
+  var lcSteps      = document.querySelectorAll('.lc-step');
+  var lcFill       = document.getElementById('lc-progress-fill');
+  var lcLabel      = document.getElementById('lc-progress-label');
+  var lcWrap       = document.querySelector('.lc-timeline-wrap');
+  var totalSteps   = lcSteps.length;
 
-  stepperItems.forEach(function(item) {
-    item.addEventListener('click', function() {
-      var isActive = item.classList.contains('active');
-      stepperItems.forEach(function(s) { s.classList.remove('active'); });
-      if (!isActive) item.classList.add('active');
+  function setActiveStep(idx) {
+    lcSteps.forEach(function(s, i) {
+      s.classList.toggle('active', i === idx);
+      s.classList.toggle('done',   i < idx);
     });
+    if (lcFill)  lcFill.style.width  = ((idx + 1) / totalSteps * 100) + '%';
+    if (lcLabel) lcLabel.textContent = 'Step ' + (idx + 1) + ' of ' + totalSteps;
+    /* Scroll active card into view inside the wrapper */
+    if (lcWrap) {
+      var activeEl = lcSteps[idx];
+      if (activeEl) {
+        var wrapLeft  = lcWrap.scrollLeft;
+        var wrapWidth = lcWrap.offsetWidth;
+        var elLeft    = activeEl.offsetLeft;
+        var elWidth   = activeEl.offsetWidth;
+        var target    = elLeft - (wrapWidth / 2) + (elWidth / 2);
+        lcWrap.scrollTo({ left: target, behavior: 'smooth' });
+      }
+    }
+  }
+
+  lcSteps.forEach(function(step, i) {
+    step.addEventListener('click', function() { setActiveStep(i); });
   });
+
+  /* Drag-to-scroll on the timeline wrapper */
+  if (lcWrap && !prefersReducedMotion) {
+    var isDown = false, startX, scrollLeft;
+    lcWrap.addEventListener('mousedown',  function(e) { isDown = true; startX = e.pageX - lcWrap.offsetLeft; scrollLeft = lcWrap.scrollLeft; });
+    lcWrap.addEventListener('mouseleave', function()  { isDown = false; });
+    lcWrap.addEventListener('mouseup',    function()  { isDown = false; });
+    lcWrap.addEventListener('mousemove',  function(e) {
+      if (!isDown) return;
+      e.preventDefault();
+      lcWrap.scrollLeft = scrollLeft - (e.pageX - lcWrap.offsetLeft - startX);
+    });
+  }
 
   /* ---------- Support filter tabs ---------- */
   var supTabs = document.querySelectorAll('.sup-tab');
