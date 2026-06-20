@@ -523,6 +523,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Hero particles ---------- */
   if (!prefersReducedMotion) {
+
+    /* Typewriter / morphing headline */
+    var twEl = document.getElementById('hero-typewriter');
+    if (twEl) {
+      var twPhrases = [
+        'organised, secure data.',
+        'protected survivor records.',
+        'role-based access control.',
+        'immutable audit trails.',
+        'evidence-driven prevention.'
+      ];
+      var twIdx = 0, twCharIdx = 0, twDeleting = false;
+      function twTick() {
+        var current = twPhrases[twIdx];
+        if (!twDeleting) {
+          twCharIdx++;
+          twEl.textContent = current.slice(0, twCharIdx);
+          if (twCharIdx === current.length) {
+            twDeleting = true;
+            setTimeout(twTick, 1800);
+            return;
+          }
+          setTimeout(twTick, 55);
+        } else {
+          twCharIdx--;
+          twEl.textContent = current.slice(0, twCharIdx);
+          if (twCharIdx === 0) {
+            twDeleting = false;
+            twIdx = (twIdx + 1) % twPhrases.length;
+            setTimeout(twTick, 300);
+            return;
+          }
+          setTimeout(twTick, 28);
+        }
+      }
+      setTimeout(twTick, 1200);
+    }
+
+    /* Parallax tilt on hero content layers */
+    var heroLeft  = document.querySelector('.hero-left');
+    var heroRight = document.querySelector('.hero-right');
+    var heroSection = document.getElementById('top');
+    if (heroLeft && heroRight && heroSection) {
+      document.addEventListener('mousemove', function(e) {
+        var rect = heroSection.getBoundingClientRect();
+        if (rect.bottom < 0) return;
+        var mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+        var my = (e.clientY / window.innerHeight - 0.5) * 2;
+        heroLeft.style.transform  = 'translate(' + (mx * -6) + 'px,' + (my * -4) + 'px)';
+        heroRight.style.transform = 'translate(' + (mx *  8) + 'px,' + (my *  5) + 'px)';
+      });
+    }
+
     var hero = document.getElementById('top');
     var canvas = document.createElement('canvas');
     canvas.className = 'hero-particles';

@@ -60,29 +60,30 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-grain" aria-hidden="true"></div>
-  <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
-  <div class="container">
-    <div class="hero-inner">
+
+  <div class="container hero-split">
+
+    <!-- LEFT: content panel -->
+    <div class="hero-left">
       <span class="hero-eyebrow-pill hero-anim" style="--d:0ms">
         <span class="hero-eyebrow-dot" aria-hidden="true"></span>
         Raising Voices Uganda &mdash; GBV Data Repository
       </span>
+
       <h1 class="hero-anim" style="--d:120ms">
         <span class="hw">Protecting</span>
         <span class="hw">survivors</span>
         <span class="hw">starts</span>
-        <span class="hw">with</span>
-        <em><span class="hw">organised,</span>
-        <span class="hw">secure</span>
-        <span class="hw">data.</span></em>
+        <span class="hw">with</span><br>
+        <em><span class="hero-typewriter" id="hero-typewriter">organised, secure data.</span></em>
       </h1>
+
       <p class="lead hero-anim" style="--d:240ms">Raising Voices Uganda&rsquo;s unified repository connects GBV incident intake, referral coordination and two decades of research &mdash; giving every frontline activist, case officer and researcher exactly the information their role requires, and nothing more.</p>
 
       <div class="hero-cta hero-anim" style="--d:360ms">
         <a href="#repository" class="btn btn-primary btn-hero"><i class="ti ti-books"></i> Browse the repository<i class="ti ti-arrow-right btn-arrow"></i></a>
-        <span class="hero-cta-sep" aria-hidden="true"></span>
         <button class="btn btn-outline-light" id="open-login-hero"><i class="ti ti-lock"></i> Staff sign-in</button>
       </div>
 
@@ -104,14 +105,71 @@
       </div>
     </div>
 
-    <a href="#about" class="hero-scroll-hint" aria-label="Scroll down">
-      <span>Scroll to explore</span>
-      <span class="scroll-mouse" aria-hidden="true">
-        <span class="scroll-wheel"></span>
-      </span>
-      <span class="scroll-line" aria-hidden="true"></span>
-    </a>
+    <!-- RIGHT: animated network visualization -->
+    <div class="hero-right hero-anim" style="--d:200ms" aria-hidden="true">
+      <div class="hero-viz">
+        <svg class="hero-network" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Connection lines -->
+          <line class="net-line" x1="210" y1="210" x2="90" y2="100"/>
+          <line class="net-line" x1="210" y1="210" x2="330" y2="100"/>
+          <line class="net-line" x1="210" y1="210" x2="340" y2="260"/>
+          <line class="net-line" x1="210" y1="210" x2="210" y2="340"/>
+          <line class="net-line" x1="210" y1="210" x2="80" y2="280"/>
+          <line class="net-line net-line-dim" x1="90" y1="100" x2="330" y2="100"/>
+          <line class="net-line net-line-dim" x1="330" y1="100" x2="340" y2="260"/>
+          <line class="net-line net-line-dim" x1="340" y1="260" x2="210" y2="340"/>
+          <line class="net-line net-line-dim" x1="210" y1="340" x2="80" y2="280"/>
+          <line class="net-line net-line-dim" x1="80" y1="280" x2="90" y2="100"/>
+          <!-- Pulse rings on centre node -->
+          <circle class="net-pulse net-pulse-1" cx="210" cy="210" r="32"/>
+          <circle class="net-pulse net-pulse-2" cx="210" cy="210" r="32"/>
+          <!-- Satellite nodes -->
+          <circle class="net-node net-node-sm" cx="90" cy="100" r="14"/>
+          <circle class="net-node net-node-sm" cx="330" cy="100" r="14"/>
+          <circle class="net-node net-node-sm" cx="340" cy="260" r="18"/>
+          <circle class="net-node net-node-sm" cx="210" cy="340" r="14"/>
+          <circle class="net-node net-node-sm" cx="80" cy="280" r="16"/>
+          <!-- Centre node -->
+          <circle class="net-node net-node-center" cx="210" cy="210" r="32"/>
+          <!-- Node icons (text labels) -->
+          <text class="net-label" x="90" y="135">Intake</text>
+          <text class="net-label" x="316" y="135">Referral</text>
+          <text class="net-label" x="326" y="295">Research</text>
+          <text class="net-label" x="188" y="375">Archive</text>
+          <text class="net-label" x="48" y="315">Analytics</text>
+          <text class="net-label net-label-center" x="210" y="215">RV</text>
+          <!-- Travelling data dots -->
+          <circle class="net-dot net-dot-1" r="4"/>
+          <circle class="net-dot net-dot-2" r="3"/>
+          <circle class="net-dot net-dot-3" r="3.5"/>
+        </svg>
+
+        <!-- Floating stat chips over the viz -->
+        <div class="viz-chip viz-chip-1">
+          <i class="ti ti-shield-check"></i>
+          <span>AES-256 encrypted</span>
+        </div>
+        <div class="viz-chip viz-chip-2">
+          <i class="ti ti-history"></i>
+          <span>Immutable audit log</span>
+        </div>
+        <div class="viz-chip viz-chip-3">
+          <i class="ti ti-users"></i>
+          <span>4 role tiers</span>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Bottom scroll hint -->
+  <a href="#about" class="hero-scroll-hint" aria-label="Scroll down">
+    <span>Scroll to explore</span>
+    <span class="scroll-mouse" aria-hidden="true">
+      <span class="scroll-wheel"></span>
+    </span>
+    <span class="scroll-line" aria-hidden="true"></span>
+  </a>
 
   <div class="hero-dock">
     <a href="#repository" class="hero-chip">
