@@ -886,12 +886,12 @@
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer" id="contact">
 
-  <!-- Newsletter bar -->
-  <div class="footer-newsletter">
-    <div class="container footer-newsletter-inner">
-      <div class="footer-newsletter-text">
-        <h4>Stay informed on GBV research &amp; programme updates</h4>
-        <p>Occasional bulletins from Raising Voices Uganda. No spam, unsubscribe any time.</p>
+  <!-- Top band: newsletter + tagline -->
+  <div class="footer-top">
+    <div class="container footer-top-inner">
+      <div class="footer-top-left">
+        <span class="footer-top-eyebrow"><i class="ti ti-point-filled"></i> Stay informed</span>
+        <h3>GBV research &amp; programme updates, direct to your inbox.</h3>
       </div>
       <form class="footer-newsletter-form" id="newsletter-form">
         <div class="footer-newsletter-field">
@@ -900,84 +900,105 @@
         </div>
         <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
       </form>
-      <p class="footer-newsletter-feedback" id="newsletter-feedback"><i class="ti ti-circle-check"></i> You&rsquo;re subscribed &mdash; thank you. We&rsquo;ll be in touch with programme updates.</p>
+      <p class="footer-newsletter-feedback" id="newsletter-feedback">
+        <i class="ti ti-circle-check"></i> You&rsquo;re subscribed &mdash; thank you.
+      </p>
     </div>
   </div>
 
-  <div class="container">
-    <div class="footer-grid">
+  <!-- Main footer body -->
+  <div class="footer-body">
+    <div class="container">
+      <div class="footer-grid">
 
-      <div class="footer-brand footer-col-reveal" style="--fi:0">
-        <a href="#top" class="brand">
-          <span class="brand-mark">
-            <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
-              <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
-            </svg>
-          </span>
-          <span>RV Data Repository<small>Raising Voices Uganda</small></span>
-        </a>
-        <p>Raising Voices Uganda&rsquo;s unified digital repository for GBV incident management, referral coordination and two decades of violence-prevention research &mdash; keeping evidence secure, organised and actionable.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="X / Twitter" class="social-x"><i class="ti ti-brand-x"></i></a>
-          <a href="#" aria-label="Facebook" class="social-fb"><i class="ti ti-brand-facebook"></i></a>
-          <a href="#" aria-label="Instagram" class="social-ig"><i class="ti ti-brand-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn" class="social-li"><i class="ti ti-brand-linkedin"></i></a>
+        <!-- Brand column -->
+        <div class="footer-brand footer-col-reveal" style="--fi:0">
+          <a href="#top" class="brand">
+            <span class="brand-mark">
+              <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
+                <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+              </svg>
+            </span>
+            <span>RV Data Repository<small>Raising Voices Uganda</small></span>
+          </a>
+          <p>Raising Voices Uganda&rsquo;s unified digital repository for GBV incident management, referral coordination and two decades of violence-prevention research.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="X / Twitter" class="social-x"><i class="ti ti-brand-x"></i></a>
+            <a href="#" aria-label="Facebook" class="social-fb"><i class="ti ti-brand-facebook"></i></a>
+            <a href="#" aria-label="Instagram" class="social-ig"><i class="ti ti-brand-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn" class="social-li"><i class="ti ti-brand-linkedin"></i></a>
+          </div>
+          <div class="footer-cert">
+            <span><i class="ti ti-shield-lock"></i> AES-256 encrypted</span>
+            <span><i class="ti ti-eye-off"></i> Survivor anonymised</span>
+          </div>
         </div>
+
+        <!-- Nav columns -->
+        <div class="footer-col footer-col-reveal" style="--fi:1">
+          <h5>Navigate</h5>
+          <ul>
+            <li><a href="#top"><i class="ti ti-chevron-right"></i>Home</a></li>
+            <li><a href="#about"><i class="ti ti-chevron-right"></i>About</a></li>
+            <li><a href="#modules"><i class="ti ti-chevron-right"></i>Modules</a></li>
+            <li><a href="#lifecycle"><i class="ti ti-chevron-right"></i>Case lifecycle</a></li>
+            <li><a href="#repository"><i class="ti ti-chevron-right"></i>Research repository</a></li>
+            <li><a href="#support"><i class="ti ti-chevron-right"></i>Case management</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col-reveal" style="--fi:2">
+          <h5>Resources</h5>
+          <ul>
+            <li><a href="#"><i class="ti ti-chevron-right"></i>Data &amp; privacy policy</a></li>
+            <li><a href="#"><i class="ti ti-chevron-right"></i>Anonymisation policy</a></li>
+            <li><a href="#"><i class="ti ti-chevron-right"></i>Terms of use</a></li>
+            <li><a href="#"><i class="ti ti-chevron-right"></i>Methodology</a></li>
+            <li><a href="#"><i class="ti ti-chevron-right"></i>Access policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact column -->
+        <div class="footer-col footer-col-reveal" style="--fi:3">
+          <h5>Contact</h5>
+          <ul class="footer-contact-list">
+            <li>
+              <span class="footer-contact-icon"><i class="ti ti-map-pin"></i></span>
+              <span>Plot 16 Tufnell Drive, Kamwokya, Kampala, Uganda</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon"><i class="ti ti-mail"></i></span>
+              <a href="mailto:info@raisingvoices.org">info@raisingvoices.org</a>
+            </li>
+            <li>
+              <span class="footer-contact-icon"><i class="ti ti-phone"></i></span>
+              <span>+256 414 531 343</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon"><i class="ti ti-clock"></i></span>
+              <span>Mon&ndash;Fri, 8am&ndash;5pm EAT</span>
+            </li>
+          </ul>
+        </div>
+
       </div>
-
-      <div class="footer-col footer-col-reveal" style="--fi:1">
-        <h5>Quick links</h5>
-        <ul>
-          <li><a href="#top"><i class="ti ti-chevron-right"></i>Home</a></li>
-          <li><a href="#about"><i class="ti ti-chevron-right"></i>About</a></li>
-          <li><a href="#modules"><i class="ti ti-chevron-right"></i>Modules</a></li>
-          <li><a href="#lifecycle"><i class="ti ti-chevron-right"></i>Case lifecycle</a></li>
-          <li><a href="#repository"><i class="ti ti-chevron-right"></i>Research repository</a></li>
-          <li><a href="#support"><i class="ti ti-chevron-right"></i>Case management</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-reveal" style="--fi:2">
-        <h5>Resources</h5>
-        <ul>
-          <li><a href="#"><i class="ti ti-chevron-right"></i>Data &amp; privacy policy</a></li>
-          <li><a href="#"><i class="ti ti-chevron-right"></i>Anonymisation policy</a></li>
-          <li><a href="#"><i class="ti ti-chevron-right"></i>Terms of use</a></li>
-          <li><a href="#"><i class="ti ti-chevron-right"></i>Methodology</a></li>
-          <li><a href="#"><i class="ti ti-chevron-right"></i>Access policy</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-reveal" style="--fi:3">
-        <h5>Contact</h5>
-        <ul class="footer-contact-list">
-          <li>
-            <span class="footer-contact-icon"><i class="ti ti-map-pin"></i></span>
-            <span>Plot 16 Tufnell Drive, Kamwokya, Kampala, Uganda</span>
-          </li>
-          <li>
-            <span class="footer-contact-icon"><i class="ti ti-mail"></i></span>
-            <a href="mailto:info@raisingvoices.org">info@raisingvoices.org</a>
-          </li>
-          <li>
-            <span class="footer-contact-icon"><i class="ti ti-phone"></i></span>
-            <span>+256 414 531 343</span>
-          </li>
-          <li>
-            <span class="footer-contact-icon"><i class="ti ti-clock"></i></span>
-            <span>Mon&ndash;Fri, 8am&ndash;5pm EAT</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <span>&copy; 2026 Raising Voices Uganda Data Repository. All rights reserved.</span>
-      <span class="footer-bottom-note">Survivor data is anonymised and encrypted at rest &amp; in transit.</span>
     </div>
   </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom-bar">
+    <div class="container footer-bottom-inner">
+      <span>&copy; 2026 Raising Voices Uganda Data Repository. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+      </div>
+      <span class="footer-bottom-note">Survivor data encrypted at rest &amp; in transit.</span>
+    </div>
+  </div>
+
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="ti ti-arrow-up"></i></button>
