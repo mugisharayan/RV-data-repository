@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RV Data Repository — Raising Voices Uganda</title>
+<meta name="description" content="A secure, role-based digital repository for GBV incident management and research at Raising Voices Uganda.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-loading">
+
+<!-- ============ SCROLL PROGRESS BAR ============ -->
+<div class="scroll-progress" id="scroll-progress">
+  <div class="scroll-progress-fill" id="scroll-progress-fill"></div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="site-header">
+  <div class="container nav-row">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
+          <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+        </svg>
+      </span>
+      <span>RV Data Repository<small>Raising Voices Uganda</small></span>
+    </a>
+
+    <nav class="nav-links" id="nav-links" role="navigation" aria-label="Main navigation">
+      <button class="nav-close" id="nav-close" aria-label="Close navigation"><i class="ti ti-x"></i></button>
+      <a href="#top" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#modules">Modules</a>
+      <a href="#lifecycle">Case lifecycle</a>
+      <a href="#repository">Research</a>
+      <a href="#support">Case management<span class="nav-tag">Restricted</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-primary btn-sm" id="open-login"><i class="ti ti-lock"></i><span>Staff sign-in</span></button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links"><i class="ti ti-menu-2"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <span class="eyebrow hero-anim" style="--d:0ms"><i class="ti ti-point-filled"></i> Raising Voices Uganda &mdash; GBV Data Repository</span>
+      <h1 class="hero-anim" style="--d:120ms">Protecting survivors starts with <em>organised, secure data.</em></h1>
+      <p class="lead hero-anim" style="--d:240ms">Raising Voices Uganda&rsquo;s unified repository connects GBV incident intake, referral coordination and two decades of research &mdash; giving every frontline activist, case officer and researcher exactly the information their role requires, and nothing more.</p>
+
+      <div class="hero-cta hero-anim" style="--d:360ms">
+        <a href="#repository" class="btn btn-primary"><i class="ti ti-books"></i> Browse the repository</a>
+        <button class="btn btn-outline-light" id="open-login-hero"><i class="ti ti-lock"></i> Staff sign-in</button>
+      </div>
+
+      <div class="hero-meta hero-anim" style="--d:480ms">
+        <div class="hero-meta-item">
+          <i class="ti ti-shield-lock"></i>
+          <span><strong>AES-256 &amp; TLS</strong>Encrypted at rest &amp; in transit</span>
+        </div>
+        <div class="hero-meta-item">
+          <i class="ti ti-history"></i>
+          <span><strong>Fully audited</strong>Every view &amp; edit recorded</span>
+        </div>
+        <div class="hero-meta-item">
+          <i class="ti ti-users"></i>
+          <span><strong>Role-based</strong>Need-to-know access, by design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-chips reveal">
+      <a href="#repository" class="hero-chip">
+        <i class="ti ti-book-2"></i>
+        <div><h4>Research repository</h4><p>Published studies, briefs &amp; toolkits</p></div>
+        <span class="chip-arrow"><i class="ti ti-arrow-right"></i></span>
+      </a>
+      <a href="#lifecycle" class="hero-chip">
+        <i class="ti ti-clipboard-heart"></i>
+        <div><h4>Case management</h4><p>Intake to closure, fully tracked</p></div>
+        <span class="chip-arrow"><i class="ti ti-arrow-right"></i></span>
+      </a>
+      <a href="#support" class="hero-chip">
+        <i class="ti ti-route"></i>
+        <div><h4>Referral directory</h4><p>Verified Ugandan support contacts</p></div>
+        <span class="chip-arrow"><i class="ti ti-arrow-right"></i></span>
+      </a>
+    </div>
+
+    <a href="#about" class="hero-scroll-hint" aria-label="Scroll down">
+      <span>Scroll to explore</span>
+      <i class="ti ti-chevron-down"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ============ STANDARDS STRIP ============ -->
+<div class="standards">
+  <div class="standards-track-wrap">
+    <div class="standards-track" id="standards-track">
+      <span class="standard-item"><i class="ti ti-scale"></i> Uganda Data Protection &amp; Privacy Act, 2019</span>
+      <span class="standard-item"><i class="ti ti-shield-lock"></i> AES-256 encryption at rest</span>
+      <span class="standard-item"><i class="ti ti-lock"></i> TLS 1.3 in transit</span>
+      <span class="standard-item"><i class="ti ti-tags"></i> Dublin Core metadata standard</span>
+      <span class="standard-item"><i class="ti ti-world"></i> UN Women GBV guidelines</span>
+      <span class="standard-item"><i class="ti ti-heart-handshake"></i> SASA! Together methodology</span>
+      <span class="standard-item"><i class="ti ti-school"></i> Good School Toolkit framework</span>
+      <span class="standard-item"><i class="ti ti-eye-off"></i> Survivor anonymisation by default</span>
+      <span class="standard-item"><i class="ti ti-history"></i> Immutable audit logging</span>
+      <span class="standard-item"><i class="ti ti-certificate"></i> Do No Harm principle</span>
+      <span class="standard-item"><i class="ti ti-building-community"></i> Uganda National GBV Policy, 2016</span>
+      <span class="standard-item"><i class="ti ti-users-group"></i> CEDAW obligations, Uganda</span>
+      <!-- duplicate set for seamless loop -->
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-scale"></i> Uganda Data Protection &amp; Privacy Act, 2019</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-shield-lock"></i> AES-256 encryption at rest</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-lock"></i> TLS 1.3 in transit</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-tags"></i> Dublin Core metadata standard</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-world"></i> UN Women GBV guidelines</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-heart-handshake"></i> SASA! Together methodology</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-school"></i> Good School Toolkit framework</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-eye-off"></i> Survivor anonymisation by default</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-history"></i> Immutable audit logging</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-certificate"></i> Do No Harm principle</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-building-community"></i> Uganda National GBV Policy, 2016</span>
+      <span class="standard-item" aria-hidden="true"><i class="ti ti-users-group"></i> CEDAW obligations, Uganda</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="container about-grid">
+
+    <div class="about-visual reveal">
+      <div class="about-panel">
+        <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="about-svg">
+          <g class="svg-lines">
+            <line class="svg-line" x1="120" y1="120" x2="280" y2="90"/>
+            <line class="svg-line" x1="280" y1="90" x2="320" y2="220"/>
+            <line class="svg-line" x1="320" y1="220" x2="200" y2="330"/>
+            <line class="svg-line" x1="80" y1="260" x2="200" y2="330"/>
+            <line class="svg-line" x1="120" y1="120" x2="80" y2="260"/>
+            <line class="svg-line" x1="200" y1="330" x2="260" y2="380"/>
+            <line class="svg-line" x1="280" y1="90" x2="80" y2="260"/>
+          </g>
+          <g class="svg-nodes">
+            <circle class="svg-node" cx="120" cy="120" r="5"/>
+            <circle class="svg-node" cx="280" cy="90" r="5"/>
+            <circle class="svg-node" cx="320" cy="220" r="5"/>
+            <circle class="svg-node" cx="80" cy="260" r="5"/>
+            <circle class="svg-node" cx="200" cy="330" r="5"/>
+            <circle class="svg-node" cx="260" cy="380" r="5"/>
+          </g>
+          <g class="svg-rings" opacity="0.4">
+            <circle cx="120" cy="120" r="12" fill="none" stroke="#F4874A" stroke-width="1" class="svg-ring"/>
+            <circle cx="280" cy="90" r="12" fill="none" stroke="#F4874A" stroke-width="1" class="svg-ring" style="animation-delay:.6s"/>
+            <circle cx="200" cy="330" r="12" fill="none" stroke="#F4874A" stroke-width="1" class="svg-ring" style="animation-delay:1.1s"/>
+          </g>
+          <g transform="translate(140,150)">
+            <path d="M60 0 L116 22 V70 C116 118 90 150 60 168 C30 150 4 118 4 70 V22 Z"
+                  fill="rgba(255,255,255,0.07)" stroke="#F4874A" stroke-width="2"/>
+            <path d="M40 84 L55 99 L84 64" fill="none" stroke="#F4874A" stroke-width="5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="about-badge">
+        <strong><span class="counter" data-target="5000">0</span>+</strong>
+        <span>partner schools by 2027</span>
+      </div>
+    </div>
+
+    <div class="about-body reveal">
+      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Who we are</span>
+      <h2>Over two decades turning activism into evidence.</h2>
+      <p>Founded in 1999 and headquartered in Kampala, Raising Voices Uganda is a pioneer in violence prevention across East and Central Africa. Through the SASA! Together community mobilisation programme and the Good School Toolkit, we equip communities, schools and local organisations to prevent violence before it happens.</p>
+      <p>As our work scales toward 5,000 partner schools, the evidence behind it must scale too. This repository unifies incident tracking, referral coordination and the full research archive into one role-based system &mdash; so every report strengthens the evidence base without ever exposing the people behind it.</p>
+
+      <div class="about-features">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ti ti-shield-lock"></i></div>
+          <h4>Privacy by design</h4>
+          <p>Survivor identities are logically separated from research and analytics data at every stage of the system.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ti ti-heart-handshake"></i></div>
+          <h4>SASA! Together</h4>
+          <p>Our flagship community mobilisation approach, proven across Uganda, East Africa and beyond.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ti ti-school"></i></div>
+          <h4>Good School Toolkit</h4>
+          <p>A structured school-based programme eliminating violence in Ugandan primary schools since 2012.</p>
+        </div>
+      </div>
+
+      <div class="about-actions">
+        <a href="#modules" class="btn btn-navy"><i class="ti ti-layout-grid"></i> Explore the system</a>
+        <a href="#lifecycle" class="btn btn-outline-navy">See how cases are managed</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ MODULES ============ -->
+<section class="modules section-pad" id="modules">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> System overview</span>
+      <h2>Six modules, one accountable system</h2>
+      <p>Every module is scoped to a specific role &mdash; so access always matches professional need, never convenience.</p>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="modules-tabs reveal">
+      <button class="mod-tab active" data-filter="all">All modules</button>
+      <button class="mod-tab" data-filter="open"><i class="ti ti-lock-open"></i> Open access</button>
+      <button class="mod-tab" data-filter="restricted"><i class="ti ti-lock"></i> Staff only</button>
+    </div>
+
+    <div class="modules-grid" id="modules-grid">
+
+      <div class="module-card restricted reveal" data-access="restricted" style="--i:0">
+        <div class="module-card-accent"></div>
+        <span class="module-tag"><i class="ti ti-lock"></i> Staff only</span>
+        <div class="module-icon"><i class="ti ti-clipboard-list"></i></div>
+        <h3>Incident intake &amp; tracking</h3>
+        <p>Validated intake forms capture every GBV report from first contact through to case closure. Mandatory fields prevent incomplete records, and every submission is timestamped and attributed.</p>
+        <a href="#lifecycle" class="module-link">View case lifecycle <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+      <div class="module-card restricted reveal" data-access="restricted" style="--i:1">
+        <div class="module-card-accent"></div>
+        <span class="module-tag"><i class="ti ti-lock"></i> Staff only</span>
+        <div class="module-icon"><i class="ti ti-route"></i></div>
+        <h3>Referral management</h3>
+        <p>Coordinate medical, legal and psychosocial referrals to verified Ugandan partner agencies. Each referral carries a unique tracking ID so outcomes are confirmed and recorded against the original case.</p>
+        <a href="#support" class="module-link">View referral directory <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+      <div class="module-card reveal" data-access="open" style="--i:2">
+        <div class="module-card-accent"></div>
+        <div class="module-icon"><i class="ti ti-book-2"></i></div>
+        <h3>Research &amp; knowledge repository</h3>
+        <p>Search and download published studies, policy briefs and programme toolkits from Raising Voices Uganda and partner organisations, catalogued with Dublin Core metadata.</p>
+        <a href="#repository" class="module-link">Search the repository <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+      <div class="module-card reveal" data-access="open" style="--i:3">
+        <div class="module-card-accent"></div>
+        <div class="module-icon"><i class="ti ti-users"></i></div>
+        <h3>Role-based access control</h3>
+        <p>Field activists, case officers, researchers and system administrators each see only what their role requires. Permissions are assigned by the system administrator and reviewed quarterly.</p>
+        <a href="#support" class="module-link">View support contacts <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+      <div class="module-card reveal" data-access="open" style="--i:4">
+        <div class="module-card-accent"></div>
+        <div class="module-icon"><i class="ti ti-chart-bar"></i></div>
+        <h3>Analytics &amp; reporting</h3>
+        <p>Aggregated incident trends, referral outcomes and programme reach visualised by region and type &mdash; without ever exposing individual survivor identities. Feeds directly into Raising Voices&rsquo; M&amp;E reporting cycles.</p>
+        <a href="#repository" class="module-link">Browse the data <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+      <div class="module-card restricted reveal" data-access="restricted" style="--i:5">
+        <div class="module-card-accent"></div>
+        <span class="module-tag"><i class="ti ti-lock"></i> Staff only</span>
+        <div class="module-icon"><i class="ti ti-list-check"></i></div>
+        <h3>Audit &amp; compliance trail</h3>
+        <p>Every view, edit and data export is logged immutably against the acting user and timestamp. The trail is read-only and satisfies the accountability requirements of the Uganda Data Protection &amp; Privacy Act, 2019.</p>
+        <a href="#about" class="module-link">Our data commitments <i class="ti ti-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE LIFECYCLE (signature section) ============ -->
+<section class="lifecycle section-pad" id="lifecycle">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow"><i class="ti ti-point-filled"></i> Case management workflow</span>
+      <h2>From first disclosure to a closed, accountable case</h2>
+      <p>Every GBV report follows the same structured, auditable path through the system &mdash; no report is lost, no step happens off the record, and every action is attributed to a named staff member.</p>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-line"><div class="timeline-line-fill" id="tl-line-fill"></div></div>
+      <div class="timeline" id="timeline">
+
+        <div class="tl-step" style="--i:0">
+          <div class="tl-node"><div class="tl-id">S1</div></div>
+          <div class="tl-body">
+            <h4>Disclosure received</h4>
+            <p class="tl-short">A field activist or case officer receives the report.</p>
+            <p class="tl-detail">The intake form captures incident type, location, approximate date, survivor consent preferences and immediate safety concerns. Every field is mandatory before submission, preventing incomplete records from entering the system.</p>
+          </div>
+        </div>
+
+        <div class="tl-step" style="--i:1">
+          <div class="tl-node"><div class="tl-id">S2</div></div>
+          <div class="tl-body">
+            <h4>Safety &amp; needs screening</h4>
+            <p class="tl-short">Immediate risk assessed before any referral is made.</p>
+            <p class="tl-detail">A structured risk-screening tool flags immediate safety concerns. Cases meeting any of the six escalation criteria are automatically elevated to a senior officer before proceeding to the next step.</p>
+          </div>
+        </div>
+
+        <div class="tl-step" style="--i:2">
+          <div class="tl-node"><div class="tl-id">S3</div></div>
+          <div class="tl-body">
+            <h4>Case officer assigned</h4>
+            <p class="tl-short">A named officer takes full ownership of the case.</p>
+            <p class="tl-detail">Assignment is logged with a timestamp and the officer&rsquo;s staff ID. The case appears on their active queue immediately, and they are responsible for all subsequent actions until formal closure or escalation.</p>
+          </div>
+        </div>
+
+        <div class="tl-step" style="--i:3">
+          <div class="tl-node"><div class="tl-id">S4</div></div>
+          <div class="tl-body">
+            <h4>Referral actioned</h4>
+            <p class="tl-short">Medical, legal or psychosocial referrals sent to partners.</p>
+            <p class="tl-detail">Referrals are dispatched directly to verified Ugandan partner agencies from within the system. Each carries a unique tracking ID linked back to the originating case, so completion can be confirmed and recorded.</p>
+          </div>
+        </div>
+
+        <div class="tl-step" style="--i:4">
+          <div class="tl-node"><div class="tl-id">S5</div></div>
+          <div class="tl-body">
+            <h4>Follow-up &amp; review</h4>
+            <p class="tl-short">Outcomes verified against the original needs assessment.</p>
+            <p class="tl-detail">Scheduled follow-up prompts ensure the assigned officer confirms that each referral was received, acted upon and that the survivor&rsquo;s immediate needs have been met. Any unresolved needs trigger a new referral cycle.</p>
+          </div>
+        </div>
+
+        <div class="tl-step" style="--i:5">
+          <div class="tl-node"><div class="tl-id">S6</div></div>
+          <div class="tl-body">
+            <h4>Case closed</h4>
+            <p class="tl-short">Archived with a complete, immutable audit trail.</p>
+            <p class="tl-detail">Closure requires a mandatory summary note from the assigned officer. The case is then anonymised and archived. The full audit trail is locked as read-only, satisfying Uganda Data Protection &amp; Privacy Act, 2019 obligations.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REPOSITORY SEARCH ============ -->
+<section class="section-pad repo-section" id="repository">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Public research archive</span>
+      <h2>Knowledge repository</h2>
+      <p>Published studies, policy briefs and programme toolkits from Raising Voices Uganda and partner organisations &mdash; catalogued with Dublin Core metadata and free of any identifying survivor information.</p>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="repo-search-box reveal">
+      <div class="field-control">
+        <i class="ti ti-search"></i>
+        <input type="text" id="repo-search-input" placeholder="Search by title, author or keyword" autocomplete="off">
+        <button class="repo-clear" id="repo-clear" aria-label="Clear search"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="field-control">
+        <i class="ti ti-filter"></i>
+        <select id="repo-subject-filter">
+          <option value="all">All subjects</option>
+          <option value="Community Mobilization">Community mobilization</option>
+          <option value="Child Protection">Child protection</option>
+          <option value="Intimate Partner Violence">Intimate partner violence</option>
+          <option value="Programme Evaluation">Programme evaluation</option>
+          <option value="Policy & Advocacy">Policy &amp; advocacy</option>
+        </select>
+      </div>
+      <div class="field-control">
+        <i class="ti ti-arrows-sort"></i>
+        <select id="repo-sort">
+          <option value="default">Default order</option>
+          <option value="year-desc">Newest first</option>
+          <option value="year-asc">Oldest first</option>
+          <option value="title-asc">Title A&ndash;Z</option>
+          <option value="title-desc">Title Z&ndash;A</option>
+        </select>
+      </div>
+      <button class="btn btn-navy" id="repo-search-btn"><i class="ti ti-search"></i> Search</button>
+    </div>
+
+    <div class="repo-meta reveal" id="repo-meta">Showing <strong id="repo-count">6</strong> of <strong>6</strong> records</div>
+
+    <div class="record-grid" id="record-grid">
+
+      <article class="record-card" data-title="SASA! Together: a community mobilisation approach to prevent violence against women" data-subject="Community Mobilization" data-year="2021">
+        <div class="record-top"><span class="record-id">RV-2021-001</span><span class="badge badge-published">Published</span></div>
+        <h4>SASA! Together: a community mobilisation approach to prevent violence against women</h4>
+        <p class="record-meta">Raising Voices &mdash; L. Michau, J. Horn, A. Bank, M. Dutt, C. Zimmerman &middot; 2021</p>
+        <span class="record-subject">Community mobilization</span>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/sasa-together/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
+        </div>
+        <div class="record-detail">
+          <p>The full SASA! Together implementation guide presenting the community mobilisation model used across Uganda, East Africa and beyond to prevent violence against women and HIV.</p>
+          <ul>
+            <li><strong>Publisher:</strong> Raising Voices, Kampala</li>
+            <li><strong>Type:</strong> Programme guide</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Rights:</strong> Open access</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="record-card" data-title="Good School Toolkit: preventing violence in Ugandan primary schools" data-subject="Child Protection" data-year="2014">
+        <div class="record-top"><span class="record-id">RV-2014-002</span><span class="badge badge-published">Published</span></div>
+        <h4>Good School Toolkit: preventing violence in Ugandan primary schools</h4>
+        <p class="record-meta">Raising Voices &mdash; L. Devries, J. Kyegombe, M. Zuurmond et al. &middot; 2014</p>
+        <span class="record-subject">Child protection</span>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
+        </div>
+        <div class="record-detail">
+          <p>A cluster randomised trial and implementation guide evaluating the Good School Toolkit&rsquo;s effectiveness in reducing physical and emotional violence by school staff against pupils in Ugandan primary schools.</p>
+          <ul>
+            <li><strong>Publisher:</strong> Raising Voices / The Lancet Global Health</li>
+            <li><strong>Type:</strong> Randomised trial &amp; toolkit</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Rights:</strong> Open access</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="record-card" data-title="Stepping Stones and Creating Futures: intervention outcomes" data-subject="Intimate Partner Violence" data-year="2015">
+        <div class="record-top"><span class="record-id">RV-2015-003</span><span class="badge badge-published">Published</span></div>
+        <h4>Stepping Stones and Creating Futures: intervention outcomes</h4>
+        <p class="record-meta">Raising Voices / MRC South Africa &mdash; C. Watts, K. Heise et al. &middot; 2015</p>
+        <span class="record-subject">Intimate partner violence</span>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
+        </div>
+        <div class="record-detail">
+          <p>Evaluation of a combined livelihoods and gender-transformative intervention in South Africa, measuring reductions in intimate partner violence and improvements in economic outcomes for young women.</p>
+          <ul>
+            <li><strong>Publisher:</strong> Raising Voices / MRC South Africa</li>
+            <li><strong>Type:</strong> Programme evaluation</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Rights:</strong> Open access</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="record-card" data-title="SASA! study: a cluster randomised trial to assess the impact on violence against women" data-subject="Programme Evaluation" data-year="2014">
+        <div class="record-top"><span class="record-id">RV-2014-004</span><span class="badge badge-published">Published</span></div>
+        <h4>SASA! study: a cluster randomised trial to assess the impact on violence against women</h4>
+        <p class="record-meta">L. Abramsky, C. Watts, C. Garcia-Moreno et al. &middot; 2014</p>
+        <span class="record-subject">Programme evaluation</span>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
+        </div>
+        <div class="record-detail">
+          <p>A rigorous cluster randomised trial conducted in Kampala measuring the impact of the SASA! programme on community attitudes, norms and reported rates of intimate partner violence.</p>
+          <ul>
+            <li><strong>Publisher:</strong> BMC Medicine / Raising Voices</li>
+            <li><strong>Type:</strong> Randomised controlled trial</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Rights:</strong> Open access</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="record-card" data-title="Preventing violence against women: the role of community activists" data-subject="Community Mobilization" data-year="2018">
+        <div class="record-top"><span class="record-id">RV-2018-005</span><span class="badge badge-published">Published</span></div>
+        <h4>Preventing violence against women: the role of community activists</h4>
+        <p class="record-meta">Raising Voices &mdash; L. Michau &middot; 2018</p>
+        <span class="record-subject">Community mobilization</span>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
+        </div>
+        <div class="record-detail">
+          <p>A practice paper examining how community-based activists drive norm change in violence prevention programmes, drawing on 20 years of Raising Voices field experience in Uganda and East Africa.</p>
+          <ul>
+            <li><strong>Publisher:</strong> Raising Voices, Kampala</li>
+            <li><strong>Type:</strong> Practice paper</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Rights:</strong> Open access</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="record-card" data-title="Strengthening the evidence base for violence prevention in low-income settings" data-subject="Policy & Advocacy" data-year="2020">
+        <div class="record-top"><span class="record-id">RV-2020-006</span><span class="badge badge-published">Published</span></div>
+        <h4>Strengthening the evidence base for violence prevention in low-income settings</h4>
+        <p class="record-meta">Raising Voices / WHO &mdash; C. Garcia-Moreno, L. Michau et al. &middot; 2020</p>
+        <span class="record-subject">Policy &amp; advocacy</span>
+        <div class="record-actions">
+          <button class="btn btn-outline-navy btn-sm view-entry-btn">View entry</button>
+          <a href="https://raisingvoices.org/resources/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Download</a>
+        </div>
+        <div class="record-detail">
+          <p>A policy and advocacy brief co-authored with WHO examining what works in violence prevention in low- and middle-income country contexts, drawing on evidence from Uganda, East Africa and global programmes.</p>
+          <ul>
+            <li><strong>Publisher:</strong> Raising Voices / World Health Organization</li>
+            <li><strong>Type:</strong> Policy brief</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Rights:</strong> Open access</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="no-results" id="no-results">
+      <i class="ti ti-search-off"></i>
+      <p>No matching records found.</p>
+      <span>Try a different keyword or reset the subject filter.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="cta-band">
+  <div class="cta-band-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="cta-head reveal">
+      <h2>Evidence built in the field shapes <em>policy across Africa.</em></h2>
+      <p>Raising Voices Uganda has spent over two decades turning community-level activism into evidence that governments, donors and practitioners around the world rely on. This repository keeps that evidence secure, organised and actionable.</p>
+      <div class="cta-actions">
+        <a href="#repository" class="btn btn-navy"><i class="ti ti-books"></i> Browse the repository</a>
+        <button class="btn btn-outline-navy" id="open-login-cta"><i class="ti ti-lock"></i> Staff sign-in</button>
+      </div>
+    </div>
+
+    <div class="cta-stats reveal">
+      <div class="cta-stat">
+        <strong><span class="counter" data-target="25">0</span>+</strong>
+        <span>years of programme experience</span>
+      </div>
+      <div class="cta-stat-divider"></div>
+      <div class="cta-stat">
+        <strong><span class="counter" data-target="5000">0</span>+</strong>
+        <span>partner schools by 2027</span>
+      </div>
+      <div class="cta-stat-divider"></div>
+      <div class="cta-stat">
+        <strong><span class="counter" data-target="40">0</span>+</strong>
+        <span>countries using SASA! Together</span>
+      </div>
+    </div>
+
+    <div class="cta-grid">
+      <div class="cta-card reveal" style="--i:0">
+        <div class="cta-card-accent"></div>
+        <div class="cta-card-icon"><i class="ti ti-heart-handshake"></i></div>
+        <h4>SASA! Together</h4>
+        <p>Our flagship community mobilisation programme is now active in over 40 countries, equipping communities to prevent violence against women before it happens.</p>
+        <a href="#repository" class="cta-card-link">Read the research <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="cta-card reveal" style="--i:1">
+        <div class="cta-card-accent"></div>
+        <div class="cta-card-icon"><i class="ti ti-school"></i></div>
+        <h4>Good School Toolkit</h4>
+        <p>Since 2012, our school-based programme has reached hundreds of Ugandan primary schools, eliminating teacher-perpetrated violence and transforming school culture.</p>
+        <a href="#repository" class="cta-card-link">Read the research <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="cta-card reveal" style="--i:2">
+        <div class="cta-card-accent"></div>
+        <div class="cta-card-icon"><i class="ti ti-shield-lock"></i></div>
+        <h4>Safe &amp; accountable data</h4>
+        <p>Every case record, referral and research output is encrypted, role-gated and audit-logged &mdash; meeting the Uganda Data Protection &amp; Privacy Act, 2019 and UN Women GBV guidelines.</p>
+        <a href="#modules" class="cta-card-link">Explore the system <i class="ti ti-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUPPORT / REFERRAL DIRECTORY ============ -->
+<section class="support" id="support">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Case management</span>
+      <h2>Referral &amp; support directory</h2>
+      <p>For case officers coordinating an active referral. All contacts are verified Ugandan partner agencies. This directory is not a public emergency line &mdash; if a survivor is in immediate danger, call 999 or 112.</p>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="support-banner reveal">
+      <div class="support-banner-left">
+        <div class="support-banner-icon"><i class="ti ti-alert-triangle"></i></div>
+        <div>
+          <h3>This system does not replace emergency response.</h3>
+          <p>If a survivor is in immediate physical danger, call Uganda Police on <strong>999</strong> or the national emergency line on <strong>112</strong> right away. The directory below is for coordinating verified partner referrals only.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="support-tabs reveal">
+      <button class="sup-tab active" data-cat="all">All contacts</button>
+      <button class="sup-tab" data-cat="emergency"><i class="ti ti-alert-circle"></i> Emergency</button>
+      <button class="sup-tab" data-cat="medical"><i class="ti ti-first-aid-kit"></i> Medical</button>
+      <button class="sup-tab" data-cat="legal"><i class="ti ti-scale"></i> Legal</button>
+      <button class="sup-tab" data-cat="internal"><i class="ti ti-headset"></i> Internal</button>
+    </div>
+
+    <div class="support-grid reveal" id="support-grid">
+
+      <div class="support-card urgent" data-cat="emergency">
+        <div class="support-card-top">
+          <div class="support-icon"><i class="ti ti-phone"></i></div>
+          <span class="support-status available"><i class="ti ti-point-filled"></i> 24/7</span>
+        </div>
+        <h4>Uganda Police &mdash; GBV emergency line</h4>
+        <p class="phone">999 / 0800-199-699
+          <button class="copy-phone" data-phone="0800199699" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+        </p>
+        <p class="addr"><i class="ti ti-map-pin"></i> Nationwide, Uganda</p>
+      </div>
+
+      <div class="support-card urgent" data-cat="medical">
+        <div class="support-card-top">
+          <div class="support-icon"><i class="ti ti-first-aid-kit"></i></div>
+          <span class="support-status available"><i class="ti ti-point-filled"></i> 24/7</span>
+        </div>
+        <h4>MGLSD GBV &amp; mental health line</h4>
+        <p class="phone">999 / 0800-199-699
+          <button class="copy-phone" data-phone="0800199699" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+        </p>
+        <p class="addr"><i class="ti ti-map-pin"></i> Ministry of Gender, Labour &amp; Social Development, Kampala</p>
+      </div>
+
+      <div class="support-card" data-cat="legal">
+        <div class="support-card-top">
+          <div class="support-icon"><i class="ti ti-scale"></i></div>
+          <span class="support-status hours"><i class="ti ti-clock"></i> Mon&ndash;Fri, 8am&ndash;5pm</span>
+        </div>
+        <h4>FIDA Uganda &mdash; legal aid</h4>
+        <p class="phone">+256 414 269 983
+          <button class="copy-phone" data-phone="+256414269983" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+        </p>
+        <p class="addr"><i class="ti ti-map-pin"></i> Plot 16 Martyrs Way, Ntinda, Kampala</p>
+      </div>
+
+      <div class="support-card" data-cat="internal">
+        <div class="support-card-top">
+          <div class="support-icon"><i class="ti ti-headset"></i></div>
+          <span class="support-status hours"><i class="ti ti-clock"></i> Mon&ndash;Fri, 8am&ndash;5pm</span>
+        </div>
+        <h4>Raising Voices Uganda &mdash; case intake</h4>
+        <p class="phone">+256 414 531 343
+          <button class="copy-phone" data-phone="+256414531343" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+        </p>
+        <p class="addr"><i class="ti ti-map-pin"></i> Plot 16 Tufnell Drive, Kamwokya, Kampala</p>
+      </div>
+
+    </div>
+
+    <div class="quick-actions reveal">
+      <a href="https://maps.google.com/?q=Raising+Voices+Uganda,+Plot+16+Tufnell+Drive,+Kamwokya,+Kampala" target="_blank" rel="noopener" class="qa-item">
+        <span class="qa-icon"><i class="ti ti-map-pin"></i></span>
+        <span class="qa-label">Get directions</span>
+      </a>
+      <button class="qa-item" id="open-login-qa">
+        <span class="qa-icon"><i class="ti ti-clipboard-plus"></i></span>
+        <span class="qa-label">Report a case</span>
+      </button>
+      <a href="#repository" class="qa-item">
+        <span class="qa-icon"><i class="ti ti-search"></i></span>
+        <span class="qa-label">Search repository</span>
+      </a>
+      <a href="#contact" class="qa-item">
+        <span class="qa-icon"><i class="ti ti-message-circle"></i></span>
+        <span class="qa-label">Contact the team</span>
+      </a>
+    </div>
+
+    <div class="escalate-box">
+      <div class="escalate-head">
+        <div class="escalate-icon"><i class="ti ti-alert-triangle"></i></div>
+        <h3>Escalate immediately if a case shows any of these signs</h3>
+      </div>
+      <div class="escalate-grid">
+        <div class="escalate-item reveal" style="--i:0"><i class="ti ti-circle-check"></i> Survivor or child is in immediate physical danger</div>
+        <div class="escalate-item reveal" style="--i:1"><i class="ti ti-circle-check"></i> Disclosure of an ongoing or planned assault</div>
+        <div class="escalate-item reveal" style="--i:2"><i class="ti ti-circle-check"></i> A child or minor is involved or at risk</div>
+        <div class="escalate-item reveal" style="--i:3"><i class="ti ti-circle-check"></i> Survivor expresses suicidal ideation or self-harm risk</div>
+        <div class="escalate-item reveal" style="--i:4"><i class="ti ti-circle-check"></i> Perpetrator has access to the survivor&rsquo;s current location</div>
+        <div class="escalate-item reveal" style="--i:5"><i class="ti ti-circle-check"></i> A medical emergency accompanies the disclosure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+
+  <!-- Newsletter bar -->
+  <div class="footer-newsletter">
+    <div class="container footer-newsletter-inner">
+      <div class="footer-newsletter-text">
+        <h4>Stay informed on GBV research &amp; programme updates</h4>
+        <p>Occasional bulletins from Raising Voices Uganda. No spam, unsubscribe any time.</p>
+      </div>
+      <form class="footer-newsletter-form" id="newsletter-form">
+        <div class="footer-newsletter-field">
+          <i class="ti ti-mail"></i>
+          <input type="email" placeholder="Your work email" aria-label="Email address" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+      </form>
+      <p class="footer-newsletter-feedback" id="newsletter-feedback"><i class="ti ti-circle-check"></i> You&rsquo;re subscribed &mdash; thank you. We&rsquo;ll be in touch with programme updates.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand footer-col-reveal" style="--fi:0">
+        <a href="#top" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
+              <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+            </svg>
+          </span>
+          <span>RV Data Repository<small>Raising Voices Uganda</small></span>
+        </a>
+        <p>Raising Voices Uganda&rsquo;s unified digital repository for GBV incident management, referral coordination and two decades of violence-prevention research &mdash; keeping evidence secure, organised and actionable.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="X / Twitter" class="social-x"><i class="ti ti-brand-x"></i></a>
+          <a href="#" aria-label="Facebook" class="social-fb"><i class="ti ti-brand-facebook"></i></a>
+          <a href="#" aria-label="Instagram" class="social-ig"><i class="ti ti-brand-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" class="social-li"><i class="ti ti-brand-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-col-reveal" style="--fi:1">
+        <h5>Quick links</h5>
+        <ul>
+          <li><a href="#top"><i class="ti ti-chevron-right"></i>Home</a></li>
+          <li><a href="#about"><i class="ti ti-chevron-right"></i>About</a></li>
+          <li><a href="#modules"><i class="ti ti-chevron-right"></i>Modules</a></li>
+          <li><a href="#lifecycle"><i class="ti ti-chevron-right"></i>Case lifecycle</a></li>
+          <li><a href="#repository"><i class="ti ti-chevron-right"></i>Research repository</a></li>
+          <li><a href="#support"><i class="ti ti-chevron-right"></i>Case management</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-reveal" style="--fi:2">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Data &amp; privacy policy</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Anonymisation policy</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Terms of use</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Methodology</a></li>
+          <li><a href="#"><i class="ti ti-chevron-right"></i>Access policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-reveal" style="--fi:3">
+        <h5>Contact</h5>
+        <ul class="footer-contact-list">
+          <li>
+            <span class="footer-contact-icon"><i class="ti ti-map-pin"></i></span>
+            <span>Plot 16 Tufnell Drive, Kamwokya, Kampala, Uganda</span>
+          </li>
+          <li>
+            <span class="footer-contact-icon"><i class="ti ti-mail"></i></span>
+            <a href="mailto:info@raisingvoices.org">info@raisingvoices.org</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon"><i class="ti ti-phone"></i></span>
+            <span>+256 414 531 343</span>
+          </li>
+          <li>
+            <span class="footer-contact-icon"><i class="ti ti-clock"></i></span>
+            <span>Mon&ndash;Fri, 8am&ndash;5pm EAT</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Raising Voices Uganda Data Repository. All rights reserved.</span>
+      <span class="footer-bottom-note">Survivor data is anonymised and encrypted at rest &amp; in transit.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="ti ti-arrow-up"></i></button>
+
+<!-- ============ STAFF SIGN-IN MODAL ============ -->
+<div class="modal-overlay" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-brand-mark">
+          <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:22px;height:22px">
+            <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+            <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+          </svg>
+        </div>
+        <div>
+          <h3 id="modal-title">Staff sign-in</h3>
+          <p class="modal-note">Raising Voices Uganda portal</p>
+        </div>
+      </div>
+      <button class="modal-close" id="close-login" aria-label="Close modal"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="modal-notice">
+      <i class="ti ti-info-circle"></i>
+      <span>Access is restricted to authorised Raising Voices Uganda staff. Credentials are verified against the staff directory.</span>
+    </div>
+
+    <!-- Sign-in form -->
+    <form id="staff-login-form" novalidate>
+      <div class="form-group" id="fg-role">
+        <label for="staff-role">Your role</label>
+        <div class="form-select-wrap">
+          <i class="ti ti-users"></i>
+          <select id="staff-role" required>
+            <option value="">Select your role…</option>
+            <option value="activist">Field activist</option>
+            <option value="officer">Case officer</option>
+            <option value="researcher">Researcher</option>
+            <option value="admin">System administrator</option>
+          </select>
+          <i class="ti ti-chevron-down form-select-caret"></i>
+        </div>
+        <span class="form-error" id="err-role"></span>
+      </div>
+
+      <div class="form-group" id="fg-email">
+        <label for="staff-email">Work email</label>
+        <div class="form-input-wrap">
+          <i class="ti ti-mail"></i>
+          <input type="email" id="staff-email" placeholder="name@raisingvoices.org" autocomplete="email" required>
+        </div>
+        <span class="form-error" id="err-email"></span>
+      </div>
+
+      <div class="form-group" id="fg-password">
+        <div class="form-label-row">
+          <label for="staff-password">Password</label>
+          <button type="button" class="forgot-link" id="forgot-link">Forgot password?</button>
+        </div>
+        <div class="form-input-wrap">
+          <i class="ti ti-lock"></i>
+          <input type="password" id="staff-password" placeholder="••••••••" autocomplete="current-password" required>
+          <button type="button" class="toggle-pw" id="toggle-pw" aria-label="Show password">
+            <i class="ti ti-eye" id="toggle-pw-icon"></i>
+          </button>
+        </div>
+        <span class="form-error" id="err-password"></span>
+      </div>
+
+      <button type="submit" class="btn btn-navy btn-block" id="login-submit">
+        <span class="login-btn-text">Sign in</span>
+        <span class="login-spinner" aria-hidden="true"><i class="ti ti-loader-2"></i></span>
+      </button>
+    </form>
+
+    <!-- Success state -->
+    <div class="modal-success" id="modal-success">
+      <div class="modal-success-icon"><i class="ti ti-circle-check"></i></div>
+      <h4>Signed in successfully</h4>
+      <p>Your credentials have been verified. You will be redirected to your role-based dashboard. Multi-factor authentication is enforced in the live system.</p>
+      <button class="btn btn-navy btn-block" id="modal-success-close">Close</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
