@@ -747,115 +747,138 @@
 <!-- ============ SUPPORT / REFERRAL DIRECTORY ============ -->
 <section class="support" id="support">
   <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Case management</span>
-      <h2>Referral &amp; support directory</h2>
-      <p>For case officers coordinating an active referral. All contacts are verified Ugandan partner agencies. This directory is not a public emergency line &mdash; if a survivor is in immediate danger, call 999 or 112.</p>
-      <div class="section-rule"></div>
+
+    <div class="support-head reveal">
+      <div class="support-head-left">
+        <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Case management</span>
+        <h2>Referral &amp; support directory</h2>
+        <p>For case officers coordinating an active referral. All contacts are verified Ugandan partner agencies.</p>
+      </div>
+      <div class="support-head-right">
+        <div class="support-emergency-pill">
+          <i class="ti ti-alert-triangle"></i>
+          <span>Immediate danger? Call <strong>999</strong> or <strong>112</strong> now</span>
+        </div>
+      </div>
     </div>
 
-    <div class="support-banner reveal">
-      <div class="support-banner-left">
-        <div class="support-banner-icon"><i class="ti ti-alert-triangle"></i></div>
-        <div>
+    <div class="support-layout">
+
+      <!-- LEFT: pinned emergency panel -->
+      <div class="support-panel reveal">
+        <div class="support-panel-inner">
+          <div class="support-panel-icon">
+            <i class="ti ti-shield-check"></i>
+          </div>
           <h3>This system does not replace emergency response.</h3>
-          <p>If a survivor is in immediate physical danger, call Uganda Police on <strong>999</strong> or the national emergency line on <strong>112</strong> right away. The directory below is for coordinating verified partner referrals only.</p>
+          <p>If a survivor is in immediate physical danger, call Uganda Police on <strong>999</strong> or the national emergency line on <strong>112</strong> right away.</p>
+          <p>The directory on the right is for coordinating verified partner referrals only.</p>
+          <div class="support-panel-numbers">
+            <a href="tel:999" class="support-panel-num">
+              <span class="support-panel-num-val">999</span>
+              <span>Uganda Police</span>
+            </a>
+            <a href="tel:112" class="support-panel-num">
+              <span class="support-panel-num-val">112</span>
+              <span>National emergency</span>
+            </a>
+          </div>
+          <div class="support-escalate">
+            <h4>Escalate immediately if:</h4>
+            <ul>
+              <li><i class="ti ti-circle-check"></i> Survivor or child in immediate danger</li>
+              <li><i class="ti ti-circle-check"></i> Ongoing or planned assault disclosed</li>
+              <li><i class="ti ti-circle-check"></i> Child or minor involved or at risk</li>
+              <li><i class="ti ti-circle-check"></i> Survivor expresses suicidal ideation</li>
+              <li><i class="ti ti-circle-check"></i> Perpetrator knows survivor&rsquo;s location</li>
+              <li><i class="ti ti-circle-check"></i> Medical emergency accompanies disclosure</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="support-tabs reveal">
-      <button class="sup-tab active" data-cat="all">All contacts</button>
-      <button class="sup-tab" data-cat="emergency"><i class="ti ti-alert-circle"></i> Emergency</button>
-      <button class="sup-tab" data-cat="medical"><i class="ti ti-first-aid-kit"></i> Medical</button>
-      <button class="sup-tab" data-cat="legal"><i class="ti ti-scale"></i> Legal</button>
-      <button class="sup-tab" data-cat="internal"><i class="ti ti-headset"></i> Internal</button>
-    </div>
-
-    <div class="support-grid reveal" id="support-grid">
-
-      <div class="support-card urgent" data-cat="emergency">
-        <div class="support-card-top">
-          <div class="support-icon"><i class="ti ti-phone"></i></div>
-          <span class="support-status available"><i class="ti ti-point-filled"></i> 24/7</span>
+      <!-- RIGHT: contact cards -->
+      <div class="support-right">
+        <div class="support-filter-row reveal">
+          <button class="sup-tab active" data-cat="all">All contacts</button>
+          <button class="sup-tab" data-cat="emergency"><i class="ti ti-alert-circle"></i> Emergency</button>
+          <button class="sup-tab" data-cat="medical"><i class="ti ti-first-aid-kit"></i> Medical</button>
+          <button class="sup-tab" data-cat="legal"><i class="ti ti-scale"></i> Legal</button>
+          <button class="sup-tab" data-cat="internal"><i class="ti ti-headset"></i> Internal</button>
         </div>
-        <h4>Uganda Police &mdash; GBV emergency line</h4>
-        <p class="phone">999 / 0800-199-699
-          <button class="copy-phone" data-phone="0800199699" aria-label="Copy number"><i class="ti ti-copy"></i></button>
-        </p>
-        <p class="addr"><i class="ti ti-map-pin"></i> Nationwide, Uganda</p>
-      </div>
 
-      <div class="support-card urgent" data-cat="medical">
-        <div class="support-card-top">
-          <div class="support-icon"><i class="ti ti-first-aid-kit"></i></div>
-          <span class="support-status available"><i class="ti ti-point-filled"></i> 24/7</span>
+        <div class="support-grid reveal" id="support-grid">
+
+          <div class="support-card urgent" data-cat="emergency">
+            <div class="support-card-top">
+              <div class="support-icon"><i class="ti ti-phone"></i></div>
+              <span class="support-status available"><i class="ti ti-point-filled"></i> 24/7</span>
+            </div>
+            <h4>Uganda Police &mdash; GBV emergency line</h4>
+            <p class="phone">999 / 0800-199-699
+              <button class="copy-phone" data-phone="0800199699" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+            </p>
+            <p class="addr"><i class="ti ti-map-pin"></i> Nationwide, Uganda</p>
+          </div>
+
+          <div class="support-card urgent" data-cat="medical">
+            <div class="support-card-top">
+              <div class="support-icon"><i class="ti ti-first-aid-kit"></i></div>
+              <span class="support-status available"><i class="ti ti-point-filled"></i> 24/7</span>
+            </div>
+            <h4>MGLSD GBV &amp; mental health line</h4>
+            <p class="phone">0800-199-699
+              <button class="copy-phone" data-phone="0800199699" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+            </p>
+            <p class="addr"><i class="ti ti-map-pin"></i> Ministry of Gender, Labour &amp; Social Development</p>
+          </div>
+
+          <div class="support-card" data-cat="legal">
+            <div class="support-card-top">
+              <div class="support-icon"><i class="ti ti-scale"></i></div>
+              <span class="support-status hours"><i class="ti ti-clock"></i> Mon&ndash;Fri 8am&ndash;5pm</span>
+            </div>
+            <h4>FIDA Uganda &mdash; legal aid</h4>
+            <p class="phone">+256 414 269 983
+              <button class="copy-phone" data-phone="+256414269983" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+            </p>
+            <p class="addr"><i class="ti ti-map-pin"></i> Plot 16 Martyrs Way, Ntinda, Kampala</p>
+          </div>
+
+          <div class="support-card" data-cat="internal">
+            <div class="support-card-top">
+              <div class="support-icon"><i class="ti ti-headset"></i></div>
+              <span class="support-status hours"><i class="ti ti-clock"></i> Mon&ndash;Fri 8am&ndash;5pm</span>
+            </div>
+            <h4>Raising Voices Uganda &mdash; case intake</h4>
+            <p class="phone">+256 414 531 343
+              <button class="copy-phone" data-phone="+256414531343" aria-label="Copy number"><i class="ti ti-copy"></i></button>
+            </p>
+            <p class="addr"><i class="ti ti-map-pin"></i> Plot 16 Tufnell Drive, Kamwokya, Kampala</p>
+          </div>
+
         </div>
-        <h4>MGLSD GBV &amp; mental health line</h4>
-        <p class="phone">999 / 0800-199-699
-          <button class="copy-phone" data-phone="0800199699" aria-label="Copy number"><i class="ti ti-copy"></i></button>
-        </p>
-        <p class="addr"><i class="ti ti-map-pin"></i> Ministry of Gender, Labour &amp; Social Development, Kampala</p>
-      </div>
 
-      <div class="support-card" data-cat="legal">
-        <div class="support-card-top">
-          <div class="support-icon"><i class="ti ti-scale"></i></div>
-          <span class="support-status hours"><i class="ti ti-clock"></i> Mon&ndash;Fri, 8am&ndash;5pm</span>
+        <div class="quick-actions reveal">
+          <a href="https://maps.google.com/?q=Raising+Voices+Uganda" target="_blank" rel="noopener" class="qa-item">
+            <span class="qa-icon"><i class="ti ti-map-pin"></i></span>
+            <span class="qa-label">Get directions</span>
+          </a>
+          <button class="qa-item" id="open-login-qa">
+            <span class="qa-icon"><i class="ti ti-clipboard-plus"></i></span>
+            <span class="qa-label">Report a case</span>
+          </button>
+          <a href="#repository" class="qa-item">
+            <span class="qa-icon"><i class="ti ti-search"></i></span>
+            <span class="qa-label">Search repository</span>
+          </a>
+          <a href="#contact" class="qa-item">
+            <span class="qa-icon"><i class="ti ti-message-circle"></i></span>
+            <span class="qa-label">Contact the team</span>
+          </a>
         </div>
-        <h4>FIDA Uganda &mdash; legal aid</h4>
-        <p class="phone">+256 414 269 983
-          <button class="copy-phone" data-phone="+256414269983" aria-label="Copy number"><i class="ti ti-copy"></i></button>
-        </p>
-        <p class="addr"><i class="ti ti-map-pin"></i> Plot 16 Martyrs Way, Ntinda, Kampala</p>
       </div>
 
-      <div class="support-card" data-cat="internal">
-        <div class="support-card-top">
-          <div class="support-icon"><i class="ti ti-headset"></i></div>
-          <span class="support-status hours"><i class="ti ti-clock"></i> Mon&ndash;Fri, 8am&ndash;5pm</span>
-        </div>
-        <h4>Raising Voices Uganda &mdash; case intake</h4>
-        <p class="phone">+256 414 531 343
-          <button class="copy-phone" data-phone="+256414531343" aria-label="Copy number"><i class="ti ti-copy"></i></button>
-        </p>
-        <p class="addr"><i class="ti ti-map-pin"></i> Plot 16 Tufnell Drive, Kamwokya, Kampala</p>
-      </div>
-
-    </div>
-
-    <div class="quick-actions reveal">
-      <a href="https://maps.google.com/?q=Raising+Voices+Uganda,+Plot+16+Tufnell+Drive,+Kamwokya,+Kampala" target="_blank" rel="noopener" class="qa-item">
-        <span class="qa-icon"><i class="ti ti-map-pin"></i></span>
-        <span class="qa-label">Get directions</span>
-      </a>
-      <button class="qa-item" id="open-login-qa">
-        <span class="qa-icon"><i class="ti ti-clipboard-plus"></i></span>
-        <span class="qa-label">Report a case</span>
-      </button>
-      <a href="#repository" class="qa-item">
-        <span class="qa-icon"><i class="ti ti-search"></i></span>
-        <span class="qa-label">Search repository</span>
-      </a>
-      <a href="#contact" class="qa-item">
-        <span class="qa-icon"><i class="ti ti-message-circle"></i></span>
-        <span class="qa-label">Contact the team</span>
-      </a>
-    </div>
-
-    <div class="escalate-box">
-      <div class="escalate-head">
-        <div class="escalate-icon"><i class="ti ti-alert-triangle"></i></div>
-        <h3>Escalate immediately if a case shows any of these signs</h3>
-      </div>
-      <div class="escalate-grid">
-        <div class="escalate-item reveal" style="--i:0"><i class="ti ti-circle-check"></i> Survivor or child is in immediate physical danger</div>
-        <div class="escalate-item reveal" style="--i:1"><i class="ti ti-circle-check"></i> Disclosure of an ongoing or planned assault</div>
-        <div class="escalate-item reveal" style="--i:2"><i class="ti ti-circle-check"></i> A child or minor is involved or at risk</div>
-        <div class="escalate-item reveal" style="--i:3"><i class="ti ti-circle-check"></i> Survivor expresses suicidal ideation or self-harm risk</div>
-        <div class="escalate-item reveal" style="--i:4"><i class="ti ti-circle-check"></i> Perpetrator has access to the survivor&rsquo;s current location</div>
-        <div class="escalate-item reveal" style="--i:5"><i class="ti ti-circle-check"></i> A medical emergency accompanies the disclosure</div>
-      </div>
     </div>
   </div>
 </section>
