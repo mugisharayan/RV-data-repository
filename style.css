@@ -7,41 +7,52 @@
   /* ── Primary brand: deep teal ── */
   --teal:        #1A5C4F;
   --teal-dark:   #0F3D34;
-  --teal-darker: #082820;
-  --teal-mid:    #2A7A69;
-  --teal-light:  #3D9C87;
-  --teal-pale:   #E6F4F1;
+  --teal-darker: #061E17;
+  --teal-deep:   #041410;
+  --teal-mid:    #236B5A;
+  --teal-light:  #2E9478;
+  --teal-bright: #3DBFA0;
+  --teal-pale:   #E3F2EF;
+  --teal-pale2:  #C8E8E2;
 
   /* ── Accent: warm orange ── */
   --orange:      #E8640C;
-  --orange-dark: #C4520A;
-  --orange-light:#F4874A;
+  --orange-dark: #B84E09;
+  --orange-light:#F07840;
+  --orange-glow: #FF8C50;
   --orange-pale: #FEF0E7;
+  --orange-pale2:#FDDEC8;
 
   /* ── Gold: badges / highlights ── */
-  --gold:        #D4A017;
-  --gold-light:  #E8BE55;
+  --gold:        #C9920A;
+  --gold-light:  #E2B240;
+  --gold-bright: #F5CC60;
   --gold-pale:   #FBF2DC;
 
   /* ── Alert / restricted ── */
   --red:         #C0392B;
+  --red-dark:    #962D21;
   --red-pale:    #FDECEA;
 
   /* ── Success ── */
-  --green:       #1E7A4A;
-  --green-pale:  #E6F5ED;
+  --green:       #1A7A46;
+  --green-light: #22A05C;
+  --green-pale:  #E3F5EC;
 
   /* ── Neutrals ── */
-  --slate:       #4A5E5A;
-  --bg:          #F4F7F6;
-  --bg-alt:      #E8EEEC;
+  --slate:       #3D5550;
+  --bg:          #F2F6F5;
+  --bg-alt:      #E5EDEA;
+  --bg-dark:     #0E1E1A;
   --white:       #FFFFFF;
-  --ink:         #0F2420;
-  --ink-soft:    #3A4F4A;
+  --ink:         #0A1E18;
+  --ink-soft:    #2E4A44;
+  --ink-mid:     #4A6660;
   --ink-faint:   #7A9490;
-  --border:      #D4E0DC;
+  --border:      #C8D8D4;
+  --border-light:#DDE8E5;
 
-  /* ── Legacy aliases — retained for any external references ── */
+  /* ── Legacy aliases ── */
   --navy:        var(--teal);
   --navy-dark:   var(--teal-dark);
   --navy-darker: var(--teal-darker);
@@ -49,21 +60,30 @@
   --maroon-light:#D95B4A;
   --maroon-pale: var(--red-pale);
 
-  /* ── Shadows ── */
-  --shadow-sm:   0 2px 10px rgba(8,40,32,0.07);
-  --shadow-md:   0 10px 30px rgba(8,40,32,0.11);
-  --shadow-lg:   0 20px 48px rgba(8,40,32,0.17);
+  /* ── Shadows — tinted with brand color ── */
+  --shadow-xs:   0 1px 4px rgba(6,30,23,0.07);
+  --shadow-sm:   0 2px 12px rgba(6,30,23,0.09);
+  --shadow-md:   0 8px 28px rgba(6,30,23,0.13);
+  --shadow-lg:   0 18px 52px rgba(6,30,23,0.20);
+  --shadow-xl:   0 32px 80px rgba(6,30,23,0.28);
+  --shadow-orange: 0 8px 28px rgba(232,100,12,0.28);
+  --shadow-teal:   0 8px 28px rgba(26,92,79,0.25);
 
   /* ── Shape ── */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   18px;
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
   --maxw:        1180px;
 
   /* ── Typography ── */
-  --font-display:'Lora', Georgia, serif;
-  --font-body:   'Inter', -apple-system, Segoe UI, sans-serif;
-  --font-mono:   'IBM Plex Mono', monospace;
+  --font-display:'DM Serif Display', Georgia, serif;
+  --font-body:   'Plus Jakarta Sans', -apple-system, Segoe UI, sans-serif;
+  --font-mono:   'JetBrains Mono', 'IBM Plex Mono', monospace;
+
+  /* ── Grain texture (SVG noise) ── */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
 *{box-sizing:border-box;}
@@ -76,10 +96,13 @@ html{scroll-behavior:smooth;}
 body{
   margin:0;
   font-family:var(--font-body);
+  font-size:16px;
   color:var(--ink);
   background:var(--white);
-  line-height:1.6;
+  line-height:1.65;
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
 }
 
 img{max-width:100%; display:block;}
@@ -89,13 +112,58 @@ button{font-family:inherit; cursor:pointer;}
 input, select{font-family:inherit;}
 h1 span, h2 span, h3 span, h4 span, p span{text-decoration:none;}
 
-h1,h2,h3,h4{
+/* --- Display headings: DM Serif Display --- */
+h1,h2,h3{
   font-family:var(--font-display);
   color:var(--teal-darker);
   margin:0;
-  font-weight:600;
+  font-weight:400;
   letter-spacing:-0.01em;
+  line-height:1.12;
 }
+
+/* h4 uses the body font — tighter, semi-bold sub-headings */
+h4{
+  font-family:var(--font-body);
+  color:var(--teal-darker);
+  margin:0;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  line-height:1.3;
+}
+
+/* Fluid type scale */
+h1{ font-size:clamp(38px, 6vw, 72px); }
+h2{ font-size:clamp(28px, 4vw, 44px); }
+h3{ font-size:clamp(20px, 2.5vw, 28px); }
+h4{ font-size:clamp(14px, 1.5vw, 17px); }
+
+/* Italic accent — used inside headings for emphasis */
+h1 em, h2 em, h3 em{
+  font-style:italic;
+  color:var(--orange);
+}
+
+/* Body text scale */
+p{
+  margin:0 0 1em;
+  line-height:1.75;
+}
+p:last-child{ margin-bottom:0; }
+
+/* Lead paragraph */
+.lead{
+  font-size:clamp(15px, 1.5vw, 18px);
+  line-height:1.75;
+  color:var(--ink-soft);
+}
+
+/* Small utility */
+.text-sm{ font-size:13px; line-height:1.6; }
+.text-xs{ font-size:11.5px; line-height:1.5; }
+
+/* Strong inside paragraphs */
+strong{ font-weight:700; color:var(--ink); }
 
 .container{
   width:100%;
@@ -107,14 +175,29 @@ h1,h2,h3,h4{
 .eyebrow{
   display:inline-flex;
   align-items:center;
-  gap:8px;
+  gap:7px;
   font-family:var(--font-mono);
-  font-size:12px;
-  letter-spacing:0.06em;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.10em;
   text-transform:uppercase;
-  color:var(--orange-light);
+  color:var(--orange);
+  background:var(--orange-pale);
+  border:1px solid var(--orange-pale2);
+  padding:5px 12px;
+  border-radius:50px;
 }
-.eyebrow.dark{color:var(--orange);}
+.eyebrow i{ font-size:7px; opacity:0.7; }
+.eyebrow.dark{
+  color:var(--teal);
+  background:var(--teal-pale);
+  border-color:var(--teal-pale2);
+}
+.eyebrow.light{
+  color:rgba(255,255,255,0.75);
+  background:rgba(255,255,255,0.08);
+  border-color:rgba(255,255,255,0.14);
+}
 
 section{position:relative;}
 
@@ -348,7 +431,7 @@ section{position:relative;}
   color:var(--white);
   overflow:hidden;
 }
-/* Ken Burns image layer */
+/* Grain texture layer on hero */
 .hero::before{
   content:'';
   position:absolute; inset:0;
@@ -358,6 +441,17 @@ section{position:relative;}
   z-index:0;
   will-change:transform;
 }
+.hero-grain{
+  position:absolute; inset:0;
+  z-index:3;
+  pointer-events:none;
+  opacity:0.032;
+  background-image:var(--grain);
+  background-repeat:repeat;
+  background-size:180px 180px;
+  mix-blend-mode:overlay;
+}
+/* Ken Burns image layer — kept inside the rule above */
 /* Darkened overlay */
 .hero::after{
   content:'';
@@ -1128,7 +1222,21 @@ section{position:relative;}
 .lifecycle{
   background:var(--teal-darker);
   color:var(--white);
+  position:relative;
+  overflow:hidden;
 }
+.lifecycle::after{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:0.028;
+  background-image:var(--grain);
+  background-repeat:repeat;
+  background-size:180px 180px;
+  mix-blend-mode:overlay;
+  z-index:0;
+}
+.lifecycle > *{ position:relative; z-index:1; }
 .lifecycle-grid{
   display:grid;
   grid-template-columns:1fr 1.4fr;
@@ -1646,6 +1754,18 @@ section{position:relative;}
   overflow:hidden;
   background:var(--teal-darker);
 }
+.cta-band::after{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:0.028;
+  background-image:var(--grain);
+  background-repeat:repeat;
+  background-size:180px 180px;
+  mix-blend-mode:overlay;
+  z-index:0;
+}
+.cta-band > *{ position:relative; z-index:1; }
 .cta-band-bg{
   position:absolute; inset:0;
   background:
@@ -2151,7 +2271,20 @@ section{position:relative;}
 .site-footer{
   background:var(--teal-darker);
   color:rgba(255,255,255,0.6);
+  position:relative;
 }
+.site-footer::before{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:0.022;
+  background-image:var(--grain);
+  background-repeat:repeat;
+  background-size:180px 180px;
+  mix-blend-mode:overlay;
+  z-index:0;
+}
+.site-footer > *{ position:relative; z-index:1; }
 .footer-grid{
   display:grid;
   grid-template-columns:1.6fr 1fr 1fr 1fr;

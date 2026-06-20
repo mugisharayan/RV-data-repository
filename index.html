@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -24,9 +24,16 @@
   <div class="container nav-row">
     <a href="#top" class="brand">
       <span class="brand-mark">
-        <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
-          <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+        <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M20 2L36 8V20C36 30 29 37.5 20 41C11 37.5 4 30 4 20V8L20 2Z" fill="url(#shieldGrad)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+          <path d="M20 6L32 11V20C32 28 26.5 34.2 20 37.2C13.5 34.2 8 28 8 20V11L20 6Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+          <text x="20" y="25" text-anchor="middle" font-family="Georgia,serif" font-weight="800" font-size="13" fill="white" letter-spacing="0.5">RV</text>
+          <defs>
+            <linearGradient id="shieldGrad" x1="4" y1="2" x2="36" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#E8640C"/>
+              <stop offset="100%" stop-color="#C4520A"/>
+            </linearGradient>
+          </defs>
         </svg>
       </span>
       <span>RV Data Repository<small>Raising Voices Uganda</small></span>
@@ -52,6 +59,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
+  <div class="hero-grain" aria-hidden="true"></div>
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
@@ -315,7 +323,7 @@
   <div class="container lifecycle-grid">
 
     <div class="lifecycle-head reveal">
-      <span class="eyebrow"><i class="ti ti-point-filled"></i> Case management workflow</span>
+      <span class="eyebrow light"><i class="ti ti-point-filled"></i> Case management workflow</span>
       <h2>From first disclosure to a closed, accountable case.</h2>
       <p>Every GBV report follows the same structured, auditable path &mdash; no step happens off the record, every action attributed to a named staff member.</p>
       <div class="lifecycle-meta">
@@ -688,7 +696,7 @@
 
     <!-- LEFT: impact numbers -->
     <div class="cta-left reveal">
-      <span class="eyebrow"><i class="ti ti-point-filled"></i> Our reach</span>
+      <span class="eyebrow light"><i class="ti ti-point-filled"></i> Our reach</span>
       <div class="cta-impact-list">
         <div class="cta-impact-item">
           <strong><span class="counter" data-target="25">0</span>+</strong>
@@ -915,9 +923,16 @@
         <div class="footer-brand footer-col-reveal" style="--fi:0">
           <a href="#top" class="brand">
             <span class="brand-mark">
-              <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
-                <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+              <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20 2L36 8V20C36 30 29 37.5 20 41C11 37.5 4 30 4 20V8L20 2Z" fill="url(#shieldGradFooter)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                <path d="M20 6L32 11V20C32 28 26.5 34.2 20 37.2C13.5 34.2 8 28 8 20V11L20 6Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+                <text x="20" y="25" text-anchor="middle" font-family="Georgia,serif" font-weight="800" font-size="13" fill="white" letter-spacing="0.5">RV</text>
+                <defs>
+                  <linearGradient id="shieldGradFooter" x1="4" y1="2" x2="36" y2="44" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#E8640C"/>
+                    <stop offset="100%" stop-color="#C4520A"/>
+                  </linearGradient>
+                </defs>
               </svg>
             </span>
             <span>RV Data Repository<small>Raising Voices Uganda</small></span>
@@ -1010,9 +1025,16 @@
     <div class="modal-head">
       <div class="modal-head-left">
         <div class="modal-brand-mark">
-          <svg viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:22px;height:22px">
-            <path d="M13 1L24 5.5V14C24 20.5 19 25.5 13 28C7 25.5 2 20.5 2 14V5.5L13 1Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
-            <text x="13" y="19" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="11" fill="white" letter-spacing="-0.5">RV</text>
+          <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:26px;height:26px">
+            <path d="M20 2L36 8V20C36 30 29 37.5 20 41C11 37.5 4 30 4 20V8L20 2Z" fill="url(#shieldGradModal)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+            <path d="M20 6L32 11V20C32 28 26.5 34.2 20 37.2C13.5 34.2 8 28 8 20V11L20 6Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+            <text x="20" y="25" text-anchor="middle" font-family="Georgia,serif" font-weight="800" font-size="13" fill="white" letter-spacing="0.5">RV</text>
+            <defs>
+              <linearGradient id="shieldGradModal" x1="4" y1="2" x2="36" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#E8640C"/>
+                <stop offset="100%" stop-color="#C4520A"/>
+              </linearGradient>
+            </defs>
           </svg>
         </div>
         <div>
