@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
   onScrollSpy();
   window.addEventListener('scroll', onScrollSpy, { passive: true });
 
-  /* ---------- About: counter + SVG draw-in ---------- */
+  /* ---------- About: counter + stat bar ---------- */
   var counterEls = document.querySelectorAll('.counter');
-  var svgPanel = document.querySelector('.about-svg');
+  var aboutLeft  = document.querySelector('.about-left');
   var aboutTriggered = false;
 
   function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
@@ -114,21 +114,14 @@ document.addEventListener('DOMContentLoaded', function () {
       if (entry.isIntersecting && !aboutTriggered) {
         aboutTriggered = true;
         counterEls.forEach(animateCounter);
-        if (svgPanel) svgPanel.classList.add('in');
+        if (aboutLeft) aboutLeft.classList.add('in');
         aboutObserver.disconnect();
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.2 });
 
   var aboutSection = document.getElementById('about');
   if (aboutSection) aboutObserver.observe(aboutSection);
-
-  /* Set stroke-dasharray to each line's length for draw-in animation */
-  document.querySelectorAll('.svg-line').forEach(function (line) {
-    var len = line.getTotalLength ? line.getTotalLength() : 200;
-    line.style.strokeDasharray = len;
-    line.style.strokeDashoffset = len;
-  });
 
   /* ---------- Standards marquee — pause if reduced motion ---------- */
   if (prefersReducedMotion) {
@@ -537,5 +530,59 @@ document.addEventListener('DOMContentLoaded', function () {
       if (navLinks.classList.contains('open')) closeNav();
     });
   });
+
+  /* ---------- Hero particles ---------- */
+  if (!prefersReducedMotion) {
+    var hero = document.getElementById('top');
+    var canvas = document.createElement('canvas');
+    canvas.className = 'hero-particles';
+    hero.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    var PARTICLE_COUNT = 55;
+    var particles = [];
+
+    function resizeCanvas() {
+      canvas.width  = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+    function createParticle() {
+      return {
+        x:     randomBetween(0, canvas.width),
+        y:     randomBetween(0, canvas.height),
+        r:     randomBetween(0.8, 2.2),
+        alpha: randomBetween(0.08, 0.35),
+        vx:    randomBetween(-0.12, 0.12),
+        vy:    randomBetween(-0.18, -0.06)
+      };
+    }
+
+    for (var i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(function (p) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        /* wrap around edges */
+        if (p.y < -4)  p.y = canvas.height + 4;
+        if (p.x < -4)  p.x = canvas.width  + 4;
+        if (p.x > canvas.width  + 4) p.x = -4;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  }
 
 });
