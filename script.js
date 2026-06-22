@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ---------- Active nav link on scroll (scroll-spy) ---------- */
-  var sectionIds = ['top', 'about', 'modules', 'lifecycle', 'repository', 'support', 'contact'];
+  var sectionIds = ['top', 'about', 'modules', 'lifecycle', 'active-cases', 'repository', 'support', 'contact'];
 
   var spySections = sectionIds.map(function (id) {
     return document.getElementById(id);
@@ -1073,8 +1073,139 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* =====================================================
-     STEP 9 — Mobile Experience
+     ACTIVE CASES TRACKER
      ===================================================== */
+
+  /* Case timestamps — fixed reference points */
+  var case1ActiveSince = new Date('2026-06-15T08:30:00'); // referral actioned
+  var case2ActiveSince = new Date('2026-06-20T08:05:00'); // assigned to officer
+  var case1Logged      = new Date('2026-06-14T09:14:00');
+  var case2Logged      = new Date('2026-06-19T14:32:00');
+
+  function timeAgo(date) {
+    var now = new Date();
+    var diff = Math.floor((now - date) / 1000); // seconds
+    if (diff < 60)   return diff + 's ago';
+    if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+    if (diff < 86400){
+      var h = Math.floor(diff/3600);
+      var m = Math.floor((diff%3600)/60);
+      return h + 'h ' + (m > 0 ? m + 'm ' : '') + 'ago';
+    }
+    var d = Math.floor(diff/86400);
+    var h2 = Math.floor((diff%86400)/3600);
+    return d + 'd ' + (h2 > 0 ? h2 + 'h ' : '') + 'ago';
+  }
+
+  function elapsedSince(date) {
+    var now = new Date();
+    var diff = Math.floor((now - date) / 1000);
+    if (diff < 60)   return 'Just now';
+    if (diff < 3600) return 'Active ' + Math.floor(diff/60) + 'm';
+    if (diff < 86400){
+      var h = Math.floor(diff/3600);
+      var m = Math.floor((diff%3600)/60);
+      return 'Active ' + h + 'h' + (m > 0 ? ' ' + m + 'm' : '');
+    }
+    var d = Math.floor(diff/86400);
+    var h2 = Math.floor((diff%86400)/3600);
+    return 'Active ' + d + 'd' + (h2 > 0 ? ' ' + h2 + 'h' : '');
+  }
+
+  /* Initial render */
+  var c1LoggedEl   = document.getElementById('case1-logged');
+  var c2LoggedEl   = document.getElementById('case2-logged');
+  var c1ElapsedEl  = document.getElementById('case1-elapsed');
+  var c2ElapsedEl  = document.getElementById('case2-elapsed');
+
+  function updateCaseTimes() {
+    if (c1LoggedEl)  c1LoggedEl.textContent  = timeAgo(case1Logged);
+    if (c2LoggedEl)  c2LoggedEl.textContent  = timeAgo(case2Logged);
+    if (c1ElapsedEl) c1ElapsedEl.textContent = elapsedSince(case1ActiveSince);
+    if (c2ElapsedEl) c2ElapsedEl.textContent = elapsedSince(case2ActiveSince);
+  }
+  updateCaseTimes();
+  setInterval(updateCaseTimes, 30000); // refresh every 30s
+
+  /* Search + filter */
+  var caseSearchInput  = document.getElementById('case-search');
+  var caseSearchClear  = document.getElementById('case-search-clear');
+  var casePills        = document.querySelectorAll('.cases-pill');
+  var caseCards        = document.querySelectorAll('#cases-grid .case-card');
+  var casesNoResults   = document.getElementById('cases-no-results');
+  var casesResetBtn    = document.getElementById('cases-reset-btn');
+  var activeCaseFilter = 'all';
+
+  function applyCaseFilter() {
+    var query = caseSearchInput ? caseSearchInput.value.trim().toLowerCase() : '';
+    var visible = 0;
+
+    caseCards.forEach(function(card) {
+      var keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+      var id       = (card.getAttribute('data-id') || '').toLowerCase();
+      var type     = (card.getAttribute('data-type') || '').toLowerCase();
+      var location = (card.getAttribute('data-location') || '').toLowerCase();
+      var officer  = (card.getAttribute('data-officer') || '').toLowerCase();
+      var stageNum = parseInt(card.getAttribute('data-stage'), 10);
+
+      /* Stage name map for search */
+      var stageNames = ['incident logged','needs assessment','assigned to officer',
+                        'referral actioned','follow-up','case closed'];
+      var stageName  = stageNames[stageNum] || '';
+
+      var matchQ = query === '' ||
+        id.includes(query) || keywords.includes(query) ||
+        type.includes(query) || location.includes(query) ||
+        officer.includes(query) || stageName.includes(query);
+
+      var matchF = activeCaseFilter === 'all' || type === activeCaseFilter;
+
+      if (matchQ && matchF) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (casesNoResults) casesNoResults.classList.toggle('show', visible === 0);
+    if (caseSearchClear) caseSearchClear.classList.toggle('show', query.length > 0);
+  }
+
+  if (caseSearchInput) {
+    caseSearchInput.addEventListener('input', applyCaseFilter);
+    caseSearchInput.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); applyCaseFilter(); }
+    });
+  }
+
+  if (caseSearchClear) {
+    caseSearchClear.addEventListener('click', function(){
+      caseSearchInput.value = '';
+      applyCaseFilter();
+      caseSearchInput.focus();
+    });
+  }
+
+  casePills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      casePills.forEach(function(p){ p.classList.remove('active'); });
+      pill.classList.add('active');
+      activeCaseFilter = pill.getAttribute('data-filter');
+      applyCaseFilter();
+    });
+  });
+
+  if (casesResetBtn) {
+    casesResetBtn.addEventListener('click', function(){
+      if (caseSearchInput) caseSearchInput.value = '';
+      casePills.forEach(function(p){ p.classList.remove('active'); });
+      var allPill = document.querySelector('.cases-pill[data-filter="all"]');
+      if (allPill) allPill.classList.add('active');
+      activeCaseFilter = 'all';
+      applyCaseFilter();
+    });
+  }
 
   /* Mobile bottom nav scroll-spy */
   var mbnItems = document.querySelectorAll('.mbn-item');

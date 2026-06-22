@@ -36,7 +36,7 @@
           </defs>
         </svg>
       </span>
-      <span>RV Data Repository<small>Raising Voices Uganda</small></span>
+      <span class="brand-text"><span class="brand-name">RV Data Repository</span><small>Raising Voices Uganda</small></span>
     </a>
 
     <nav class="nav-links" id="nav-links" role="navigation" aria-label="Main navigation">
@@ -45,6 +45,7 @@
       <a href="#about">About</a>
       <a href="#modules">Modules</a>
       <a href="#lifecycle">Case lifecycle</a>
+      <a href="#active-cases">Active cases</a>
       <a href="#repository">Research</a>
       <a href="#support">Case management<span class="nav-tag">Restricted</span></a>
       <a href="#contact">Contact</a>
@@ -685,6 +686,339 @@
   </div>
 </section>
 
+<!-- ============ ACTIVE CASES TRACKER ============ -->
+<section class="cases-section section-pad" id="active-cases">
+  <div class="container">
+
+    <!-- Section header -->
+    <div class="cases-head reveal">
+      <div class="cases-head-left">
+        <span class="eyebrow dark"><i class="ti ti-point-filled"></i> Live case pipeline</span>
+        <h2>Active case tracker</h2>
+        <p>Real-time view of cases moving through the pipeline. All survivor details are anonymised by default &mdash; only authorised case officers can access identifiable records.</p>
+      </div>
+      <div class="cases-head-right">
+        <div class="cases-live-pill">
+          <span class="cases-live-dot" aria-hidden="true"></span>
+          <span>2 active cases</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search + filter bar -->
+    <div class="cases-toolbar reveal">
+      <div class="cases-search-wrap">
+        <i class="ti ti-search"></i>
+        <input type="text" id="case-search" placeholder="Search by case ID, stage, type or location…" autocomplete="off" aria-label="Search cases">
+        <button class="cases-search-clear" id="case-search-clear" aria-label="Clear search"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="cases-filter-pills" id="cases-filter-pills">
+        <button class="cases-pill active" data-filter="all">All</button>
+        <button class="cases-pill" data-filter="medical"><i class="ti ti-first-aid-kit"></i> Medical</button>
+        <button class="cases-pill" data-filter="legal"><i class="ti ti-scale"></i> Legal</button>
+        <button class="cases-pill" data-filter="psychosocial"><i class="ti ti-heart-handshake"></i> Psychosocial</button>
+      </div>
+    </div>
+
+    <!-- Pipeline legend -->
+    <div class="cases-legend reveal" aria-label="Pipeline stages legend">
+      <div class="legend-stage"><span class="legend-dot ld-logged"></span>Incident Logged</div>
+      <div class="legend-arrow"><i class="ti ti-arrow-right"></i></div>
+      <div class="legend-stage"><span class="legend-dot ld-assess"></span>Needs Assessment</div>
+      <div class="legend-arrow"><i class="ti ti-arrow-right"></i></div>
+      <div class="legend-stage"><span class="legend-dot ld-assigned"></span>Assigned to Officer</div>
+      <div class="legend-arrow"><i class="ti ti-arrow-right"></i></div>
+      <div class="legend-stage"><span class="legend-dot ld-referral"></span>Referral Actioned</div>
+      <div class="legend-arrow"><i class="ti ti-arrow-right"></i></div>
+      <div class="legend-stage"><span class="legend-dot ld-followup"></span>Follow-up</div>
+      <div class="legend-arrow"><i class="ti ti-arrow-right"></i></div>
+      <div class="legend-stage"><span class="legend-dot ld-closed"></span>Case Closed</div>
+    </div>
+
+    <!-- Cases grid -->
+    <div class="cases-grid" id="cases-grid">
+
+      <!-- ══════════ CASE 1 ══════════ -->
+      <article class="case-card reveal"
+        data-id="RV-2026-C041"
+        data-type="medical"
+        data-stage="4"
+        data-location="Kamwokya"
+        data-officer="Grace Nakato"
+        data-keywords="medical referral Kamwokya intimate partner violence Mulago hospital">
+
+        <div class="case-card-header">
+          <div class="case-card-id-wrap">
+            <span class="case-id">RV-2026-C041</span>
+            <span class="case-status-badge active-badge"><span class="pulse-dot" aria-hidden="true"></span> Active</span>
+          </div>
+          <div class="case-meta-pills">
+            <span class="case-type-pill medical"><i class="ti ti-first-aid-kit"></i> Medical</span>
+            <span class="case-location-pill"><i class="ti ti-map-pin"></i> Kamwokya, Kampala</span>
+          </div>
+        </div>
+
+        <!-- Incident summary (anonymised) -->
+        <div class="case-summary">
+          <div class="case-summary-row">
+            <div class="case-summary-item">
+              <span class="csi-label">Incident type</span>
+              <span class="csi-value">Intimate partner violence</span>
+            </div>
+            <div class="case-summary-item">
+              <span class="csi-label">Disclosed</span>
+              <span class="csi-value" id="case1-logged">Calculating…</span>
+            </div>
+            <div class="case-summary-item">
+              <span class="csi-label">Case officer</span>
+              <span class="csi-value"><i class="ti ti-user-check" style="color:var(--teal-light);font-size:13px"></i> Grace Nakato</span>
+            </div>
+            <div class="case-summary-item">
+              <span class="csi-label">Referral partner</span>
+              <span class="csi-value">Mulago National Referral Hospital</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pipeline progress -->
+        <div class="case-pipeline" aria-label="Case RV-2026-C041 pipeline progress">
+          <div class="pipeline-track">
+
+            <div class="pipeline-stage done" data-stage-idx="0">
+              <div class="ps-node"><i class="ti ti-check"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Incident Logged</span>
+                <span class="ps-time">14 Jun 2026, 09:14</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage done" data-stage-idx="1">
+              <div class="ps-node"><i class="ti ti-check"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Needs Assessment</span>
+                <span class="ps-time">14 Jun 2026, 11:02</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage done" data-stage-idx="2">
+              <div class="ps-node"><i class="ti ti-check"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Assigned to Officer</span>
+                <span class="ps-time">14 Jun 2026, 13:45</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage current" data-stage-idx="3">
+              <div class="ps-node">
+                <span class="ps-node-pulse"></span>
+                <i class="ti ti-route"></i>
+              </div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Referral Actioned</span>
+                <span class="ps-time ps-time-live" id="case1-elapsed">In progress…</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage pending" data-stage-idx="4">
+              <div class="ps-node"><i class="ti ti-clock"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Follow-up</span>
+                <span class="ps-time">Pending</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage pending" data-stage-idx="5">
+              <div class="ps-node"><i class="ti ti-lock"></i></div>
+              <div class="ps-connector ps-connector-last"></div>
+              <div class="ps-label">
+                <span class="ps-name">Case Closed</span>
+                <span class="ps-time">Pending</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Progress bar -->
+          <div class="case-progress-wrap">
+            <div class="case-progress-bar">
+              <div class="case-progress-fill" style="--cpct:66.6%"></div>
+            </div>
+            <span class="case-progress-label">Stage 4 of 6 &mdash; 66% complete</span>
+          </div>
+        </div>
+
+        <!-- Timeline log (expandable) -->
+        <details class="case-log">
+          <summary class="case-log-toggle"><i class="ti ti-list-details"></i> View full audit log <i class="ti ti-chevron-down case-log-chevron"></i></summary>
+          <div class="case-log-entries">
+            <div class="cle"><span class="cle-time">14 Jun 2026, 09:14</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Incident logged</strong> — Report received by field activist A. Namukasa at Kamwokya community centre. Intake form RV-F-041 completed.</span></div>
+            <div class="cle"><span class="cle-time">14 Jun 2026, 09:52</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Risk screening initiated</strong> — Structured risk tool administered. Risk level assessed as HIGH. Auto-escalation triggered to senior case officer.</span></div>
+            <div class="cle"><span class="cle-time">14 Jun 2026, 11:02</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Needs assessment completed</strong> — Immediate medical care identified as primary need. Psychosocial support flagged for Stage 5 follow-up.</span></div>
+            <div class="cle"><span class="cle-time">14 Jun 2026, 13:45</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Assigned to case officer</strong> — Grace Nakato (ID: RV-CO-007) assigned as primary officer. Staff ID logged in system.</span></div>
+            <div class="cle"><span class="cle-time">15 Jun 2026, 08:30</span><span class="cle-dot cle-active"></span><span class="cle-text"><strong>Medical referral actioned</strong> — Referral dispatched to Mulago National Referral Hospital, GBV One-Stop Centre. Tracking ID: <code>REF-MUL-2026-0388</code>. Awaiting confirmation of attendance.</span></div>
+            <div class="cle cle-pending"><span class="cle-time">Scheduled: 22 Jun 2026</span><span class="cle-dot cle-pending-dot"></span><span class="cle-text"><strong>Follow-up call scheduled</strong> — Case officer to verify hospital attendance and assess further needs.</span></div>
+          </div>
+        </details>
+
+        <div class="case-card-footer">
+          <span class="case-footer-note"><i class="ti ti-eye-off"></i> Survivor identity encrypted &amp; access-controlled</span>
+          <span class="case-tracking-id">Tracking: <code>REF-MUL-2026-0388</code></span>
+        </div>
+
+      </article>
+
+      <!-- ══════════ CASE 2 ══════════ -->
+      <article class="case-card reveal"
+        data-id="RV-2026-C044"
+        data-type="legal"
+        data-stage="2"
+        data-location="Ntinda"
+        data-officer="Peter Ochieng"
+        data-keywords="legal referral Ntinda sexual violence FIDA Uganda">
+
+        <div class="case-card-header">
+          <div class="case-card-id-wrap">
+            <span class="case-id">RV-2026-C044</span>
+            <span class="case-status-badge active-badge"><span class="pulse-dot" aria-hidden="true"></span> Active</span>
+          </div>
+          <div class="case-meta-pills">
+            <span class="case-type-pill legal"><i class="ti ti-scale"></i> Legal</span>
+            <span class="case-location-pill"><i class="ti ti-map-pin"></i> Ntinda, Kampala</span>
+          </div>
+        </div>
+
+        <!-- Incident summary (anonymised) -->
+        <div class="case-summary">
+          <div class="case-summary-row">
+            <div class="case-summary-item">
+              <span class="csi-label">Incident type</span>
+              <span class="csi-value">Sexual violence</span>
+            </div>
+            <div class="case-summary-item">
+              <span class="csi-label">Disclosed</span>
+              <span class="csi-value" id="case2-logged">Calculating…</span>
+            </div>
+            <div class="case-summary-item">
+              <span class="csi-label">Case officer</span>
+              <span class="csi-value"><i class="ti ti-user-check" style="color:var(--teal-light);font-size:13px"></i> Peter Ochieng</span>
+            </div>
+            <div class="case-summary-item">
+              <span class="csi-label">Referral partner</span>
+              <span class="csi-value">FIDA Uganda — Legal Aid</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pipeline progress -->
+        <div class="case-pipeline" aria-label="Case RV-2026-C044 pipeline progress">
+          <div class="pipeline-track">
+
+            <div class="pipeline-stage done" data-stage-idx="0">
+              <div class="ps-node"><i class="ti ti-check"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Incident Logged</span>
+                <span class="ps-time">19 Jun 2026, 14:32</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage done" data-stage-idx="1">
+              <div class="ps-node"><i class="ti ti-check"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Needs Assessment</span>
+                <span class="ps-time">19 Jun 2026, 16:10</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage current" data-stage-idx="2">
+              <div class="ps-node">
+                <span class="ps-node-pulse"></span>
+                <i class="ti ti-user-check"></i>
+              </div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Assigned to Officer</span>
+                <span class="ps-time ps-time-live" id="case2-elapsed">In progress…</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage pending" data-stage-idx="3">
+              <div class="ps-node"><i class="ti ti-clock"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Referral Actioned</span>
+                <span class="ps-time">Pending</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage pending" data-stage-idx="4">
+              <div class="ps-node"><i class="ti ti-clock"></i></div>
+              <div class="ps-connector"></div>
+              <div class="ps-label">
+                <span class="ps-name">Follow-up</span>
+                <span class="ps-time">Pending</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage pending" data-stage-idx="5">
+              <div class="ps-node"><i class="ti ti-lock"></i></div>
+              <div class="ps-connector ps-connector-last"></div>
+              <div class="ps-label">
+                <span class="ps-name">Case Closed</span>
+                <span class="ps-time">Pending</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Progress bar -->
+          <div class="case-progress-wrap">
+            <div class="case-progress-bar">
+              <div class="case-progress-fill" style="--cpct:33.3%"></div>
+            </div>
+            <span class="case-progress-label">Stage 3 of 6 &mdash; 33% complete</span>
+          </div>
+        </div>
+
+        <!-- Timeline log (expandable) -->
+        <details class="case-log">
+          <summary class="case-log-toggle"><i class="ti ti-list-details"></i> View full audit log <i class="ti ti-chevron-down case-log-chevron"></i></summary>
+          <div class="case-log-entries">
+            <div class="cle"><span class="cle-time">19 Jun 2026, 14:32</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Incident logged</strong> — Report received by case officer P. Ochieng at Ntinda field office. Intake form RV-F-044 completed and timestamped.</span></div>
+            <div class="cle"><span class="cle-time">19 Jun 2026, 15:18</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Risk screening completed</strong> — Risk level assessed as MEDIUM-HIGH. Survivor expressed desire for legal representation regarding perpetrator prosecution.</span></div>
+            <div class="cle"><span class="cle-time">19 Jun 2026, 16:10</span><span class="cle-dot cle-done"></span><span class="cle-text"><strong>Needs assessment completed</strong> — Primary need identified as legal aid and police statement support. Medical screening recommended as secondary action.</span></div>
+            <div class="cle"><span class="cle-time">20 Jun 2026, 08:05</span><span class="cle-dot cle-active"></span><span class="cle-text"><strong>Assigned to case officer</strong> — Peter Ochieng (ID: RV-CO-012) confirmed as primary officer. Legal referral to FIDA Uganda being prepared. Awaiting supervisor sign-off.</span></div>
+            <div class="cle cle-pending"><span class="cle-time">Scheduled: 21 Jun 2026</span><span class="cle-dot cle-pending-dot"></span><span class="cle-text"><strong>Legal referral pending</strong> — Referral to FIDA Uganda (Plot 16 Martyrs Way, Ntinda) to be dispatched upon supervisor approval.</span></div>
+            <div class="cle cle-pending"><span class="cle-time">Scheduled: 28 Jun 2026</span><span class="cle-dot cle-pending-dot"></span><span class="cle-text"><strong>Follow-up scheduled</strong> — Case officer to confirm FIDA attendance and assess police statement progress.</span></div>
+          </div>
+        </details>
+
+        <div class="case-card-footer">
+          <span class="case-footer-note"><i class="ti ti-eye-off"></i> Survivor identity encrypted &amp; access-controlled</span>
+          <span class="case-tracking-id">Awaiting tracking ID — referral pending</span>
+        </div>
+
+      </article>
+
+    </div><!-- /cases-grid -->
+
+    <!-- No results state -->
+    <div class="cases-no-results" id="cases-no-results">
+      <i class="ti ti-search-off"></i>
+      <p>No cases match your search.</p>
+      <span>Try a different case ID, stage name, or location.</span>
+      <button class="btn btn-outline-navy btn-sm" id="cases-reset-btn">Clear search</button>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============ REPOSITORY SEARCH ============ -->
 <section class="section-pad repo-section" id="repository">
   <div class="container">
@@ -1209,7 +1543,7 @@
                 </defs>
               </svg>
             </span>
-            <span>RV Data Repository<small>Raising Voices Uganda</small></span>
+            <span class="brand-text"><span class="brand-name">RV Data Repository</span><small>Raising Voices Uganda</small></span>
           </a>
           <p>Raising Voices Uganda&rsquo;s unified digital repository for GBV incident management, referral coordination and two decades of violence-prevention research.</p>
           <div class="footer-social">
