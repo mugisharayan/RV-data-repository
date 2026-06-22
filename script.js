@@ -482,13 +482,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var btns = document.querySelectorAll('#open-login, #open-login-hero, #open-login-cta, #open-login-qa');
     if(session){
       btns.forEach(function(btn){
-        btn.innerHTML = '<i class="ti ti-user-circle"></i><span>' + session.firstName + '</span>';
+        btn.innerHTML = '<i class="ti ti-layout-dashboard"></i><span>My dashboard</span>';
         btn.style.background = 'var(--green)';
+        btn.onclick = function(e){ e.preventDefault(); window.location.href='dashboard.html'; };
       });
     } else {
       btns.forEach(function(btn){
         btn.innerHTML = '<i class="ti ti-lock"></i><span>Staff sign-in</span>';
         btn.style.background = '';
+        btn.onclick = null;
       });
     }
   }
@@ -541,18 +543,28 @@ document.addEventListener('DOMContentLoaded', function () {
       setSession(user);
       updateHeaderAuth();
       loginForm.style.display = 'none';
+      loginSubmit.classList.remove('loading');
+      loginSubmit.disabled = false;
 
-      if(user.role === 'admin'){
-        /* Show admin dashboard inside modal */
-        document.getElementById('success-heading').textContent = 'Welcome back, ' + user.firstName;
-        document.getElementById('success-body').textContent = '';
-        modalSuccess.classList.add('show');
-        showAdminDashboard();
-      } else {
-        document.getElementById('success-heading').textContent = 'Signed in — ' + user.firstName + ' ' + user.lastName;
-        document.getElementById('success-body').textContent = 'Welcome back. You are signed in as ' + user.role + '. Your session is active.';
-        modalSuccess.classList.add('show');
-      }
+      /* Append sign-in audit entry to rv_audit_log */
+      try {
+        var log = JSON.parse(localStorage.getItem('rv_audit_log')||'[]');
+        log.push({
+          id:        'AL-'+Date.now()+'-signin',
+          time:      new Date().toISOString(),
+          actor:     user.firstName+' '+user.lastName,
+          actorId:   user.id,
+          actorRole: user.role,
+          action:    'USER_SIGNIN',
+          detail:    'Successful sign-in from staff portal',
+          target:    'index.html',
+          userAgent: navigator.userAgent.slice(0,80)
+        });
+        localStorage.setItem('rv_audit_log', JSON.stringify(log));
+      } catch(e){}
+
+      /* Redirect to full-page dashboard */
+      window.location.href = 'dashboard.html';
     }, 1200);
   });
 

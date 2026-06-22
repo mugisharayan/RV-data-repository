@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RV Dashboard — Raising Voices Uganda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<!-- ── TOP NAVIGATION BAR ── -->
+<header class="db-header">
+  <div class="db-header-inner">
+    <a href="index.html" class="db-brand">
+      <div class="db-brand-mark">
+        <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M20 2L36 8V20C36 30 29 37.5 20 41C11 37.5 4 30 4 20V8L20 2Z" fill="url(#dbShield)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+          <text x="20" y="25" text-anchor="middle" font-family="Georgia,serif" font-weight="800" font-size="13" fill="white" letter-spacing="0.5">RV</text>
+          <defs>
+            <linearGradient id="dbShield" x1="4" y1="2" x2="36" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#E8640C"/><stop offset="100%" stop-color="#C4520A"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="db-brand-text">
+        <span class="db-brand-name">RV Data Repository</span>
+        <small>Raising Voices Uganda</small>
+      </div>
+    </a>
+
+    <nav class="db-nav" id="db-nav"></nav>
+
+    <div class="db-header-right">
+      <div class="db-user-pill" id="db-user-pill">
+        <div class="db-avatar" id="db-avatar">--</div>
+        <div class="db-user-info">
+          <span class="db-user-name" id="db-user-name">Loading…</span>
+          <span class="db-user-role" id="db-user-role"></span>
+        </div>
+      </div>
+      <button class="db-signout-btn" id="db-signout" title="Sign out"><i class="ti ti-logout"></i> Sign out</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── MAIN CONTENT AREA ── -->
+<main class="db-main" id="db-main">
+  <div class="db-loading" id="db-loading">
+    <div class="db-spinner"><i class="ti ti-loader-2"></i></div>
+    <p>Loading your dashboard…</p>
+  </div>
+</main>
+
+<!-- ── TOAST ── -->
+<div class="db-toast" id="db-toast"></div>
+
+<!-- ── INCIDENT LOG MODAL ── -->
+<div class="db-modal-overlay" id="incident-modal" aria-modal="true" role="dialog" aria-labelledby="incident-modal-title">
+  <div class="db-modal-box">
+    <div class="db-modal-head">
+      <h3 id="incident-modal-title"><i class="ti ti-clipboard-plus"></i> Log New Incident</h3>
+      <button class="db-modal-close" id="incident-modal-close"><i class="ti ti-x"></i></button>
+    </div>
+    <form id="incident-form" novalidate>
+      <!-- Anonymised — no survivor name field -->
+      <div class="db-notice">
+        <i class="ti ti-eye-off"></i>
+        <span>Survivor identity is <strong>never recorded here</strong>. This form captures incident metadata only. Full case records are held in the secure case management system.</span>
+      </div>
+
+      <div class="db-form-row-2">
+        <div class="db-form-group">
+          <label>Incident type <span class="req">*</span></label>
+          <select id="inc-type" required>
+            <option value="">Select type…</option>
+            <option value="Intimate Partner Violence">Intimate Partner Violence</option>
+            <option value="Sexual Violence">Sexual Violence</option>
+            <option value="Child Abuse">Child Abuse</option>
+            <option value="Emotional / Psychological Abuse">Emotional / Psychological Abuse</option>
+            <option value="Economic Abuse">Economic Abuse</option>
+            <option value="Female Genital Mutilation">Female Genital Mutilation</option>
+            <option value="Other GBV">Other GBV</option>
+          </select>
+          <span class="db-form-error" id="err-inc-type"></span>
+        </div>
+        <div class="db-form-group">
+          <label>Disclosure date &amp; time <span class="req">*</span></label>
+          <input type="datetime-local" id="inc-date" required>
+          <span class="db-form-error" id="err-inc-date"></span>
+        </div>
+      </div>
+
+      <div class="db-form-row-2">
+        <div class="db-form-group">
+          <label>Location (district/area) <span class="req">*</span></label>
+          <input type="text" id="inc-location" placeholder="e.g. Kamwokya, Kampala" required>
+          <span class="db-form-error" id="err-inc-location"></span>
+        </div>
+        <div class="db-form-group">
+          <label>Risk level <span class="req">*</span></label>
+          <select id="inc-risk" required>
+            <option value="">Assess risk…</option>
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High — immediate action needed</option>
+            <option value="CRITICAL">Critical — imminent danger</option>
+          </select>
+          <span class="db-form-error" id="err-inc-risk"></span>
+        </div>
+      </div>
+
+      <div class="db-form-row-2">
+        <div class="db-form-group">
+          <label>Referral type needed</label>
+          <select id="inc-referral">
+            <option value="">None / Unknown</option>
+            <option value="Medical">Medical</option>
+            <option value="Legal">Legal</option>
+            <option value="Psychosocial">Psychosocial</option>
+            <option value="Safe shelter">Safe shelter</option>
+            <option value="Police">Police</option>
+            <option value="Multiple">Multiple referrals needed</option>
+          </select>
+        </div>
+        <div class="db-form-group">
+          <label>Survivor gender identity</label>
+          <select id="inc-gender">
+            <option value="">Not disclosed</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Non-binary">Non-binary / Gender non-conforming</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="db-form-group">
+        <label>Age range of survivor</label>
+        <select id="inc-age">
+          <option value="">Not disclosed</option>
+          <option value="Under 10">Under 10</option>
+          <option value="10–17">10–17 (minor)</option>
+          <option value="18–25">18–25</option>
+          <option value="26–35">26–35</option>
+          <option value="36–50">36–50</option>
+          <option value="Over 50">Over 50</option>
+        </select>
+      </div>
+
+      <div class="db-form-group">
+        <label>Initial case notes <span class="req">*</span></label>
+        <textarea id="inc-notes" rows="3" placeholder="Describe the circumstances of disclosure, immediate needs, and actions taken. Do not include survivor's name, address, or identifying information." required></textarea>
+        <span class="db-form-hint"><i class="ti ti-lock"></i> Notes are encrypted and visible only to assigned case officers and administrators.</span>
+        <span class="db-form-error" id="err-inc-notes"></span>
+      </div>
+
+      <div class="db-form-actions">
+        <button type="button" class="db-btn db-btn-outline" id="incident-modal-cancel">Cancel</button>
+        <button type="submit" class="db-btn db-btn-primary" id="inc-submit">
+          <span class="btn-text"><i class="ti ti-clipboard-check"></i> Log incident</span>
+          <span class="btn-spin" style="display:none"><i class="ti ti-loader-2"></i></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ── RESEARCH RECORD MODAL (Dublin Core) ── -->
+<div class="db-modal-overlay" id="research-modal" aria-modal="true" role="dialog" aria-labelledby="research-modal-title">
+  <div class="db-modal-box db-modal-wide">
+    <div class="db-modal-head">
+      <h3 id="research-modal-title"><i class="ti ti-book-2"></i> Add Research Record</h3>
+      <button class="db-modal-close" id="research-modal-close"><i class="ti ti-x"></i></button>
+    </div>
+    <form id="research-form" novalidate>
+      <div class="db-notice db-notice-blue">
+        <i class="ti ti-tags"></i>
+        <span>This form uses the <strong>Dublin Core Metadata Standard</strong> — all 15 elements are captured to ensure research is discoverable and properly attributed.</span>
+      </div>
+
+      <div class="dc-schema-grid">
+        <!-- DC: Title -->
+        <div class="db-form-group dc-full">
+          <label class="dc-label"><span class="dc-tag">DC: Title</span> Publication title <span class="req">*</span></label>
+          <input type="text" id="dc-title" placeholder="Full title of the research publication" required>
+          <span class="db-form-error" id="err-dc-title"></span>
+        </div>
+
+        <!-- DC: Creator -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Creator</span> Author(s) <span class="req">*</span></label>
+          <input type="text" id="dc-creator" placeholder="e.g. Michau, L.; Horn, J." required>
+          <span class="db-form-error" id="err-dc-creator"></span>
+        </div>
+
+        <!-- DC: Publisher -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Publisher</span> Publisher <span class="req">*</span></label>
+          <input type="text" id="dc-publisher" placeholder="e.g. Raising Voices, Kampala" required>
+          <span class="db-form-error" id="err-dc-publisher"></span>
+        </div>
+
+        <!-- DC: Date -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Date</span> Publication year <span class="req">*</span></label>
+          <input type="number" id="dc-date" placeholder="e.g. 2024" min="1990" max="2030" required>
+          <span class="db-form-error" id="err-dc-date"></span>
+        </div>
+
+        <!-- DC: Type -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Type</span> Resource type</label>
+          <select id="dc-type">
+            <option value="Research article">Research article</option>
+            <option value="Programme guide">Programme guide</option>
+            <option value="Policy brief">Policy brief</option>
+            <option value="Randomised controlled trial">Randomised controlled trial</option>
+            <option value="Programme evaluation">Programme evaluation</option>
+            <option value="Practice paper">Practice paper</option>
+            <option value="Toolkit">Toolkit</option>
+            <option value="Report">Report</option>
+          </select>
+        </div>
+
+        <!-- DC: Subject -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Subject</span> Subject / Theme <span class="req">*</span></label>
+          <select id="dc-subject" required>
+            <option value="">Select subject…</option>
+            <option value="Intimate Partner Violence">Intimate Partner Violence</option>
+            <option value="Child Protection">Child Protection</option>
+            <option value="Community Mobilization">Community Mobilization</option>
+            <option value="Programme Evaluation">Programme Evaluation</option>
+            <option value="Policy & Advocacy">Policy &amp; Advocacy</option>
+            <option value="Sexual Violence">Sexual Violence</option>
+            <option value="GBV Prevention">GBV Prevention</option>
+            <option value="Economic Empowerment">Economic Empowerment</option>
+          </select>
+          <span class="db-form-error" id="err-dc-subject"></span>
+        </div>
+
+        <!-- DC: Language -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Language</span> Language</label>
+          <select id="dc-language">
+            <option value="English">English</option>
+            <option value="Luganda">Luganda</option>
+            <option value="Swahili">Swahili</option>
+            <option value="French">French</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- DC: Rights -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Rights</span> Rights management</label>
+          <select id="dc-rights">
+            <option value="Open access">Open access</option>
+            <option value="Creative Commons CC-BY">Creative Commons CC-BY</option>
+            <option value="Creative Commons CC-BY-NC">Creative Commons CC-BY-NC</option>
+            <option value="All rights reserved">All rights reserved</option>
+            <option value="Restricted — staff only">Restricted — staff only</option>
+          </select>
+        </div>
+
+        <!-- DC: Identifier -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Identifier</span> DOI / URL</label>
+          <input type="text" id="dc-identifier" placeholder="https://doi.org/…">
+        </div>
+
+        <!-- DC: Format -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Format</span> File format</label>
+          <select id="dc-format">
+            <option value="PDF">PDF</option>
+            <option value="Word (.docx)">Word (.docx)</option>
+            <option value="Web (HTML)">Web (HTML)</option>
+            <option value="ePub">ePub</option>
+          </select>
+        </div>
+
+        <!-- DC: Source -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Source</span> Journal / Series</label>
+          <input type="text" id="dc-source" placeholder="e.g. The Lancet Global Health">
+        </div>
+
+        <!-- DC: Coverage -->
+        <div class="db-form-group">
+          <label class="dc-label"><span class="dc-tag">DC: Coverage</span> Geographic coverage</label>
+          <input type="text" id="dc-coverage" placeholder="e.g. Uganda, East Africa">
+        </div>
+
+        <!-- DC: Relation -->
+        <div class="db-form-group dc-full">
+          <label class="dc-label"><span class="dc-tag">DC: Relation</span> Related publication / project</label>
+          <input type="text" id="dc-relation" placeholder="e.g. SASA! Together programme evaluation series">
+        </div>
+
+        <!-- DC: Description -->
+        <div class="db-form-group dc-full">
+          <label class="dc-label"><span class="dc-tag">DC: Description</span> Abstract / Description <span class="req">*</span></label>
+          <textarea id="dc-description" rows="3" placeholder="Write a concise abstract summarising the research, methods, and key findings." required></textarea>
+          <span class="db-form-error" id="err-dc-description"></span>
+        </div>
+
+        <!-- DC: Contributor -->
+        <div class="db-form-group dc-full">
+          <label class="dc-label"><span class="dc-tag">DC: Contributor</span> Contributors / Co-authors</label>
+          <input type="text" id="dc-contributor" placeholder="Additional contributors (comma-separated)">
+        </div>
+
+      </div><!-- /dc-schema-grid -->
+
+      <div class="db-form-actions">
+        <button type="button" class="db-btn db-btn-outline" id="research-modal-cancel">Cancel</button>
+        <button type="submit" class="db-btn db-btn-primary" id="research-submit">
+          <span class="btn-text"><i class="ti ti-database-plus"></i> Add to repository</span>
+          <span class="btn-spin" style="display:none"><i class="ti ti-loader-2"></i></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
