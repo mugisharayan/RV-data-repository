@@ -1996,7 +1996,62 @@
       </div>
       <h4 id="success-heading">Signed in successfully</h4>
       <p id="success-body">Your credentials have been verified. You will be redirected to your role-based dashboard. Multi-factor authentication is enforced in the live system.</p>
-      <button class="btn btn-navy btn-block" id="modal-success-close">Close</button>
+
+      <!-- ── ADMIN DASHBOARD (shown only for admin role) ── -->
+      <div id="admin-dashboard" style="display:none;width:100%;text-align:left;margin-top:8px">
+
+        <!-- Stats row -->
+        <div class="adm-stats-row">
+          <div class="adm-stat">
+            <i class="ti ti-users"></i>
+            <div>
+              <strong id="adm-stat-users">0</strong>
+              <span>Staff accounts</span>
+            </div>
+          </div>
+          <div class="adm-stat">
+            <i class="ti ti-key"></i>
+            <div>
+              <strong id="adm-stat-codes">0</strong>
+              <span>Invite codes</span>
+            </div>
+          </div>
+          <div class="adm-stat">
+            <i class="ti ti-key-off"></i>
+            <div>
+              <strong id="adm-stat-used">0</strong>
+              <span>Codes used</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invite code generator -->
+        <div class="adm-section">
+          <div class="adm-section-head">
+            <h4><i class="ti ti-key"></i> Invite codes</h4>
+            <button class="btn btn-navy btn-sm" id="admin-gen-code"><i class="ti ti-plus"></i> Generate new code</button>
+          </div>
+          <p class="adm-hint">Share a code with a new staff member. Each code can only be used once.</p>
+          <div class="adm-codes-list" id="admin-codes-list">
+            <p class="adm-empty">No codes generated yet.</p>
+          </div>
+        </div>
+
+        <!-- Registered staff -->
+        <div class="adm-section">
+          <div class="adm-section-head">
+            <h4><i class="ti ti-users"></i> Registered staff</h4>
+          </div>
+          <div class="adm-users-list" id="admin-users-list"></div>
+        </div>
+
+        <!-- Sign out -->
+        <button class="btn btn-outline-navy btn-block" id="admin-sign-out" style="margin-top:8px">
+          <i class="ti ti-logout"></i> Sign out
+        </button>
+      </div>
+
+      <button class="btn btn-navy btn-block" id="modal-success-close" style="margin-top:12px">Close</button>
     </div>
 
   </div>

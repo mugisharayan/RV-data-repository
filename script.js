@@ -431,6 +431,69 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ================================================================
+     RV DATA REPOSITORY — localStorage Auth Engine
+     ================================================================
+     Storage keys:
+       rv_users   : array of user objects
+       rv_codes   : array of invite code objects
+       rv_session : current logged-in user object (null if logged out)
+     ================================================================ */
+
+  /* ── Seed admin account on first load ── */
+  function dbGet(key){ try{ return JSON.parse(localStorage.getItem(key)) || []; }catch(e){ return []; } }
+  function dbSet(key,val){ localStorage.setItem(key, JSON.stringify(val)); }
+
+  function initDB(){
+    var users = dbGet('rv_users');
+    var hasAdmin = users.some(function(u){ return u.role === 'admin'; });
+    if(!hasAdmin){
+      users.push({
+        id: 'USR-001',
+        firstName: 'System',
+        lastName:  'Administrator',
+        email:     'admin@raisingvoices.org',
+        password:  'Admin@2026',
+        role:      'admin',
+        department:'Administration',
+        createdAt: new Date().toISOString(),
+        twofa:     true
+      });
+      dbSet('rv_users', users);
+    }
+  }
+  initDB();
+
+  /* ── Simple hash (XOR + base36, not cryptographic — prototype only) ── */
+  function hashPw(pw){
+    var h = 0;
+    for(var i=0;i<pw.length;i++){ h = ((h<<5)-h)+pw.charCodeAt(i); h|=0; }
+    return Math.abs(h).toString(36);
+  }
+
+  /* ── Session helpers ── */
+  function getSession(){ try{ return JSON.parse(localStorage.getItem('rv_session')); }catch(e){ return null; } }
+  function setSession(user){ localStorage.setItem('rv_session',JSON.stringify(user)); }
+  function clearSession(){ localStorage.removeItem('rv_session'); }
+
+  /* ── Update header sign-in button when logged in ── */
+  function updateHeaderAuth(){
+    var session = getSession();
+    var btns = document.querySelectorAll('#open-login, #open-login-hero, #open-login-cta, #open-login-qa');
+    if(session){
+      btns.forEach(function(btn){
+        btn.innerHTML = '<i class="ti ti-user-circle"></i><span>' + session.firstName + '</span>';
+        btn.style.background = 'var(--green)';
+      });
+    } else {
+      btns.forEach(function(btn){
+        btn.innerHTML = '<i class="ti ti-lock"></i><span>Staff sign-in</span>';
+        btn.style.background = '';
+      });
+    }
+  }
+  updateHeaderAuth();
+
   /* ---------- Forgot password toast ---------- */
   var forgotLink = document.getElementById('forgot-link');
   if(forgotLink){
@@ -439,38 +502,58 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Form submit (sign-in) ---------- */
+  /* ---------- Form submit (sign-in) — REAL AUTH ── */
   loginForm.addEventListener('submit', function(e){
     e.preventDefault();
     clearErrors();
     var role  = document.getElementById('staff-role').value;
-    var email = document.getElementById('staff-email').value.trim();
+    var email = document.getElementById('staff-email').value.trim().toLowerCase();
     var pw    = document.getElementById('staff-password').value;
     var valid = true;
 
-    if(!role){
-      showError('err-role','fg-role','Please select your role.'); valid=false;
-    }
-    if(!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)){
-      showError('err-email','fg-email','Please enter a valid work email.'); valid=false;
-    }
-    if(pw.length < 6){
-      showError('err-password','fg-password','Password must be at least 6 characters.'); valid=false;
-    }
+    if(!role){ showError('err-role','fg-role','Please select your role.'); valid=false; }
+    if(!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)){ showError('err-email','fg-email','Please enter a valid work email.'); valid=false; }
+    if(pw.length < 6){ showError('err-password','fg-password','Password must be at least 6 characters.'); valid=false; }
     if(!valid) return;
 
-    /* Loading state */
     loginSubmit.classList.add('loading');
     loginSubmit.disabled = true;
 
     setTimeout(function(){
       loginSubmit.classList.remove('loading');
       loginSubmit.disabled = false;
+
+      var users = dbGet('rv_users');
+      var user  = users.find(function(u){
+        return u.email.toLowerCase() === email && u.password === pw;
+      });
+
+      if(!user){
+        showError('err-password','fg-password','Incorrect email or password.');
+        return;
+      }
+      if(user.role !== role && role !== 'admin'){
+        showError('err-role','fg-role','Role does not match your registered account.');
+        return;
+      }
+
+      /* ✅ Sign in success */
+      setSession(user);
+      updateHeaderAuth();
       loginForm.style.display = 'none';
-      document.getElementById('success-heading').textContent = 'Signed in successfully';
-      document.getElementById('success-body').textContent = 'Your credentials have been verified. You will be redirected to your role-based dashboard. Multi-factor authentication is enforced in the live system.';
-      modalSuccess.classList.add('show');
-    }, 1600);
+
+      if(user.role === 'admin'){
+        /* Show admin dashboard inside modal */
+        document.getElementById('success-heading').textContent = 'Welcome back, ' + user.firstName;
+        document.getElementById('success-body').textContent = '';
+        modalSuccess.classList.add('show');
+        showAdminDashboard();
+      } else {
+        document.getElementById('success-heading').textContent = 'Signed in — ' + user.firstName + ' ' + user.lastName;
+        document.getElementById('success-body').textContent = 'Welcome back. You are signed in as ' + user.role + '. Your session is active.';
+        modalSuccess.classList.add('show');
+      }
+    }, 1200);
   });
 
   /* ---------- Registration wizard ---------- */
@@ -563,14 +646,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /* Registration submit */
+  /* Registration submit — REAL ACCOUNT CREATION */
   var regSubmitBtn = document.getElementById('reg-submit');
   if(regSubmitBtn){
     regSubmitBtn.addEventListener('click', function(){
-      var pw1 = document.getElementById('reg-password').value;
-      var pw2 = document.getElementById('reg-confirm').value;
+      var pw1   = document.getElementById('reg-password').value;
+      var pw2   = document.getElementById('reg-confirm').value;
       var terms = document.getElementById('reg-terms');
-      var ok = true;
+      var ok    = true;
 
       if(pw1.length < 8){ showRegError('err-reg-password','reg-password','Password must be at least 8 characters.'); ok=false; }
       else clearRegError('err-reg-password','reg-password');
@@ -580,19 +663,66 @@ document.addEventListener('DOMContentLoaded', function () {
       else clearRegError('err-reg-terms','reg-terms');
       if(!ok) return;
 
-      /* Loading */
+      /* Pull data from previous steps */
+      var fn      = document.getElementById('reg-firstname').value.trim();
+      var ln      = document.getElementById('reg-lastname').value.trim();
+      var em      = document.getElementById('reg-email').value.trim().toLowerCase();
+      var invCode = document.getElementById('reg-invite').value.trim().toUpperCase();
+      var roleVal = document.querySelector('input[name="reg-role"]:checked');
+      var dept    = document.getElementById('reg-department').value;
+
+      /* Validate invite code */
+      var codes   = dbGet('rv_codes');
+      var codeObj = codes.find(function(c){ return c.code === invCode && !c.used; });
+      if(!codeObj){
+        goToRegStep(0);
+        showRegError('err-reg-invite','reg-invite','Invalid or already used invite code.');
+        return;
+      }
+
+      /* Check email not already registered */
+      var users = dbGet('rv_users');
+      if(users.find(function(u){ return u.email.toLowerCase() === em; })){
+        goToRegStep(0);
+        showRegError('err-reg-email','reg-email','This email is already registered.');
+        return;
+      }
+
       regSubmitBtn.classList.add('loading');
       regSubmitBtn.disabled = true;
+
       setTimeout(function(){
         regSubmitBtn.classList.remove('loading');
         regSubmitBtn.disabled = false;
-        /* Hide sign-up panel, show success */
+
+        /* Create account */
+        var newUser = {
+          id:         'USR-' + String(users.length + 1).padStart(3,'0'),
+          firstName:  fn,
+          lastName:   ln,
+          email:      em,
+          password:   pw1,
+          role:       roleVal ? roleVal.value : 'activist',
+          department: dept,
+          createdAt:  new Date().toISOString(),
+          twofa:      document.getElementById('reg-2fa') ? document.getElementById('reg-2fa').checked : false
+        };
+        users.push(newUser);
+        dbSet('rv_users', users);
+
+        /* Mark invite code as used */
+        codeObj.used       = true;
+        codeObj.usedBy     = em;
+        codeObj.usedAt     = new Date().toISOString();
+        dbSet('rv_codes', codes);
+
+        /* Show success */
         panelSignup.classList.add('modal-panel-hidden');
         panelSignup.classList.remove('modal-panel');
-        document.getElementById('success-heading').textContent = 'Registration submitted';
-        document.getElementById('success-body').textContent = 'Your registration request has been received. A system administrator will verify your invitation code and activate your account within one business day.';
+        document.getElementById('success-heading').textContent = 'Account created!';
+        document.getElementById('success-body').textContent    = 'Welcome, ' + fn + '. Your account has been created. You can now sign in using your email and password.';
         modalSuccess.classList.add('show');
-      }, 1800);
+      }, 1400);
     });
   }
 
@@ -641,6 +771,142 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleRegPw.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
     });
   }
+
+  /* ================================================================
+     ADMIN DASHBOARD
+     ================================================================ */
+
+  function generateCode(){
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var code  = 'RV-';
+    for(var i=0;i<4;i++) code += chars[Math.floor(Math.random()*chars.length)];
+    code += '-';
+    for(var j=0;j<4;j++) code += chars[Math.floor(Math.random()*chars.length)];
+    return code;
+  }
+
+  function showAdminDashboard(){
+    var dash = document.getElementById('admin-dashboard');
+    if(!dash) return;
+    dash.style.display = 'block';
+
+    /* Update stats */
+    var users = dbGet('rv_users');
+    var codes = dbGet('rv_codes');
+    var usedCodes = codes.filter(function(c){ return c.used; });
+    var statUsers = document.getElementById('adm-stat-users');
+    var statCodes = document.getElementById('adm-stat-codes');
+    var statUsed  = document.getElementById('adm-stat-used');
+    if(statUsers) statUsers.textContent = users.length;
+    if(statCodes) statCodes.textContent = codes.length;
+    if(statUsed)  statUsed.textContent  = usedCodes.length;
+
+    renderAdminUsers();
+    renderAdminCodes();
+  }
+
+  function renderAdminUsers(){
+    var list  = document.getElementById('admin-users-list');
+    if(!list) return;
+    var users = dbGet('rv_users');
+    list.innerHTML = '';
+    users.forEach(function(u){
+      var row = document.createElement('div');
+      row.className = 'adm-row';
+      row.innerHTML =
+        '<div class="adm-row-left">' +
+          '<div class="adm-avatar">' + u.firstName[0] + u.lastName[0] + '</div>' +
+          '<div>' +
+            '<span class="adm-name">' + u.firstName + ' ' + u.lastName + '</span>' +
+            '<span class="adm-email">' + u.email + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="adm-row-right">' +
+          '<span class="adm-role-badge adm-role-' + u.role + '">' + u.role + '</span>' +
+        '</div>';
+      list.appendChild(row);
+    });
+  }
+
+  function renderAdminCodes(){
+    var list  = document.getElementById('admin-codes-list');
+    if(!list) return;
+    var codes = dbGet('rv_codes');
+    list.innerHTML = '';
+    if(!codes.length){
+      list.innerHTML = '<p class="adm-empty">No invite codes generated yet.</p>';
+      return;
+    }
+    codes.slice().reverse().forEach(function(c){
+      var row = document.createElement('div');
+      row.className = 'adm-code-row';
+      row.innerHTML =
+        '<code class="adm-code' + (c.used ? ' adm-code-used' : '') + '">' + c.code + '</code>' +
+        '<span class="adm-code-status">' + (c.used ? '<i class="ti ti-check"></i> Used by ' + c.usedBy : '<i class="ti ti-clock"></i> Unused') + '</span>' +
+        '<span class="adm-code-date">' + new Date(c.createdAt).toLocaleDateString() + '</span>' +
+        (!c.used ? '<button class="adm-copy-btn" data-code="' + c.code + '" title="Copy code"><i class="ti ti-copy"></i></button>' : '<span></span>');
+      list.appendChild(row);
+    });
+
+    /* copy buttons */
+    list.querySelectorAll('.adm-copy-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var code = btn.getAttribute('data-code');
+        if(navigator.clipboard){
+          navigator.clipboard.writeText(code).then(function(){
+            btn.innerHTML = '<i class="ti ti-check"></i>';
+            setTimeout(function(){ btn.innerHTML = '<i class="ti ti-copy"></i>'; }, 2000);
+          });
+        } else {
+          showToast('Code: ' + code);
+        }
+      });
+    });
+  }
+
+  /* Generate invite code button */
+  var genCodeBtn = document.getElementById('admin-gen-code');
+  if(genCodeBtn){
+    genCodeBtn.addEventListener('click', function(){
+      var session = getSession();
+      if(!session || session.role !== 'admin'){ showToast('Admin access required.'); return; }
+      var code = generateCode();
+      var codes = dbGet('rv_codes');
+      codes.push({ code:code, used:false, usedBy:null, usedAt:null, createdBy:session.email, createdAt:new Date().toISOString() });
+      dbSet('rv_codes', codes);
+      renderAdminCodes();
+      showToast('<i class="ti ti-key" style="margin-right:6px"></i>Code generated: ' + code);
+    });
+  }
+
+  /* Sign out button */
+  var signOutBtn = document.getElementById('admin-sign-out');
+  if(signOutBtn){
+    signOutBtn.addEventListener('click', function(){
+      clearSession();
+      updateHeaderAuth();
+      closeModal();
+      showToast('You have been signed out.');
+    });
+  }
+
+  /* Check if already signed in when modal opens */
+  var origOpenModal = openModal;
+  /* Patch openModal to show dashboard if admin is already signed in */
+  document.querySelectorAll('#open-login,#open-login-hero,#open-login-cta,#open-login-qa').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var session = getSession();
+      if(session && session.role === 'admin'){
+        loginModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        loginForm.style.display = 'none';
+        modalSuccess.classList.add('show');
+        document.getElementById('success-heading').textContent = 'Admin Dashboard';
+        document.getElementById('success-body').textContent = '';
+        showAdminDashboard();
+      }
+    });
+  });
 
   /* ---------- Toast helper ---------- */
   var toastEl = document.getElementById('toast');
